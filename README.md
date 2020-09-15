@@ -1,20 +1,3 @@
 
 # usStore (University Store, 대학생들이 스스로 참여가능한 우리들의 스토어)
 전국의 대학생들을 위한 마켓 플랫폼 서비스
-
-![슬라이드1](https://user-images.githubusercontent.com/48404998/91593650-83e13a80-e99b-11ea-92b0-248b0c05b3fd.JPG)
-![슬라이드2](https://user-images.githubusercontent.com/48404998/91593655-86dc2b00-e99b-11ea-8f66-9646b2175b3a.JPG)
-![슬라이드3](https://user-images.githubusercontent.com/48404998/91593658-8774c180-e99b-11ea-94d2-402400b294de.JPG)
-![슬라이드4](https://user-images.githubusercontent.com/48404998/91593660-880d5800-e99b-11ea-9fbb-cf8e274fd2ad.JPG)
-![슬라이드5](https://user-images.githubusercontent.com/48404998/91593663-88a5ee80-e99b-11ea-9d56-2d01825779bb.JPG)
-![슬라이드6](https://user-images.githubusercontent.com/48404998/91593664-88a5ee80-e99b-11ea-8737-bbf261feb2de.JPG)
-![슬라이드7](https://user-images.githubusercontent.com/48404998/91593665-893e8500-e99b-11ea-8573-cffe62ef4bff.JPG)
-![슬라이드8](https://user-images.githubusercontent.com/48404998/91593668-89d71b80-e99b-11ea-96f1-a48d3bbf40a3.JPG)
-![슬라이드9](https://user-images.githubusercontent.com/48404998/91593671-8a6fb200-e99b-11ea-8d43-71a32103590a.JPG)
-![슬라이드10](https://user-images.githubusercontent.com/48404998/91593672-8a6fb200-e99b-11ea-97e3-3ca112d79461.JPG)
-![슬라이드11](https://user-images.githubusercontent.com/48404998/91593674-8b084880-e99b-11ea-9bfa-c99ec90e0555.JPG)
-![슬라이드12](https://user-images.githubusercontent.com/48404998/91593676-8ba0df00-e99b-11ea-9176-a9c054af576d.JPG)
-![슬라이드13](https://user-images.githubusercontent.com/48404998/91593678-8ba0df00-e99b-11ea-87f8-20c45e4f526b.JPG)
-![슬라이드14](https://user-images.githubusercontent.com/48404998/91593681-8c397580-e99b-11ea-8dda-980b072d612f.JPG)
-![슬라이드15](https://user-images.githubusercontent.com/48404998/91593682-8c397580-e99b-11ea-87db-496af23609fa.JPG)
-![슬라이드16](https://user-images.githubusercontent.com/48404998/91593683-8cd20c00-e99b-11ea-8083-7721f67b1962.JPG)
