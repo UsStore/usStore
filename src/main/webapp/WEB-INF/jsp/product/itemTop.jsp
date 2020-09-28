@@ -44,10 +44,10 @@
 <nav class="navbar navbar-light" style="background-color: #000000; height: 74px; font-size: 20px;">
 	<ul class="navbar-nav">
 		<li class="nav-item active">
-			<a class="nav-link" href="#" onclick="goClick();">
+			<a class="nav-link" href="<c:url value="/shop/index.do"/>">
 				<img border="0" src="${pageContext.request.contextPath}/images/back.png"
 					style="float: left; width: 30; height: 30; border: 0;" /> &nbsp;
-				<font color="white" font-size="10px"> BACK </font>
+				<font color="white" font-size="10px"> GO TO INDEX </font>
 			</a>
 		</li>
 	</ul>
