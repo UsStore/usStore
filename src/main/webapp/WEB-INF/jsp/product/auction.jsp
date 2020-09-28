@@ -9,6 +9,14 @@
 <title>경매 리스트 페이지</title>
 </head>
 <body> 
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table> 
    <form name = "pform" action="" style="position:absolute; left:50%; margin:0 0 0 -580px;">
       <div class="container" >
          <div class="row"  style="display:inline">

@@ -3,11 +3,23 @@
 
 <h6 class="card-title text-center"> University </h6>
 <div class="form-label-group">
+	<form:input path="account.university" id="inputUniversity" class="form-control" />
 	<B><form:errors path="account.university" cssClass="error" /></B>
-	<form:select path="account.university"  class="form-control">
-		<option value=""></option>
-		<form:options items="${universityKinds}" />
-	</form:select>
+	<!-- <button class="btn btn-lg btn-light btn-block text-uppercase" type="button">대학 찾기</button> -->
+	<button id="button1" onclick="popup();">대학교 찾기</button>
+	<script>
+		function button1_click() {
+			alert("버튼1을 누르셨습니다.");
+		}
+	</script>
+	<script>
+        function popup(){
+            var url = "http://localhost:8080/usStore/searchUniv.do";
+            var name = "univAPI";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+    </script>
 </div>
 <hr class="my-4">
 

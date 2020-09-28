@@ -75,24 +75,24 @@
                     <li>
                         <a href="<c:url value="/shop/handMade/listItem.do?productId=3"/>">수공예</a>
                     </li>
-                    
-					<li role="separator" class="divider"></li>
-					
+
                     <li>
                     	<a href="<c:url value="/shop/secondHand/listItem.do?productId=2"/>">중고거래</a>
                    	</li>
-                   	
-					<li role="separator" class="divider"></li>
-					
+
                     <li>
-                    	<a href="<c:url value="/shop/auction/listItem.do?productId=1"/>">경매</a>
+                    	<a href="<c:url value="/shop/auction/listItem.do?productId=1"/>">경메</a>
                     </li>
-                    
-                    <li role="separator" class="divider"></li>
                     
                     <li>
                     	<a href="<c:url value="/shop/groupBuying/listItem.do?productId=0"/>">공동구매</a>
-                    </li>     
+                    </li>
+
+                    <li role="separator" class="divider"></li>
+
+                    <li>
+                    	<a href="<c:url value="/shop/rank.do"/>">Ranking</a>
+                    </li>
 
                   </ul>
                 </div>
@@ -105,12 +105,8 @@
 
               <ul class="nav navbar-nav navbar-right">
 
-				<li>
-                    <a href="<c:url value="/shop/rank.do"/>">Ranking</a>
-                </li>
-                <li>
-                	<a href="#">About Us</a>
-               	</li>
+                <li><a href="#">About Us</a></li>
+
               </ul>
 
             </div><!-- /.navbar-collapse -->

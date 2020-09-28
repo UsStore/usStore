@@ -19,6 +19,14 @@
 </style>
 </head>
 <body>
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table>
    <!-- db에서 select 결과 보여주는 페이지 -->
    <form name = "pform" action="" style="position:absolute; left:45%; margin:0 0 0 -420px;">
       <div class="container" >

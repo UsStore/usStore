@@ -8,6 +8,15 @@
 		padding-right: 50px;
 	}
 </style>
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table>
+
 <form name="pform" action="" style="position: absolute; left: 45%; margin: 0 0 0 -420px;">
 	<div class="container">
 		<div class="row" style="display: inline">
