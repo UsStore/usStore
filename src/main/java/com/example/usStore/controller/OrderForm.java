@@ -8,6 +8,7 @@ import com.example.usStore.domain.Orders;
  * @author Juergen Hoeller
  * @since 01.12.2003
  */
+ 
 @SuppressWarnings("serial")
 public class OrderForm implements Serializable {
 

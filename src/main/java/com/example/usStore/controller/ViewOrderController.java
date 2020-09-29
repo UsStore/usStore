@@ -17,7 +17,9 @@ import com.example.usStore.service.facade.UsStoreFacade;
  * @author Juergen Hoeller
  * @since 01.12.2003
  * @modified by Changsup Park
+ * @modified by Jieun Lee
  */
+
 @Controller
 @SessionAttributes("userSession")
 public class ViewOrderController {
@@ -32,10 +34,11 @@ public class ViewOrderController {
 	@RequestMapping("/shop/viewOrder.do")
 	public ModelAndView handleRequest(
 			@ModelAttribute("userSession") UserSession userSession,
-			@RequestParam("orderId") int orderId
-			) throws Exception {
+			@RequestParam("orderId") int orderId) throws Exception {
 		
 		Orders order = usStoreFacade.getOrder(orderId);
+		
+		// check username in Orders
 		if (userSession.getAccount().getUsername().equals(order.getShipToUsername())) {
 			System.out.println("account username : " + userSession.getAccount().getUsername());
 			System.out.println("order shipToUsername : " + order.getShipToUsername());
@@ -49,7 +52,8 @@ public class ViewOrderController {
 		}
 	}
 	
-	@RequestMapping("/shop/order/viewItem.do") // go index(remove sessions)
+	 // go index(remove sessions)
+	@RequestMapping("/shop/order/viewItem.do")
 	public String goIndex(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId) {
 		String viewItem = "";
 
