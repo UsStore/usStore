@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.service.GroupBuyingFormValidator;
+import com.example.usStore.service.ItemFormValidator;
 import com.example.usStore.service.OrderService;
 import com.example.usStore.service.facade.ItemFacade;
 
@@ -71,7 +72,7 @@ public class GroupBuyingFormController {
    
    @RequestMapping("/shop/groupBuying/listItem.do") 
     public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, 
-    		Model model,  HttpServletRequest rq) throws ParseException {
+    		Model model, HttpServletRequest rq) throws ParseException {
      
 	  HttpSession session = rq.getSession(false);
 	   
@@ -365,7 +366,7 @@ public class GroupBuyingFormController {
 			   
 			   for(LineItem lineItem : lineItems) {
 				   if(lineItem.getItemId() == itemId) {	//현 사용자의 구매 목록에 속한 itemId = 현재의 itemId
-					   return "product/addReview";	//리뷰 작성 페이지 이동
+					   return "redirect:/shop/review.do?itemId=" + itemId;	//리뷰 작성 페이지 이동
 				   }
 			   }
 		   }
@@ -382,4 +383,5 @@ public class GroupBuyingFormController {
 	   
 	   return "redirect:/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=0";
    }
+      
 }

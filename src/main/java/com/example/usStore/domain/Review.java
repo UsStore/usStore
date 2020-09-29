@@ -5,6 +5,7 @@ public class Review {
    private int itemId;
    private String buyer;
    private String description;
+   private int score;
    
    public int getReviewId() {
       return reviewId;
@@ -30,7 +31,13 @@ public class Review {
    public void setDescription(String description) {
       this.description = description;
    }
-   
+   public int getScore() {
+	return score;
+   }
+   public void setScore(int score) {
+	   this.score = score;
+   }
+
    @Override
    public String toString() {
       return "Review [reviewId=" + reviewId + ", itemId=" + itemId + ", buyer=" + buyer + ", description="
