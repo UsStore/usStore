@@ -1,10 +1,7 @@
 package com.example.usStore.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -16,6 +13,7 @@ import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.GroupBuyingDao;
 import com.example.usStore.dao.HandMadeDao;
 import com.example.usStore.dao.ItemDao;
+import com.example.usStore.dao.ReviewDao;
 import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.TagDao;
 import com.example.usStore.domain.Account;
@@ -25,6 +23,7 @@ import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Orders;
+import com.example.usStore.domain.Review;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
@@ -51,6 +50,8 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	@Autowired // applicationContext.xml占쎈퓠 占쎌젟占쎌벥占쎈쭆 scheduler 揶쏆빘猿쒐몴占 雅뚯눘 뿯 獄쏆룇 벉
 	private ThreadPoolTaskScheduler scheduler;
 
@@ -346,6 +347,21 @@ public class ItemImpl implements ItemFacade {
 	public List<Item> getItemByPId(int productId) {
 		// TODO Auto-generated method stub
 		return itemDao.getItemByPId(productId);
+	}
+
+	@Override
+	public void insertReview(Review review) {
+		reviewDao.insertReview(review);
+	}
+
+	@Override
+	public void deleteReview(int itemId) {
+		reviewDao.deleteReview(itemId);
+	}
+
+	@Override
+	public List<Review> getReviewListByItemId(int itemId) {
+		return reviewDao.getReviewListByItemId(itemId);
 	}
 
 }
