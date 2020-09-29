@@ -14,6 +14,7 @@ import com.example.usStore.domain.Cart;
  * @since 30.11.2003
  * @modified-by Changsup Park
  */
+
 @Controller
 @SessionAttributes("sessionCart")
 public class RemoveItemFromCartController { 
@@ -21,8 +22,8 @@ public class RemoveItemFromCartController {
 	@RequestMapping("/shop/removeItemFromCart.do")
 	public ModelAndView handleRequest(
 			@RequestParam("workingItemId") int workingItemId,
-			@ModelAttribute("sessionCart") Cart cart
-		) throws Exception {
+			@ModelAttribute("sessionCart") Cart cart) throws Exception {
+		
 		cart.removeItemById(workingItemId);
 		return new ModelAndView("order/Cart", "cart", cart);
 	}
