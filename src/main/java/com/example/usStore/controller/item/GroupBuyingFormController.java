@@ -368,19 +368,18 @@ public class GroupBuyingFormController {
 				   if(lineItem.getItemId() == itemId) {	//현 사용자의 구매 목록에 속한 itemId = 현재의 itemId
 					   return "redirect:/shop/review.do?itemId=" + itemId;	//리뷰 작성 페이지 이동
 				   }
-			   }
+			   }	//////////////////////////////이미 해당 제품의 리뷰를 등록한 사용자일 경우, 권한 없음으로 수정 구현하기!
 		   }
+		 //해당 아이템을 구매한 기록 없는 경우
+		   PrintWriter out=response.getWriter();
+		   out.println("<script>");
+		   out.print("alert('You do not have permission!');");
+		   out.print("location.href='viewItem.do?itemId=" + itemId + "&productId=0';");
+		   out.println("</script>");
+		   out.flush();
+		   out.close();
 	   }
 
-	   //해당 아이템을 구매한 기록 없는 경우
-	   PrintWriter out=response.getWriter();
-	   out.println("<script>");
-	   out.print("alert('You do not have permission!');");
-	   out.print("location.href='viewItem.do?itemId=" + itemId + "&productId=0';");
-	   out.println("</script>");
-	   out.flush();
-	   out.close();
-	   
 	   return "redirect:/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=0";
    }
       

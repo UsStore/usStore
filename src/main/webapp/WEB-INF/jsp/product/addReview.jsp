@@ -41,11 +41,11 @@ div#addReviewForm {
 <body>
 	<div id="addReviewForm">
 		<h2>리뷰 작성</h2>
-		<hr width="927px" align="left"><br><br>
+		<hr width="927px" align="left"><br>
 	<spring:hasBindErrors name="review" />
 	<form:form modelAttribute="review" method="post" action="checkReview.do?itemId=${itemId}&score=${score}">
 	
-		<font size="6px">${title}</font>&nbsp;&nbsp;&nbsp;상품은 어떠셨나요?<br><br>
+		<font size="6px">"${title}"</font>&nbsp;&nbsp;&nbsp;상품은 어떠셨나요?<br><br>
 		
 		별점 : &nbsp;&nbsp;
 		<div class="star-box">
@@ -78,7 +78,7 @@ div#addReviewForm {
 //				  window.open('/usStore/shop/review.do?itemId=' + itemId + '&score=' + idx); //점수를 form score 로 제출해주기
 				});	
 		</script>
-		<br><br>
+		<br>
 		
 		리뷰 : <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<form:textarea path="description" placeholder="내용을 입력하세요." cols="50" rows="10" />
