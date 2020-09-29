@@ -22,15 +22,18 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Review;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -310,4 +313,23 @@ public class GroupBuyingFormController {
       out.close();
    }
    
+   @RequestMapping(value = "/shop/getReview.do/{itemId}", method = RequestMethod.GET, produces = "application/json")
+   @ResponseBody
+   public List<Review> getReview(@PathVariable("itemId") int itemId, HttpServletResponse response) throws IOException {   
+      System.out.println("/usStore/rest/shop/getReview.do/" + itemId);
+      
+      List<Review> reviewList = new ArrayList<Review>();
+      
+      reviewList = itemFacade.getReviewListByItemId(itemId);
+                    
+      if (reviewList == null) {
+         response.sendError(HttpServletResponse.SC_NOT_FOUND);
+         return null;
+      }
+      
+      System.out.println("리뷰 리스트:" + reviewList);
+
+      return reviewList;
+   }
+
 }

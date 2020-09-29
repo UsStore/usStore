@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class University implements Serializable{
+	//DTO
 
 	private String univName; // (PK)
 	private String univLink;
