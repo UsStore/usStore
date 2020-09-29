@@ -23,7 +23,7 @@ public class ListOrdersController {
 	private UsStoreFacade usStoreFacade;
 
 	@Autowired
-	public void setPetStore(UsStoreFacade usStoreFacade) {
+	public void setUsStore(UsStoreFacade usStoreFacade) {
 		this.usStoreFacade = usStoreFacade;
 	}
 

@@ -98,18 +98,19 @@ table.n23 {
     width : 50%;
 }
 table.n23 tr td {
-    padding: 3px;
+    padding: 1em;
 }
 
-table.n13 {
-	background-color: #c0c0c0;
+table.orderInfo {
+	background-color: #f6f6f6;
     border: none;
-    border-spacing: 1px;
+    border-spacing: 2px;
+    width: 50%;
 }
-table.n13 tr {
-    background-color: #c0c0c0;
-    width : 50%;
+table.orderInfo tr {
+    background-color: #f6f6f6;
 }
-table.n13 tr td {
-    padding: 10px;
+table.orderInfo tr td {
+    padding: 1em;
+    width: 100%;
 }

@@ -15,8 +15,8 @@
 	<meta name="description" content="2020-01 소프트웨어 시스템 개발 ">
 	<meta name="author" content="愛+">
 	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/usstore.css?after" type="text/css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css?after" type="text/css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/usstore.css" type="text/css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css" type="text/css" />
 	
 	<!-- Bootstrap core JavaScript -->
 	<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>

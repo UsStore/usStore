@@ -1,4 +1,4 @@
-package com.example.usStore.controller.item;
+package com.example.usStore.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +23,7 @@ public class RestfulOrderController {
 	private OrderService orderSvc;
 
 	@Autowired
-	public void setPetStoreSvc(OrderService orderService) {
+	public void setUsStoreSvc(OrderService orderService) {
 		this.orderSvc = orderService;
 	}
 	

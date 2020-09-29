@@ -80,6 +80,7 @@ public class OrderController {
 	public String bindAndValidateOrder(HttpServletRequest request,
 			@ModelAttribute("orderForm") OrderForm orderForm, BindingResult result) {
 		
+		System.out.println("여기다....?");
 		if (orderForm.didShippingAddressProvided() == false) {	
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
