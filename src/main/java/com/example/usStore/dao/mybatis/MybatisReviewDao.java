@@ -32,4 +32,9 @@ public class MybatisReviewDao implements ReviewDao{
    public List<Review> getReviewListByItemId(int itemId) {
       return reviewMapper.getReviewListByItemId(itemId);
    }
+   
+   @Override
+   public Review findReviewByuserIdAndItemId(int itemId, String buyer) {
+	   return reviewMapper.findReviewByuserIdAndItemId(itemId, buyer);
+   }
 }

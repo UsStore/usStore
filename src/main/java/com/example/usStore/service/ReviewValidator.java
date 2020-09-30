@@ -19,6 +19,12 @@ public class ReviewValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		System.out.println("리뷰 validation");
 		
+		Review review = (Review)target; 
+		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "required");
+		
+		if(review.getDescription().length() < 10) {
+			errors.rejectValue("description", "tooShortDesc");
+		}
 	}
 }

@@ -5,8 +5,18 @@ public class Review {
    private int itemId;
    private String buyer;
    private String description;
-   private int score;
+   private int rating;
    
+   public Review() {}
+   
+   public Review(int itemId, String buyer, String description, int rating) {
+	super();
+	this.itemId = itemId;
+	this.buyer = buyer;
+	this.description = description;
+	this.rating = rating;
+   }
+
    public int getReviewId() {
       return reviewId;
    }
@@ -31,17 +41,17 @@ public class Review {
    public void setDescription(String description) {
       this.description = description;
    }
-   public int getScore() {
-	return score;
+   public int getRating() {
+	return rating;
    }
-   public void setScore(int score) {
-	   this.score = score;
+   public void setRating(int rating) {
+	   this.rating = rating;
    }
-
+	
    @Override
    public String toString() {
-      return "Review [reviewId=" + reviewId + ", itemId=" + itemId + ", buyer=" + buyer + ", description="
-            + description + "]";
+	   return "Review [reviewId=" + reviewId + ", itemId=" + itemId + ", buyer=" + buyer + ", description=" + description
+			   + ", rating=" + rating + "]";
    }
-   
+      
 }

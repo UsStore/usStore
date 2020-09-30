@@ -364,4 +364,9 @@ public class ItemImpl implements ItemFacade {
 		return reviewDao.getReviewListByItemId(itemId);
 	}
 
+	@Override
+	public Review findReviewByuserIdAndItemId(int itemId, String buyer) {
+		return reviewDao.findReviewByuserIdAndItemId(itemId, buyer);
+	}
+	
 }

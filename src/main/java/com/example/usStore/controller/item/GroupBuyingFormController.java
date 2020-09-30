@@ -51,19 +51,12 @@ public class GroupBuyingFormController {
    private static final String ADD_GroupBuying_FORM = "product/addGroupBuying";
    private static final String CHECK_FORM3 = "product/checkGroupBuying";
    private static final String DetailPage = "product/viewGroupBuying";
-   
-   private OrderService orderSvc;
-   
+     
    @Autowired
    private ItemFacade itemFacade; 
    
    @Autowired
    private MyPageFacade myPageFacade;
-   
-   @Autowired
-   public void setUsStoreSvc(OrderService orderService) {
-	   this.orderSvc = orderService;
-   }
    
    @ModelAttribute("GroupBuying")        
    public GroupBuyingForm formBacking() {  // accessor method 기본값들로 폼 초기화
@@ -324,63 +317,4 @@ public class GroupBuyingFormController {
       out.close();
    }
    
-   @RequestMapping(value = "/shop/groupBuying/getReview.do/{itemId}", method = RequestMethod.GET, produces = "application/json")
-   @ResponseBody
-   public List<Review> getReview(@PathVariable("itemId") int itemId, HttpServletResponse response) throws IOException {   
-      System.out.println("/usStore/rest/shop/getReview.do/" + itemId);
-      
-      List<Review> reviewList = new ArrayList<Review>();
-      
-      reviewList = itemFacade.getReviewListByItemId(itemId);
-                    
-      if (reviewList == null) {
-         response.sendError(HttpServletResponse.SC_NOT_FOUND);
-         return null;
-      }
-      
-      System.out.println("리뷰 리스트:" + reviewList);
-
-      return reviewList;
-   }
-
-   @RequestMapping("/shop/groupBuying/addReview.do") //리뷰 추가
-   public String gbAddReview(@RequestParam("itemId") int itemId, HttpServletRequest rq, HttpServletResponse response) throws IOException
-   {
-	   System.out.println("addReview.do");
-	   HttpSession session = rq.getSession(false);
-	          
-	   UserSession userSession = (UserSession) session.getAttribute("userSession");
-	   String userId = userSession.getAccount().getUserId();
-	  
-	   List<Orders> orderList = null;
-	   try {
-		   orderList = orderSvc.getOrdersByUserId(userId);	//현 사용자의 주문 목록 가져오기
-	   } catch (NullPointerException e) {	//	orderList == null	//해당 상품 구매자가 아닌 경우
-		   System.out.println("orderList NULL , userId : " + userId);
-	   }
-	   if (orderList != null) {	//주문 목록이 1개 이상 존재할 경우
-		   System.out.println("order 하나 이상 존재");
-		   for(Orders o : orderList) {
-			   System.out.println(o.toString());
-			   List<LineItem> lineItems = orderSvc.getLineItemsByOrderId(o.getOrderId());	//해당 주문번호의 lineItem 받음
-			   
-			   for(LineItem lineItem : lineItems) {
-				   if(lineItem.getItemId() == itemId) {	//현 사용자의 구매 목록에 속한 itemId = 현재의 itemId
-					   return "redirect:/shop/review.do?itemId=" + itemId;	//리뷰 작성 페이지 이동
-				   }
-			   }	//////////////////////////////이미 해당 제품의 리뷰를 등록한 사용자일 경우, 권한 없음으로 수정 구현하기!
-		   }
-		 //해당 아이템을 구매한 기록 없는 경우
-		   PrintWriter out=response.getWriter();
-		   out.println("<script>");
-		   out.print("alert('You do not have permission!');");
-		   out.print("location.href='viewItem.do?itemId=" + itemId + "&productId=0';");
-		   out.println("</script>");
-		   out.flush();
-		   out.close();
-	   }
-
-	   return "redirect:/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=0";
-   }
-      
 }
