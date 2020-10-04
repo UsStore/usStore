@@ -15,7 +15,7 @@
        	http://www.springframework.org/schema/mvc
        	http://www.springframework.org/schema/mvc/spring-mvc.xsd"> 
 
-	<context:component-scan base-package="com.example.usStore.controller.item">
+	<context:component-scan base-package="com.example.usStore.controller">
       <context:exclude-filter type="regex" expression=".*(usStoreImpl|AccountFormValidator)"/>
     </context:component-scan>
     
