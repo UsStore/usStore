@@ -5,21 +5,21 @@
 
   <select id="getAccountByUserId" resultType="Account">
     SELECT USERID, PASSWORD, USERNAME, EMAIL,
-    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY
+    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, univName
     FROM ACCOUNT
     WHERE USERID = #{userId}
   </select>
   
    <select id="getAccountByUsername" resultType="Account">
     SELECT USERID, PASSWORD, USERNAME, EMAIL,
-    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY
+    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, univName
     FROM ACCOUNT
     WHERE USERNAME = #{username}
   </select>
 
   <select id="getAccountByUserIdAndPassword" resultType="Account">
     SELECT USERID, PASSWORD, USERNAME, EMAIL,
-    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY
+    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, univName
     FROM ACCOUNT
     WHERE USERID = #{param1} AND PASSWORD = #{param2}
   </select>
@@ -36,14 +36,14 @@
     ZIP = #{zip}, 
     COUNTRY = #{country}, 
     PHONE = #{phone}, 
-    UNIVERSITY = #{university}
+    univName = #{univName}
     WHERE USERID = #{userId}
   </update>
 
   <insert id="insertAccount" parameterType="Account">
     INSERT INTO ACCOUNT
-      (USERID, PASSWORD, USERNAME, EMAIL, ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY)
+      (USERID, PASSWORD, USERNAME, EMAIL, ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, univName)
     VALUES
-      (#{userId}, #{password}, #{username}, #{email}, #{addr1}, #{addr2,jdbcType=VARCHAR}, #{city}, #{zip}, #{country}, #{phone}, #{university})
+      (#{userId}, #{password}, #{username}, #{email}, #{addr1}, #{addr2,jdbcType=VARCHAR}, #{city}, #{zip}, #{country}, #{phone}, #{univName})
   </insert>
 </mapper>
