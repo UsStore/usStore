@@ -105,7 +105,7 @@ public class ReviewController {
 				   }
 			   }
 		   }
-			 //해당 아이템을 구매한 기록 없는 경우
+			 //해당 아이템을 구매한 기록 없거나 이미 리뷰를 작성한 경우
 			   PrintWriter out=response.getWriter();
 			   out.println("<script>");
 			   out.print("alert('You do not have permission!');");
