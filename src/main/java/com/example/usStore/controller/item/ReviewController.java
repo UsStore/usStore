@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.controller.mypage.UserSession;
-import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.LineItem;
 import com.example.usStore.domain.Orders;
@@ -77,7 +76,7 @@ public class ReviewController {
 	      return reviewList;
 	   }
 
-	   @RequestMapping("/shop/goAddReview.do") //리뷰 추가페이지로 이동하기
+	   @RequestMapping("/shop/goAddReview.do") //리뷰 작성 허가
 	   public String gbAddReview(@RequestParam("itemId") int itemId, HttpServletRequest rq, HttpServletResponse response) throws IOException
 	   {
 		   System.out.println("goAddReview.do");
@@ -90,13 +89,12 @@ public class ReviewController {
 		  
 		   List<Orders> orderList = null;
 		   
-		   if(itemFacade.findReviewByuserIdAndItemId(itemId, buyer) == null) {	//이미 해당 제품의 리뷰를 등록한 사용자일 경우, 권한 없음!
+		   if(itemFacade.findReviewByuserIdAndItemId(itemId, buyer) == null) {	//해당 제품 리뷰 기록 없는 경우
 			   if (orderSvc.getOrdersByUserId(buyer) != null) {	//주문 목록이 1개 이상 존재할 경우
 				   System.out.println("order 하나 이상 존재");
 				   orderList = orderSvc.getOrdersByUserId(buyer);
 				   
 				   for(Orders o : orderList) {
-					   System.out.println(o.toString());
 					   List<LineItem> lineItems = orderSvc.getLineItemsByOrderId(o.getOrderId());	//해당 주문번호의 lineItem 받음
 					   
 					   for(LineItem lineItem : lineItems) {
@@ -127,11 +125,10 @@ public class ReviewController {
 			   else if(item.getProductId() == 2)
 			   {	return "redirect:/shop/secondHand/viewItem.do?itemId=" + itemId + "&productId=2";	}
 			   return "redirect:/shop/handMade/viewItem.do?itemId=" + itemId + "&productId=3";
-			   
 	   }
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping("/shop/review.do") 
+	@RequestMapping("/shop/review.do") //리뷰 작성 페이지로 이동
     public String viewRank(@ModelAttribute("review") Review review, @RequestParam("itemId")int itemId, Model model) {
       System.out.println("review.do");
       
@@ -160,10 +157,9 @@ public class ReviewController {
 			@RequestParam("itemId")int itemId, HttpServletRequest rq, SessionStatus sessionStatus) {   
 
 		  HttpSession session = rq.getSession(false);
+		  new ReviewValidator().validate(review, result);
 		  UserSession userSession = (UserSession) session.getAttribute("userSession");
-		
-	      new ReviewValidator().validate(review, result);
-	      
+			      
 	      if (result.hasErrors()) {   //유효성 검증 에러 발생시 다시 입력 폼을 이동
 	          return "redirect:/shop/review.do?itemId=" + itemId;	
 	       }
@@ -180,7 +176,7 @@ public class ReviewController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/shop/AllReviewList.do") //모든 리뷰 목록 으로 이동
-	public String allReviewList(@RequestParam("itemId")int itemId, Model model, ModelMap modelMap)
+	public String allReviewList(@RequestParam("itemId")int itemId,Model model, ModelMap modelMap)
 	{
 		@SuppressWarnings("rawtypes")
 		Map ratingOptions = new HashMap();
@@ -235,5 +231,43 @@ public class ReviewController {
 		model.addAttribute("itemId", itemId);
 		 
 		return "product/reviewList";
+	}
+	
+	@RequestMapping("/shop/goViewItem.do") //모든 리뷰 목록 으로 이동
+	public String goViewItem(@RequestParam("itemId")int itemId, Model model, ModelMap modelMap)
+	{
+		Item item = itemFacade.getItem(itemId);
+		String viewItem = "";
+		
+		switch (item.getProductId()) {
+		case 0:
+			viewItem = "redirect:/shop/groupBuying/viewItem.do";
+			break;
+		case 1:
+			viewItem = "redirect:/shop/auction/viewItem.do";
+			break;
+		case 2:
+			viewItem = "redirect:/shop/secondHand/viewItem.do";
+			break;
+		case 3:
+			viewItem = "redirect:/shop/handMade/viewItem.do";
+			break;
+		}
+
+		return viewItem + "?itemId=" + itemId + "&productId=" + item.getProductId();
+	}
+	
+	@RequestMapping("/shop/deleteReview.do") //모든 리뷰 목록 으로 이동
+	public String deleteReview(@RequestParam("itemId")int itemId, HttpServletRequest rq) {
+		System.out.println("deleteReview");
+		HttpSession session = rq.getSession(false);
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		String buyer = userSession.getAccount().getUserId();
+		
+		Review review = itemFacade.findReviewByuserIdAndItemId(itemId, buyer);
+		
+		itemFacade.deleteReview(review.getReviewId());	//리뷰 삭제
+		
+	      return "redirect:/shop/AllReviewList.do?itemId=" + itemId;
 	}
 }

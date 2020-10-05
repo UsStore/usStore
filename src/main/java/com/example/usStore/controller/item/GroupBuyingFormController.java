@@ -22,26 +22,19 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
-import com.example.usStore.domain.LineItem;
-import com.example.usStore.domain.Orders;
-import com.example.usStore.domain.Review;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.service.GroupBuyingFormValidator;
-import com.example.usStore.service.ItemFormValidator;
-import com.example.usStore.service.OrderService;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
@@ -272,18 +265,11 @@ public class GroupBuyingFormController {
    }
    
    @RequestMapping("/shop/groupBuying/delete.do") //edit Item
-   public void deleteItem(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, 
-		   HttpServletResponse response) throws IOException
+   public String deleteItem(@RequestParam("itemId") int itemId)
    {
 	   itemFacade.deleteItem(itemId);//상품 삭제
-	   PrintWriter out = response.getWriter();
-
-	   out.println("<script>");
-	   out.print("alert('DELETED !');");
-	   out.print("location.href='listItem.do?itemId=" + itemId + "&productId=" + productId + "';");	
-	   out.println("</script>");
-	   out.flush();
-	   out.close();
+	   
+	   return "redirect:/shop/groupBuying/listItem.do?productId=0";
    }
    
    @RequestMapping("/shop/groupBuying/index.do") //go index(remove sessions)
@@ -299,22 +285,7 @@ public class GroupBuyingFormController {
    }
    
    @RequestMapping("/shop/groupBuying/goCart.do") //go index(remove sessions)
-   public String goIndex(@RequestParam("workingItemId") int workingItemId, @RequestParam("productId") int productId)
-   { return "redirect:/shop/addItemToCart.do?workingItemId=" + workingItemId + "&productId=" + productId; }
-   
-   @RequestMapping("/shop/groupBuying/joint.do") //joint GroupBuying
-   public void jointGroupBuying(@RequestParam("workingItemId") int workingItemId, @RequestParam("productId") int productId, 
-         HttpServletResponse response) throws IOException
-   {
-      PrintWriter out=response.getWriter();
-      
-      out.println("<script>");
-      out.print("if (confirm('Do you want to participate in GroupBuying?') == true){");
-      out.print("location.href='goCart.do?workingItemId=" + workingItemId + "&productId=" + productId + "';}");
-      out.print("else{location.href='viewItem.do?itemId=" + workingItemId + "&productId=" + productId + "';}");   //공동구매 진행 취소
-      out.println("</script>");
-      out.flush();
-      out.close();
-   }
-   
+   public String goIndex(@RequestParam("workingItemId") int workingItemId)
+   { return "redirect:/shop/addItemToCart.do?workingItemId=" + workingItemId + "&productId=0"; }
+     
 }

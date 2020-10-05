@@ -167,14 +167,13 @@ public class ItemImpl implements ItemFacade {
 		Runnable updateTableRunner = new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("close메소드 실행");
+				System.out.println("스케쥴러 - close메소드 실행");
 				Date curTime = new Date();
 				groupBuyingDao.closeGroupBuying(curTime); // state 변경
+				System.out.println("스케쥴러 - 현재시간 : " + curTime.toString());
 			}
 		};
 		scheduler.schedule(updateTableRunner, deadLine);
-
-		System.out.println("GB updateTableRunner has been scheduled to execute at " + deadLine);
 	}
 	
 	//기한 마감시 삭제
