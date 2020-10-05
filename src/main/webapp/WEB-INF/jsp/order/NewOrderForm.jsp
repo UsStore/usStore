@@ -7,6 +7,19 @@
 	<c:url value="/shop/newOrderSubmitted.do" />
 </c:set>
 
+<script>
+	$(document).ready(function(){
+	    $("#checkBoxId").change(function(){
+	        if($("#checkBoxId").is(":checked")){
+	            alert("체크박스 체크했음!");
+	            // 여기에 폼 정보 자동 입력되도록 하면 될듯.
+	        }else{
+	            alert("체크박스 체크 해제!");
+	        }
+	    });
+	});
+</script>
+
 <div align="center">
 	<form:form modelAttribute="orderForm" action="${targetUrl}" method="post">
 		<form:errors cssClass="error" />
@@ -82,55 +95,13 @@
 				</td>
 			</tr>
 			<tr class="orderInfo">
-				<td colspan="2"><form:checkbox path="shippingAddressRequired"
-						label="Ship to different address..." />
-			</tr>
-			
-			<tr class="orderInfo">
-				<td colspan="2" style="text-align: center">
-					<font color="#40bea7" size="5">
-						<b>Payment Details</b>
-					</font>
-				</td>
-			</tr>
-			<tr class="orderInfo">
-				<td>
-					<h6 class="card-title"> Card Type </h6>
-					
-					<div class="form-label-group">
-						<B><form:errors path="order.cardType" cssClass="error" /></B>
-						<form:select path="order.cardType"  class="form-control">
-							<option value="Card Type"></option>
-							<form:options items="${creditCardTypes}" />
-						</form:select>
-					</div>
-				</td>
-			</tr>
-			<tr class="orderInfo">
-				<td>
-					<font color="red" size="2">* Use a fake number!</font>
-					<div class="form-label-group">
-						<form:input path="order.creditCard" id="inputCardNumber"
-							class="form-control" />
-						<B><form:errors path="order.creditCard" cssClass="error" /></B>
-						<label for="inputCardNumber">Card Number</label>
-					</div>
-				</td>
-			</tr>
-			<tr class="orderInfo">
-				<td>
-					<div class="form-label-group">
-						<form:input path="order.expiryDate" id="inputName"
-							class="form-control" />
-						<B><form:errors path="order.expiryDate" cssClass="error" /></B>
-						<label for="inputName">Expiry Date (MM/YY)</label>
-					</div>
-				</td>
+				<td colspan="2"><form:checkbox path="shippingAddressRequired" id="checkBoxId"
+						label="배송 정보가 주문자와 동일합니다." />
 			</tr>
 		</table>
 		<br>
 		<p>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">결제하기</button>
 			<input type="submit" value="결제하기"/>
 		</p>
 		<!-- Payment Modal -->
@@ -139,7 +110,9 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+		      	<h5 class="modal-title" id="exampleModalLabel">
+		      		<font color="#40bea7"> <b>Payment Details</b> </font>
+				</h5>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
@@ -147,15 +120,31 @@
 		      <div class="modal-body">
 		        <form>
 		          <div class="form-group">
-		            <label for="recipient-name" class="col-form-label">Recipient:</label>
-		            <input type="text" class="form-control" id="recipient-name">
+		          	<h6 class="card-title">Card Type</h6>
+		            <div class="form-label-group">
+									<B><form:errors path="order.cardType" cssClass="error" /></B>
+									<form:select path="order.cardType" class="form-control">
+										<option value="Card Type"></option>
+										<form:options items="${creditCardTypes}" />
+									</form:select>
+								</div>
 		          </div>
 		          <div class="form-group">
-		            <label for="message-text" class="col-form-label">Message:</label>
-		            <textarea class="form-control" id="message-text"></textarea>
+		          	<font color="red" size="2">* Use a fake number!</font>
+		          	<div class="form-label-group">
+						<form:input path="order.creditCard" id="inputCardNumber"
+							class="form-control" />
+						<B><form:errors path="order.creditCard" cssClass="error" /></B>
+						<label for="inputCardNumber">Card Number</label>
+					</div>
 		          </div>
+		          <div class="form-label-group">
+						<form:input path="order.expiryDate" id="inputName"
+							class="form-control" />
+						<B><form:errors path="order.expiryDate" cssClass="error" /></B>
+						<label for="inputName">Expiry Date (MM/YY)</label>
+					</div>
 		        </form>
-		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		        <button type="button" class="btn btn-primary">Send message</button>
