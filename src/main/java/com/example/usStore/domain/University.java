@@ -10,6 +10,14 @@ public class University implements Serializable{
 	private String univLink;
 	private String univAddr;
 	
+	public University() {}
+	
+	public University(String univName, String univLink, String univAddr) {
+		super();
+		this.univName = univName;
+		this.univLink = univLink;
+		this.univAddr = univAddr;
+	}
 	public String getUnivName() {
 		return univName;
 	}
