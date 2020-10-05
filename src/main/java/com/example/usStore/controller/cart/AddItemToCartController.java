@@ -18,6 +18,7 @@ import com.example.usStore.service.facade.UsStoreFacade;
  * @modified-by Changsup Park
  * @modified-by Jieun Lee
  */
+
 @Controller
 @SessionAttributes("sessionCart")
 public class AddItemToCartController { 
@@ -38,12 +39,13 @@ public class AddItemToCartController {
 	public ModelAndView handleRequest(
 			@RequestParam("workingItemId") int workingItemId,
 			@RequestParam("productId") int productId,
-			@ModelAttribute("sessionCart") Cart cart 
-			) throws Exception {
+			@ModelAttribute("sessionCart") Cart cart ) throws Exception {
+		
+		// if already item in cart
 		if (cart.containsItemId(workingItemId)) {
+			// increment quantity
 			cart.incrementQuantityByItemId(workingItemId);
-		}
-		else {
+		} else {
 			// isInStock is a "real-time" property that must be updated
 			// every time an item is added to the cart, even if other
 			// item details are cached.
@@ -66,6 +68,7 @@ public class AddItemToCartController {
 					break;
 			}
 			
+			// is it in stock? yes -> true // no -> false
 			boolean isInStock = this.itemFacade.isItemInStock(workingItemId, item.getProductId());
 			cart.addItem(item, isInStock);
 		}

@@ -36,6 +36,7 @@ public class OrderController {
 	
 	@Autowired
 	private UsStoreFacade usStore;
+	
 	@Autowired
 	private OrderValidator orderValidator;
 	
@@ -46,18 +47,20 @@ public class OrderController {
 
 	@ModelAttribute("creditCardTypes")
 	public List<String> referenceData() {
+		
 		ArrayList<String> creditCardTypes = new ArrayList<String>();
 		creditCardTypes.add("Visa");
 		creditCardTypes.add("MasterCard");
-		creditCardTypes.add("American Express");
+		// add kakao pay -> connect I'mPort API
+		creditCardTypes.add("Kakao Pay");
 		return creditCardTypes;			
 	}
 	
 	@RequestMapping("/shop/newOrder.do")
 	public String initNewOrder(HttpServletRequest request,
 			@ModelAttribute("sessionCart") Cart cart,
-			@ModelAttribute("orderForm") OrderForm orderForm
-			) throws ModelAndViewDefiningException {
+			@ModelAttribute("orderForm") OrderForm orderForm) throws ModelAndViewDefiningException {
+		
 		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
 		if (cart != null) {
 			// Re-read account from DB at team's request.
@@ -65,18 +68,19 @@ public class OrderController {
 			
 			orderForm.getOrder().initOrder(account, cart, "OK");
 			return "order/NewOrderForm";	
-		}
-		else {
+		} else {
 			ModelAndView modelAndView = new ModelAndView("Error");
 			modelAndView.addObject("message", "An order could not be created because a cart could not be found.");
 			throw new ModelAndViewDefiningException(modelAndView);
 		}
 	}
 	
+	// process 변경 필요.
 	@RequestMapping("/shop/newOrderSubmitted.do")
 	public String bindAndValidateOrder(HttpServletRequest request,
-			@ModelAttribute("orderForm") OrderForm orderForm, 
-			BindingResult result) {
+			@ModelAttribute("orderForm") OrderForm orderForm, BindingResult result) {
+		
+		System.out.println("여기다....?");
 		if (orderForm.didShippingAddressProvided() == false) {	
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
@@ -101,19 +105,26 @@ public class OrderController {
 		}
 	}
 	
+	// 여기로 넘어가기 전에 카카오페이 결제가 완료되어야 함.
+	// 카카오페이 결제 완료 후 이 컨트롤러로 넘기면 될듯.
 	@RequestMapping("/shop/confirmOrder.do")
 	protected ModelAndView confirmOrder(
-			@ModelAttribute("orderForm") OrderForm orderForm, 
-			SessionStatus status) {
+			@ModelAttribute("orderForm") OrderForm orderForm, SessionStatus status) {
+		
 		System.out.println("confirmOrder.do : " + orderForm.getOrder().getLineItems().size());
+		
+		// insert Order
 		usStore.insertOrder(orderForm.getOrder());
 		ModelAndView mav = new ModelAndView("order/ViewOrder");
+		
 		mav.addObject("order", orderForm.getOrder());
 		mav.addObject("message", "Thank you, your order has been submitted.");
 		
-		// 여기서 updateQuantity 해야할듯
+		// updateQuantity order items
 		itemFacade.updateQuantity(orderForm.getOrder());
-		status.setComplete();  // remove sessionCart and orderForm from session
+		
+		// remove sessionCart and orderForm from session
+		status.setComplete();
 		return mav;
 	}
 }

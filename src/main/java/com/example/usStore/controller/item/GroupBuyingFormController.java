@@ -22,19 +22,26 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.LineItem;
+import com.example.usStore.domain.Orders;
+import com.example.usStore.domain.Review;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.service.GroupBuyingFormValidator;
+import com.example.usStore.service.ItemFormValidator;
+import com.example.usStore.service.OrderService;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
@@ -44,7 +51,7 @@ public class GroupBuyingFormController {
    private static final String ADD_GroupBuying_FORM = "product/addGroupBuying";
    private static final String CHECK_FORM3 = "product/checkGroupBuying";
    private static final String DetailPage = "product/viewGroupBuying";
-   
+     
    @Autowired
    private ItemFacade itemFacade; 
    
@@ -58,7 +65,7 @@ public class GroupBuyingFormController {
    
    @RequestMapping("/shop/groupBuying/listItem.do") 
     public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, 
-    		Model model,  HttpServletRequest rq) throws ParseException {
+    		Model model, HttpServletRequest rq) throws ParseException {
      
 	  HttpSession session = rq.getSession(false);
 	   

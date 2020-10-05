@@ -17,6 +17,7 @@ import com.example.usStore.domain.CartItem;
  * @since 30.11.2003
  * @modified-by Changsup Park
  */
+
 @Controller
 @SessionAttributes("sessionCart")
 public class UpdateCartQuantitiesController { 
@@ -25,13 +26,18 @@ public class UpdateCartQuantitiesController {
 	public ModelAndView handleRequest(
 			HttpServletRequest request,	
 			@ModelAttribute("sessionCart") Cart cart) throws Exception {
+		
+		// get all cart items for update quantities
 		Iterator<CartItem> cartItems = cart.getAllCartItems();
+		
 		while (cartItems.hasNext()) {
 			CartItem cartItem = (CartItem) cartItems.next();
 			int itemId = cartItem.getItem().getItemId();
 			try {
+				// all items quantity update
 				int quantity = Integer.parseInt(request.getParameter(String.valueOf(itemId)));
 				cart.setQuantityByItemId(itemId, quantity);
+				
 				if (quantity < 1) {
 					cartItems.remove();
 				}

@@ -28,7 +28,7 @@
 	<form:errors path="title"/> <br><br>
 	
 	내용 : <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<form:textarea path="description" cols="50" rows="10" value="${discription}"/>
+	<form:textarea path="description" cols="50" rows="10" value="${description}"/>
 	<form:errors path="description"/> <br><br>
 	
 	<c:set var="pId" value="${productId}"/>

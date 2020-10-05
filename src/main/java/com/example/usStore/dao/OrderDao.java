@@ -2,6 +2,8 @@ package com.example.usStore.dao;
 
 import java.util.List;
 import org.springframework.dao.DataAccessException;
+
+import com.example.usStore.domain.LineItem;
 import com.example.usStore.domain.Orders;
 
 public interface OrderDao {
@@ -14,4 +16,8 @@ public interface OrderDao {
 	
 	// Order 추가
 	void insertOrder(Orders order) throws DataAccessException;
+	
+	//orderId로 lineItem 구하기
+	List<LineItem> getLineItemsByOrderId(int orderId);
+	
 }

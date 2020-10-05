@@ -2,9 +2,6 @@ package com.example.usStore.service.facade;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
@@ -13,6 +10,7 @@ import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Orders;
+import com.example.usStore.domain.Review;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 
@@ -131,4 +129,17 @@ public interface ItemFacade {
 	void insertTag(Tag tag);	
 	
 	void deleteTag(int itemId);
+
+	/////////////////////////////////////////////////////////////////////////
+	/* Review */
+	/////////////////////////////////////////////////////////////////////////
+	
+	void insertReview(Review review);
+	
+	void deleteReview(int itemId);
+	
+	List<Review> getReviewListByItemId(int itemId);
+
+	Review findReviewByuserIdAndItemId(int itemId, String buyer);
+	
 }

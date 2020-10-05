@@ -2,6 +2,7 @@ package com.example.usStore.service;
 
 import java.util.List;
 
+import com.example.usStore.domain.LineItem;
 import com.example.usStore.domain.Orders;
 import com.example.usStore.service.facade.UsStoreFacade;
 import com.example.usStore.service.impl.OrderServiceImpl;
@@ -25,5 +26,7 @@ public interface OrderService {
 	Orders getOrder(int orderId);
 	
 	public List<Orders> getOrdersByUserId(String userId);
+	
+	List<LineItem> getLineItemsByOrderId(int orderId);
 
 }
