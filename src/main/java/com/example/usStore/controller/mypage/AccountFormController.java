@@ -75,7 +75,6 @@ public class AccountFormController {
 		return formViewName;
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping(method = RequestMethod.POST)
 	public String onSubmit(
 			HttpServletRequest request, HttpSession session,

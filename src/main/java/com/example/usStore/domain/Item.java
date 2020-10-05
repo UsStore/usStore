@@ -22,7 +22,7 @@ public class Item implements Serializable, Comparable<Item> {
 
    public Item() {}
    
-   public Item(int unitCost, String title, String description, int qty, String userId,   int productId) {
+   public Item(int unitCost, String title, String description, int qty, String userId, int productId) {
       this.unitCost = unitCost;
       this.title = title;
       this.description = description;

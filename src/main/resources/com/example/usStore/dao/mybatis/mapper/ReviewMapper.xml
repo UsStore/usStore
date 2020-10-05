@@ -8,8 +8,8 @@
          SELECT REVIEWID_seq.nextval AS reviewId FROM DUAL
       </selectKey> 
       INSERT INTO REVIEW
-      (REVIEWID, ITEMID, BUYER, DESCRIPTION) VALUES
-      (#{reviewId}, #{itemId}, #{buyer}, #{description})
+      (REVIEWID, ITEMID, BUYER, DESCRIPTION, RATING) VALUES
+      (#{reviewId}, #{itemId}, #{buyer}, #{description}, #{rating})
    </insert>
    
    <delete id="deleteReview">
@@ -18,9 +18,15 @@
    </delete>
       
    <select id="getReviewListByItemId" resultType="Review">
-       SELECT R.REVIEWID, R.ITEMID, R.BUYER, R.DESCRIPTION
+       SELECT R.REVIEWID, I.ITEMID, R.BUYER, R.DESCRIPTION, R.RATING
        FROM REVIEW R, ITEM I
-      WHERE R.ITEMID = I.ITEMID
+      WHERE R.ITEMID = I.ITEMID AND I.ITEMID = #{itemId}
+   </select>
+   
+   <select id="findReviewByuserIdAndItemId" resultType="Review">
+  		SELECT REVIEWID, ITEMID, BUYER, DESCRIPTION, RATING
+  		FROM REVIEW
+  		WHERE ITEMID = #{param1} AND BUYER = #{param2}
    </select>
    
 </mapper>

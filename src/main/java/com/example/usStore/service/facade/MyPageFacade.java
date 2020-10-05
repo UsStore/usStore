@@ -2,6 +2,7 @@ package com.example.usStore.service.facade;
 
 import java.util.List;
 import com.example.usStore.domain.Accuse;
+import com.example.usStore.domain.University;
 
 public interface MyPageFacade {
 	/////////////////////////////////////////////////////////////////////////
@@ -14,4 +15,13 @@ public interface MyPageFacade {
 	String isAccuseAlready(String attacker, String victim);
 
 	List<Accuse> selectAccuseList(String victim);
+	
+	/////////////////////////////////////////////////////////////////////////
+	/* University */
+	/////////////////////////////////////////////////////////////////////////
+	University getUnivByName(String univNameU);
+	
+	void insertUniv(University university);
+	 
+	
 }

@@ -1,25 +1,34 @@
 package com.example.usStore.controller.mypage;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Content implements Serializable{
+public class Content {
 
-    private List<UnivInfo> uniInfo;
+	private List<UnivInfo> univs;
 
-    public Content() {
-    }
+	public Content() {
+		super();
+	}
 
-    public Content(List<UnivInfo> uniInfo) {
-        this.uniInfo = uniInfo;
-    }
+	public Content(List<UnivInfo> univs) {
+		super();
+		this.univs = univs;
+	}
 
-    public List<UnivInfo> getUniInfo() {
-        return uniInfo;
-    }
+	public List<UnivInfo> getUnivs() {
+		return univs;
+	}
 
-    public void setUniInfo(List<UnivInfo> uniInfo) {
-        this.uniInfo = uniInfo;
-    }
+	public void setUnivs(List<UnivInfo> univs) {
+		this.univs = univs;
+	}
+
+	@Override
+	public String toString() {
+		return "Content [univs=" + univs + "]";
+	}
+
+	
+    
 
 }

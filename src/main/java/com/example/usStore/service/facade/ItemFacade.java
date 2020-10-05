@@ -140,4 +140,6 @@ public interface ItemFacade {
 	
 	List<Review> getReviewListByItemId(int itemId);
 
+	Review findReviewByuserIdAndItemId(int itemId, String buyer);
+	
 }

@@ -1,24 +1,30 @@
 package com.example.usStore.controller.mypage;
 
-import java.io.Serializable;
+public class DataSearch {
 
-public class DataSearch implements Serializable {
+	private Content content;	
 
-    private Content content;
+	public DataSearch() {
+		super();
+	}
 
-    public DataSearch() {
-    }
+	public Content getContent() {
+		return content;
+	}
 
-    public DataSearch(Content content) {
-        this.content = content;
-    }
+	public void setContent(Content content) {
+		this.content = content;
+	}
 
-    public Content getContent() {
-        return content;
-    }
+	public DataSearch(Content content) {
+		super();
+		this.content = content;
+	}
 
-    public void setContent(Content content) {
-        this.content = content;
-    }
+	@Override
+	public String toString() {
+		return "DataSearch [content=" + content + "]";
+	}	
 
+    
 }

@@ -1,13 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>대학교 찾기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript">
+	function check() {
+		alert("체크 메소드진입 ");
+	    alert(window.location.href);
+	    
+	    UrlPathHelper urlPathHelper = new UrlPathHelper(); 
+	    String originalURL = urlPathHelper.getOriginatingRequestUri(request); 
+	    alert("OriginalURL ==>" + originalURL);
+	}
+
+	$(document).ready(function () {
+	  	// 라디오버튼 클릭시 이벤트 발생
+	  	$("input:radio[name=univName]").click(function(){
+	  	    	 var radioVal = $('input[name="univName"]:checked').val();
+	  	    	 var answer = confirm(radioVal + "을(를) 자신의 대학교로 선택하기 ");
+				 if(answer == true){  // 새로운 요청 보내서 에딧트던 회원가입이던 그 페이지에 대학이름 삽입하기 
+					 alert(answer);
+				 }else{ window.go(-1);}
+	  	});
+	});
+</script>
 </head>
 <body>
-	<form action="api/university.do" method="post">
+	<form action="http://localhost:8080/usStore/api/university.do" method="post">
 	    <div>
 	      <label>지역</label> 
 	      <select id="region" name="region">
@@ -31,23 +55,32 @@
 	      </select>
 	    </div>
 	    <div>
-	      <label>대학교 찾기</label>
-	      <input name="univName" type="text" />
+	      <label>학교명</label>
+	      <input name="univName" type="text" /><button type="submit" onclick="check();">검색 </button>
 	    </div>
+	      
 	     <div>
-	      <label>찾기 결과</label>
-	      <input name="result" type="text" value="${result}"/>
+	     <br>
+	     <c:if test="${fn:length(results) ne 0}">
+				 <table>
+				 <tr>
+	                  <th style="padding-left:20px">검색 결과</th>
+	             </tr>
+	             <tbody>   
+	                  <c:forEach var="result" items="${results}">         
+		                  <tr style="height:20px;">
+			                  <td style="padding-left:20px">
+			                      ${result}&nbsp; <input type="radio" name="univName" value=${result}>
+			                   </td>
+		                  </tr>
+	                  </c:forEach>
+	            </tbody>
+	        	</table>
+				<!-- <input type="button" name="confirm" id="radioButton" value="확인"/>  -->
+        </c:if>
 	    </div>
-	    
-	    <button type="submit">찾기</button>
-	    
-	    <input type="button" name="confirm" value="확인"/> 
-	    <!-- 
-	    	univName으로 컨트롤러에서 대학교를 찾아준 다음에 그 결과를 
-	    	다시 result 박스안에다가  보여주고 제대로 result값이 들어올 때만 확인 버튼을누를수있게 보여준다. 
-	        요청 : region과 univName -> 응답 : result에다가 대학 이름보여준다 
-	     -->
 	</form>
 
+	<input type="button" name="exit" onClick="window.close();" value="닫기"/>
 </body>
 </html>

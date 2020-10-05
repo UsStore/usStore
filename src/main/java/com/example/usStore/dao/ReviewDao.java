@@ -14,5 +14,8 @@ public interface ReviewDao {
       void deleteReview(int itemId) throws DataAccessException;
       
       // 모든 공동구매 리스트 가져오는 메소드
-      List<Review> getReviewListByItemId(int itemId) throws DataAccessException;
+      List<Review> getReviewListByItemId(int itemId);
+      
+      //리뷰 조건 조회
+      Review findReviewByuserIdAndItemId(int itemId, String buyer);
 }

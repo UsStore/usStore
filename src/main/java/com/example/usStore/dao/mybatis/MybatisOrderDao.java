@@ -47,4 +47,10 @@ public class MybatisOrderDao implements OrderDao {
 		// TODO Auto-generated method stub
 		return orderMapper.getOrdersByUserId(userId);
 	}
+	
+	@Override
+	public List<LineItem> getLineItemsByOrderId(int orderId) {
+		return lineItemMapper.getLineItemsByOrderId(orderId);
+	}
+	
 }

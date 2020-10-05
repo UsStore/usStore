@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class SearchUniv implements Serializable {
 
-    private String region;
+	private static final long serialVersionUID = 1L;
+	private String region;
     private String univName;
 
     public SearchUniv() {

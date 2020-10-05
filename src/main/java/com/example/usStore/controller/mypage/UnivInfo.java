@@ -1,9 +1,9 @@
 package com.example.usStore.controller.mypage;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@SuppressWarnings("serial")
-public class UnivInfo implements Serializable{ //open api를 이용하여 데이터 입력받는 커맨드 객체
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UnivInfo  {//open api를 이용하여 데이터 입력받는 커맨드 객체
 //Response
 	private String campusName;
 	private String collegeinfourl;

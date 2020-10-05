@@ -22,6 +22,8 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.LineItem;
+import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.Review;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
@@ -38,6 +40,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.service.GroupBuyingFormValidator;
+import com.example.usStore.service.ItemFormValidator;
+import com.example.usStore.service.OrderService;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
@@ -47,7 +51,7 @@ public class GroupBuyingFormController {
    private static final String ADD_GroupBuying_FORM = "product/addGroupBuying";
    private static final String CHECK_FORM3 = "product/checkGroupBuying";
    private static final String DetailPage = "product/viewGroupBuying";
-   
+     
    @Autowired
    private ItemFacade itemFacade; 
    
@@ -61,7 +65,7 @@ public class GroupBuyingFormController {
    
    @RequestMapping("/shop/groupBuying/listItem.do") 
     public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, 
-    		Model model,  HttpServletRequest rq) throws ParseException {
+    		Model model, HttpServletRequest rq) throws ParseException {
      
 	  HttpSession session = rq.getSession(false);
 	   
@@ -313,23 +317,4 @@ public class GroupBuyingFormController {
       out.close();
    }
    
-   @RequestMapping(value = "/shop/getReview.do/{itemId}", method = RequestMethod.GET, produces = "application/json")
-   @ResponseBody
-   public List<Review> getReview(@PathVariable("itemId") int itemId, HttpServletResponse response) throws IOException {   
-      System.out.println("/usStore/rest/shop/getReview.do/" + itemId);
-      
-      List<Review> reviewList = new ArrayList<Review>();
-      
-      reviewList = itemFacade.getReviewListByItemId(itemId);
-                    
-      if (reviewList == null) {
-         response.sendError(HttpServletResponse.SC_NOT_FOUND);
-         return null;
-      }
-      
-      System.out.println("리뷰 리스트:" + reviewList);
-
-      return reviewList;
-   }
-
 }

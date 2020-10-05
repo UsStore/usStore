@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.usStore.dao.mybatis.mapper.UniversityMapper">
+  <cache />
+
+  <select id="getUnivByName" resultType="University">
+    SELECT univName, univLink, univAddr
+    FROM university
+    WHERE univName = #{univName}
+  </select>
+ 
+  <insert id="insertUniv" parameterType="University">
+    INSERT INTO university
+      (univName, univLink, univAddr)
+    VALUES
+      (#{univName}, #{univLink}, #{univAddr})
+  </insert>
+
+</mapper>
