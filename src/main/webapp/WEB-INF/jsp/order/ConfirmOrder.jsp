@@ -1,12 +1,5 @@
 <%@ include file="../account/IncludeAccount.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
- 
-<table id="main-menu">
-  <tr><td>
-    <a href='<c:url value="/shop/index.do"/>'>
-      <b><font color="black" size="2">&lt;&lt; Main Menu</font></b></a>
-  </td></tr>
-</table>
 
 <div align="center">
   <p>
