@@ -18,7 +18,7 @@
                     "</th><th style='border-bottom: none; text-align: left;'>구매자</th>" + 
                     "<th colspan='2' style='border-bottom: none; text-align: left;'>리뷰</th></tr><hr width = '800px' align='left'>");
 
-			if(obj.length == 0) {   $("#result > div").append("<tr><td colspan='4'>아직 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
+			if(obj.length == 0) {   $("#result > div").append("<tr><td colspan='4'>작성된 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
 			else {
 				for (var i in obj) {
 					$("#result > div").append("<tr><td style='text-align: left;'>" + obj[i].rating + 
@@ -101,6 +101,24 @@
    
 </style>
 <script>
+function gbJoint(itemId) {
+	if(confirm("공동구매에 참여하시겠습니까?")){
+	    document.location.href="/usStore/shop/groupBuying/goCart.do?workingItemId=" + itemId + "&productId=0";	//확인 클릭
+	 }
+}
+
+function removeGb(itemId) {
+	if(confirm("정말 공동구매를 삭제하시겠습니까?")){
+	    document.location.href="/usStore/shop/groupBuying/delete.do?itemId=" + itemId;	//확인 클릭
+	 }
+}
+
+function editGb(itemId) {
+	if(confirm("공동구매를 수정하시겠습니까?")){
+	    document.location.href="/usStore/shop/groupBuying/edit.do?itemId=" + itemId;	//확인 클릭
+	 }
+}
+
 function getTime() { 
    var time = "${gb.deadLine}";
 
@@ -199,7 +217,7 @@ newtime = window.setTimeout("getTime();", 1000);
             </font>
             <c:set var="state" value="${gb.state}"/>
                <c:if test="${state eq 0}">
-               <br><br>공동구매 종료까지 "<font id=counter0></font>일 <font id=counter1></font>시간 <font id=counter2></font>분 <font id=counter3></font>초" 남았습니다
+               	<br><br>공동구매 종료까지 "<font id=counter0></font>일 <font id=counter1></font>시간 <font id=counter2></font>분 <font id=counter3></font>초" 남았습니다
                </c:if>
             </td>
          </tr>
@@ -227,12 +245,7 @@ newtime = window.setTimeout("getTime();", 1000);
                <tr>
                   <td colspan="2" style="border-bottom: none;">
                <span id="blue">
-                  <a href="
-                        <c:url value='/shop/groupBuying/joint.do'>
-                           <c:param name="workingItemId" value="${gb.itemId}" />
-                           <c:param name="productId" value="${gb.productId}" />
-                        </c:url>
-                  ">공동구매 참여하기</a>
+                  <a href="javascript:gbJoint(${gb.itemId})">공동구매 참여하기</a>
                  
                </span>
                 </td>
@@ -251,15 +264,8 @@ newtime = window.setTimeout("getTime();", 1000);
          <c:if test="${gb.userId eq userSession.account.userId}"> <!-- ë¡ ê·¸ì ¸ì   ì ¤í   -->
             <tr>
                <td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-               <a href="<c:url value='/shop/groupBuying/edit.do'>
-                           <c:param name="itemId" value="${gb.itemId}" />
-                        </c:url>
-                        ">[게시물 수정하기]</a>
-               <a href="<c:url value='/shop/groupBuying/delete.do'>
-                           <c:param name="itemId" value="${gb.itemId}" />
-                           <c:param name="productId" value="${gb.productId}" />
-                        </c:url>
-                        "> [게시물 삭제하기]</a>
+               <a href="javascript:editGb(${gb.itemId})">[게시물 수정하기]</a>
+               <a href="javascript:removeGb(${gb.itemId})">[게시물 삭제하기]</a>
             </td>
           </tr>
       </c:if>

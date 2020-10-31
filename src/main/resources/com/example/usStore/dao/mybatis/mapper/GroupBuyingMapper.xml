@@ -56,7 +56,7 @@
         UPDATE GROUPBUYING SET STATE = 1
         WHERE DEADLINE <= #{curTime}
        ]]>
-     </update>
+   </update>
      
      <update id="soldOutGroupBuying">
        <![CDATA[
