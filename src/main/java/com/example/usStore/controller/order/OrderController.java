@@ -1,4 +1,4 @@
-package com.example.usStore.controller;
+package com.example.usStore.controller.order;
 
 import java.util.ArrayList;
 import java.util.List;

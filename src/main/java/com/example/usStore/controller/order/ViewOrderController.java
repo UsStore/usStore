@@ -1,4 +1,4 @@
-package com.example.usStore.controller;
+package com.example.usStore.controller.order;
 
 import java.io.IOException;
 import java.io.PrintWriter;

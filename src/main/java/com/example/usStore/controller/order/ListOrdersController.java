@@ -1,4 +1,4 @@
-package com.example.usStore.controller;
+package com.example.usStore.controller.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
