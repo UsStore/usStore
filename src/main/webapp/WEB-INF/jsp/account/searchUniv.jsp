@@ -9,25 +9,41 @@
 <title>대학교 찾기</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script type="text/javascript">
-	function check() {
-		alert("체크 메소드진입 ");
-	    alert(window.location.href);
-	    
-	    UrlPathHelper urlPathHelper = new UrlPathHelper(); 
-	    String originalURL = urlPathHelper.getOriginatingRequestUri(request); 
-	    alert("OriginalURL ==>" + originalURL);
-	}
 
+	var radioVal = null;
+
+
+	function setDisplay(){   // 라디오 버튼클릭하면 확인 버튼 보이게 하기 
+		var obj = $('input:radio[name="univName"]');
+		
+	    if(obj.is(':checked')){
+		  
+	        $('#confirmDiv').show();
+	        radioVal = $('input[name="univName"]:checked').val(); 
+	        obj.eq(radioVal).attr('checked', false);
+	        
+	    }else{
+	        $('#confirmDiv').hide();
+	    }
+	}
+ 
+	/* 
 	$(document).ready(function () {
-	  	// 라디오버튼 클릭시 이벤트 발생
 	  	$("input:radio[name=univName]").click(function(){
-	  	    	 var radioVal = $('input[name="univName"]:checked').val();
-	  	    	 var answer = confirm(radioVal + "을(를) 자신의 대학교로 선택하기 ");
-				 if(answer == true){  // 새로운 요청 보내서 에딧트던 회원가입이던 그 페이지에 대학이름 삽입하기 
-					 alert(answer);
-				 }else{ window.go(-1);}
+	  		radioVal = $('input[name="univName"]:checked').val(); 
 	  	});
 	});
+	 */
+	// [확인버튼]을 누르면 -> radioVal를 컨트롤러로 보내서 -> jsp로 넘겨주기     
+	function setConfirm(){
+		if(radioVal != null){ // 확인버튼을 누르면 이 창이 닫히고 대학네임을 넘겨줘야함 
+			window.opener.location.href="http://localhost:8080/usStore/shop/editAccount.do?univName="+ radioVal;
+			window.close();
+		}else{ // 라디오 버튼 선택안했으면 리다이렉트? 
+			alert("선택한 값이 없습니다.");
+		}
+	}
+	  
 </script>
 </head>
 <body>
@@ -56,7 +72,7 @@
 	    </div>
 	    <div>
 	      <label>학교명</label>
-	      <input name="univName" type="text" /><button type="submit" onclick="check();">검색 </button>
+	      <input name="univName" type="text" /><button type="submit">검색 </button>
 	    </div>
 	      
 	     <div>
@@ -70,13 +86,15 @@
 	                  <c:forEach var="result" items="${results}">         
 		                  <tr style="height:20px;">
 			                  <td style="padding-left:20px">
-			                      ${result}&nbsp; <input type="radio" name="univName" value=${result}>
+			                      ${result}&nbsp; <input type="radio" onchange="setDisplay();" value=${result} name="univName" />
 			                   </td>
 		                  </tr>
 	                  </c:forEach>
 	            </tbody>
 	        	</table>
-				<!-- <input type="button" name="confirm" id="radioButton" value="확인"/>  -->
+	        	<div id="confirmDiv" >
+					<input type="button" name="confirm" id="confirmButton" value="확인" onclick="setConfirm();"/> 
+				</div>
         </c:if>
 	    </div>
 	</form>

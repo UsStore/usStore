@@ -36,7 +36,7 @@
     ZIP = #{zip}, 
     COUNTRY = #{country}, 
     PHONE = #{phone}, 
-    univName = #{univName}
+    univName = #{university}
     WHERE USERID = #{userId}
   </update>
 
@@ -44,6 +44,6 @@
     INSERT INTO ACCOUNT
       (USERID, PASSWORD, USERNAME, EMAIL, ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, univName)
     VALUES
-      (#{userId}, #{password}, #{username}, #{email}, #{addr1}, #{addr2,jdbcType=VARCHAR}, #{city}, #{zip}, #{country}, #{phone}, #{univName})
+      (#{userId}, #{password}, #{username}, #{email}, #{addr1}, #{addr2,jdbcType=VARCHAR}, #{city}, #{zip}, #{country}, #{phone}, #{university})
   </insert>
 </mapper>

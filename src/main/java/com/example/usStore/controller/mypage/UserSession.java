@@ -6,10 +6,6 @@ import org.springframework.beans.support.PagedListHolder;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Product;
 
-/**
- * @author Juergen Hoeller
- * @since 30.11.2003
- */
 @SuppressWarnings("serial")
 public class UserSession implements Serializable {
 
