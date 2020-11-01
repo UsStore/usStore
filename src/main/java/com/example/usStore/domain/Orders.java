@@ -223,6 +223,23 @@ public class Orders implements Serializable {
 		this.lineItems = lineItems;
 	}
 
+	public int getTotalQuentity() {
+		int count = 0;
+		for(LineItem lineItem : lineItems) {
+			count += lineItem.getQuantity();
+		}
+		return count;
+	}
+	
+	public String getItemName() {
+		String rslt = "";
+		rslt = lineItems.get(0).getItem().getTitle();
+		if(lineItems.size() >= 2) {
+			rslt += " 외 ";
+			rslt += lineItems.size() - 1 + "개";
+		}
+		return rslt;
+	}
 	/* Public Methods */
 
 	public void initOrder(Account account, Cart cart, String status) { //���⼭ status�� OrderStatus���̺��� ������ 
