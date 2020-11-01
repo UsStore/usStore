@@ -23,7 +23,7 @@ import com.sun.xml.messaging.saaj.packaging.mime.internet.ParseException;
 public class SearchUnivController {
 
 	private static RestTemplate restTemplate = new RestTemplate();
-	private static List<String> schNameList = null;
+	private static List<University> schNameList = null;
 	// DTO 객체
 	private static University university = null;
 
@@ -43,7 +43,6 @@ public class SearchUnivController {
 		String searchSchulNm = searchUniv.getUnivName();
 		int regionCode = UnivRegionEnum.getCode(region);
 	
-		System.out.println("sss: " + searchSchulNm);
 		if(searchSchulNm == "") {
 			return "redirect:/searchUniv.do";
 		}
@@ -52,7 +51,7 @@ public class SearchUnivController {
 				+ "apiKey=64d783f84c56facec82aef2ec57357ee&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list"
 				+ "&searchSchulNm="+searchSchulNm;
 		
-		if (regionCode != -1) { // 지역 선택했을 때,, 
+		if (regionCode != -1) { // 지역 선택했을 때
 			uri += "&region="+regionCode;
 		}
 		
@@ -60,51 +59,31 @@ public class SearchUnivController {
 		String body = restTemplate.getForObject(uri, String.class);
 		
 		parsing(body);
-		if (schNameList != null) {  //null이면 result란 객체가 없는거????? 다시 생각하기 
+		if (schNameList != null) { 
 			model.addAttribute("results", schNameList);
 			return "account/searchUniv";
 		}else {
 			System.out.println("결과가 없다");
 			return "redirect:/searchUniv.do";
 		}
-
-//		DataSearch data = restTemplate.getForObject(uri, DataSearch.class);
-//		System.out.println(data.toString()); //리스트를 아예 못읽어옴 
-//		System.out.println(dataSearch.getContents());
 	}
 
-	@RequestMapping("/confirmUniv.do") //api창에서 확인버튼누르면 들어오는 컨트롤러 - 파라미터로 대학이름 넘겨받기  
-	public String handleRequest2(@RequestParam String univName, Model model) throws Exception {
-		System.out.println("/confirmUniv.do : " + univName);
-	
-		model.addAttribute("univName", univName);		
-		
-		return "account/EditAccountForm";  
-		// 주의: 에딧 인지 회원가입인지 구분해서 리턴하기 - 그 페이지에 대학교이름 완전 박아두기 
-		// 나중에 REGISTER 버튼 누르면 그때 실질적으로 디비에 대학교 도메인객체가 들어가게된다. 
-	}
-	
-	
 	private static void parsing(String result) throws ParseException, Exception {
-
-			JSONParser jsonparser = new JSONParser();
-	        JSONObject jsonobject = (JSONObject)jsonparser.parse(result); // Json 객체로 만들어줌
-	        JSONObject dataSearch =  (JSONObject) jsonobject.get("dataSearch");
-	        JSONArray content = (JSONArray)dataSearch.get("content");
-	        schNameList = new ArrayList<String>();
-	        
-	        for(int i = 0 ; i < content.size(); i++){
-	            JSONObject entity = (JSONObject)content.get(i);
-	            String schoolName = (String) entity.get("schoolName");
-	            String link = (String)entity.get("link");
-	            String adres = (String)entity.get("adres");
-	            
-	            //DTO 객체 생성 및 값을 저장  -> 너는 완전히 확정된것 
-	            university = new University(schoolName,link,adres);
-	    
-	            schNameList.add(schoolName);
-	        }
+		JSONParser jsonparser = new JSONParser();
+        JSONObject jsonobject = (JSONObject)jsonparser.parse(result); // Json 객체로 만들어줌
+        JSONObject dataSearch =  (JSONObject) jsonobject.get("dataSearch");
+        JSONArray content = (JSONArray)dataSearch.get("content");
+        schNameList = new ArrayList<University>();
+        
+        for(int i = 0 ; i < content.size(); i++){
+            JSONObject entity = (JSONObject)content.get(i);
+            String schoolName = (String) entity.get("schoolName");
+            String link = (String)entity.get("link");
+            String adres = (String)entity.get("adres");
+            
+            //DTO 객체 생성 및 값을 저장 
+            university = new University(schoolName,link,adres);
+            schNameList.add(university);
+        }		
 	}
-
-
 }

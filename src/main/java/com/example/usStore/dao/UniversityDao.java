@@ -6,7 +6,7 @@ import com.example.usStore.domain.University;
 
 public interface UniversityDao {
 
-	University getUnivByName(String univNameU) throws DataAccessException;
+	University getUnivByName(String univName) throws DataAccessException;
 	
 	void insertUniv(University university) throws DataAccessException;
 	 

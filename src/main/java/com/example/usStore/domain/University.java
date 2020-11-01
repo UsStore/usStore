@@ -9,6 +9,7 @@ public class University implements Serializable{
 	private String univName; // (PK)
 	private String univLink;
 	private String univAddr;
+	private int isExistUniv; // 디비에 해당 대학이 이미 있는지 여부를 알려줌 
 	
 	public University() {}
 	
@@ -36,10 +37,16 @@ public class University implements Serializable{
 	public void setUnivAddr(String univAddr) {
 		this.univAddr = univAddr;
 	}
-	
+	public int isExistUniv() {
+		return isExistUniv;
+	}
+	public void setExistUniv(int isExistUniv) {
+		this.isExistUniv = isExistUniv;
+	}
+
 	@Override
 	public String toString() {
-		return "University [univName=" + univName + ", univLink=" + univLink + ", univAddr=" + univAddr + "]";
+		return "University [univName=" + univName + ", univLink=" + univLink + ", univAddr=" + univAddr;
 	}
 	
 }

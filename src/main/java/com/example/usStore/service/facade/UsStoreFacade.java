@@ -18,9 +18,9 @@ public interface UsStoreFacade {
 
 	Account getAccountByUserIdAndPassword(String userId, String password);
 
-	void insertAccount(Account account);
+	void insertAccount(Account account, University university);
 
-	void updateAccount(Account account);
+	void updateAccount(Account account, University university);
 	
 	Account getAccountByUsername(String username);
 

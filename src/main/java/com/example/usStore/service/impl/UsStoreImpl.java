@@ -24,6 +24,8 @@ public class UsStoreImpl implements UsStoreFacade {
 	private AccountDao accountDao;
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private UniversityDao univDao;
 
 	@Override
 	public Account getAccountByUserId(String userId) {
@@ -44,50 +46,46 @@ public class UsStoreImpl implements UsStoreFacade {
 	}
 
 	@Override
-	public void insertAccount(Account account) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void insertAccount(Account account, University university) {
 		accountDao.insertAccount(account);
+		univDao.insertUniv(university);
 	}
 
 	@Override
-	public void updateAccount(Account account) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void updateAccount(Account account, University university) {
 		accountDao.updateAccount(account);
+		univDao.insertUniv(university);
 	}
 
 	@Override
 	public List<Category> getCategoryList() {
-		// TODO Auto-generated method stub
 		return categoryDao.getCategoryList();
 	}
 
 	@Override
 	public Category getCategory(int categoryId) {
-		// TODO Auto-generated method stub
 		return categoryDao.getCategory(categoryId);
 	}
 
 	@Override
 	public List<Orders> getOrdersByUserId(String userId) {
-		// TODO Auto-generated method stub
 		return orderDao.getOrdersByUserId(userId);
 	}
 	
 	@Override
 	public Orders getOrder(int orderId) {
-		// TODO Auto-generated method stub
 		return orderDao.getOrder(orderId);
 	}
 
 	@Override
-	public void insertOrder(Orders order) {
-		//itemDao.updateQuantity(order);	    
+	public void insertOrder(Orders order) {	    
 		orderDao.insertOrder(order);
 	}
 
 	@Override
 	public List<Orders> getOrdersByUsername(String username) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	 
