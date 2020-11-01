@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
+
+import com.example.usStore.domain.University;
 import com.example.usStore.service.AccountFormValidator;
+import com.example.usStore.service.facade.MyPageFacade;
 import com.example.usStore.service.facade.UsStoreFacade;
 
 @Controller
@@ -30,7 +33,10 @@ public class AccountFormController {
 	public void setusStore(UsStoreFacade usStore) {
 		this.usStore = usStore;
 	}
-
+	
+	@Autowired
+	private MyPageFacade mypageFacade;
+	
 	@Autowired
 	private AccountFormValidator validator;
 	public void setValidator(AccountFormValidator validator) {
@@ -53,35 +59,41 @@ public class AccountFormController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showForm(@RequestParam(value="univName", required=false) String univName,
-			@ModelAttribute("accountForm") AccountForm accountForm) { // 작성 또는 수정을 위해 폼을 열었을 때 
-		// 파라미터가 있어도 되고 없어도 됨 
-		System.out.println("pop up 에서대학 찾은거 넘겨준거 : " + univName);
-		accountForm.getAccount().setUniversity(univName);
+	public String showForm(HttpSession session, @RequestParam(value="univName", required=false) String univName,
+			@RequestParam(value="univLink", required=false) String univLink,
+			@RequestParam(value="univAddr", required=false) String univAddr,
+			@ModelAttribute("accountForm") AccountForm accountForm) { 
+		// 작성 또는 수정을 위해 폼을 열었을 때 
+		if(univName != null) {
+			System.out.println("pop up 에서대학 찾은거 넘겨준거 : " + univName);
+			accountForm.getAccount().setUniversity(univName);
+			
+			University university =  new University(univName, univLink, univAddr);
+			session.setAttribute("university", university);
+		}
 		return formViewName;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String onSubmit( // 디비에 저장하려고 등록 버튼 눌렀을 때 
 			HttpServletRequest request, HttpSession session,
-			@ModelAttribute("accountForm") AccountForm accountForm,
+			@ModelAttribute("accountForm") AccountForm accountForm, 
 			BindingResult result) throws Exception {
 
 		validator.validate(accountForm, result);
 		System.out.println("onSubmit");
-		System.out.println("대학교 이름 제대로 옴? " + accountForm.getAccount().getUniversity());
 		
-		if (result.hasErrors())
-			return formViewName;
+		if (result.hasErrors()) { return formViewName;}
+		
+		University university = (University)session.getAttribute("university");
 		
 		try {
-			if (accountForm.isNewAccount()) {
+			if (accountForm.isNewAccount()){
 				System.out.println("newAccount");
-				usStore.insertAccount(accountForm.getAccount());
-			}
-			else {
-				System.out.println("updateAccount");
-				usStore.updateAccount(accountForm.getAccount());
+				// 트랜젝션
+				usStore.insertAccount(accountForm.getAccount(), university);
+			}else {
+				usStore.updateAccount(accountForm.getAccount(), university);
 			}
 		}
 		catch (DataIntegrityViolationException ex) {

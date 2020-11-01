@@ -10,10 +10,16 @@
   </select>
  
   <insert id="insertUniv" parameterType="University">
-    INSERT INTO university
-      (univName, univLink, univAddr)
-    VALUES
-      (#{univName}, #{univLink}, #{univAddr})
+  	<selectKey keyProperty="isExistUniv" resultType="int" order="BEFORE">
+  		select count(univName)
+		from university
+		where univName=#{univName}
+  	</selectKey>
+  	
+  	<if test="isExistUniv == 0">
+  	 	INSERT INTO university (univName, univLink, univAddr)
+	    VALUES (#{univName}, #{univLink}, #{univAddr})
+  	</if>
   </insert>
 
 </mapper>

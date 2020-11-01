@@ -16,13 +16,11 @@
                 <c:if test="${accountForm.newAccount}">
 	              <form:input path="account.userId" class="form-control"/>
 	              <B><form:errors class="form-control" path="account.userId" id="inputUserId" cssClass="error" /></B>
-	             
 	            </c:if> 
 	            <c:if test="${!accountForm.newAccount}">
 	              <form:input path="account.userId" class="form-control" value="${accountForm.account.userId}" disabled="true"/>
 	            </c:if>
                 <label for="inputUserame">USER ID</label>
-               
               </div>
               
               <div class="form-label-group">

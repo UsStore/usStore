@@ -12,7 +12,6 @@
 
 	var radioVal = null;
 
-
 	function setDisplay(){   // 라디오 버튼클릭하면 확인 버튼 보이게 하기 
 		var obj = $('input:radio[name="univName"]');
 		
@@ -27,20 +26,16 @@
 	    }
 	}
  
-	/* 
-	$(document).ready(function () {
-	  	$("input:radio[name=univName]").click(function(){
-	  		radioVal = $('input[name="univName"]:checked').val(); 
-	  	});
-	});
-	 */
 	// [확인버튼]을 누르면 -> radioVal를 컨트롤러로 보내서 -> jsp로 넘겨주기     
-	function setConfirm(){
-		if(radioVal != null){ // 확인버튼을 누르면 이 창이 닫히고 대학네임을 넘겨줘야함 
-			window.opener.location.href="http://localhost:8080/usStore/shop/editAccount.do?univName="+ radioVal;
+	function setConfirm(name, link, addr){
+		if(name != null){ // 확인버튼을 누르면 이 창이 닫히고 대학네임을 넘겨줘야함 
+			window.opener.location.href="http://localhost:8080/usStore/shop/editAccount.do?" 
+				+ "univName=" + name
+				+ "&univLink=" + link
+				+ "&univAddr=" + addr;
 			window.close();
-		}else{ // 라디오 버튼 선택안했으면 리다이렉트? 
-			alert("선택한 값이 없습니다.");
+		}else{ // 라디오 버튼(대학) 선택안했으면 리다이렉트? 
+			window.location.href="http://localhost:8080/usStore/shop/searchUniv.do";
 		}
 	}
 	  
@@ -86,15 +81,20 @@
 	                  <c:forEach var="result" items="${results}">         
 		                  <tr style="height:20px;">
 			                  <td style="padding-left:20px">
-			                      ${result}&nbsp; <input type="radio" onchange="setDisplay();" value=${result} name="univName" />
+			                      ${result.univName}&nbsp; 
+			                      <!-- <input type="radio" onchange="setDisplay();" value=${result.univName} name="univName" /> -->
+			                   </td> 
+			                   <td>
+			                     <input type="button" name="confirm" id="confirmButton" value="선택" 
+		                   			onclick="setConfirm('${result.univName}', '${result.univLink}','${result.univAddr}');"/>
 			                   </td>
 		                  </tr>
 	                  </c:forEach>
 	            </tbody>
 	        	</table>
-	        	<div id="confirmDiv" >
+	        	<!-- <div id="confirmDiv" >
 					<input type="button" name="confirm" id="confirmButton" value="확인" onclick="setConfirm();"/> 
-				</div>
+				</div> -->
         </c:if>
 	    </div>
 	</form>

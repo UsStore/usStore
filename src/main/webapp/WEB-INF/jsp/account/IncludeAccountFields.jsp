@@ -7,7 +7,8 @@
 	<form:input path="account.university" id="inputUniversity" value="${accountForm.account.university}" class="form-control" />
 	<B><form:errors path="account.university" cssClass="error" /></B>
 	<!-- <button class="btn btn-lg btn-light btn-block text-uppercase" type="button">대학 찾기</button> -->
-	<button id="buttonApi" onclick="popup();">대학교 찾기</button>
+	<!-- <button id="buttonApi" onclick="popup();">대학교 찾기</button> -->
+	<input type="button" value="대학교 찾기" onclick="popup();">
 	<script>
         function popup(){
             var url = "http://localhost:8080/usStore/searchUniv.do";
