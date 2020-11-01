@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,7 +43,7 @@ public class SearchUnivController {
 		String searchSchulNm = searchUniv.getUnivName();
 		int regionCode = UnivRegionEnum.getCode(region);
 	
-		System.out.print("sss: " + searchSchulNm);
+		System.out.println("sss: " + searchSchulNm);
 		if(searchSchulNm == "") {
 			return "redirect:/searchUniv.do";
 		}
@@ -63,7 +64,7 @@ public class SearchUnivController {
 			model.addAttribute("results", schNameList);
 			return "account/searchUniv";
 		}else {
-			System.out.println("결과가 없다...");
+			System.out.println("결과가 없다");
 			return "redirect:/searchUniv.do";
 		}
 
@@ -72,18 +73,20 @@ public class SearchUnivController {
 //		System.out.println(dataSearch.getContents());
 	}
 
-	@RequestMapping("/confirmUnivName.do")
-	public String handleRequest2() throws Exception {
+	@RequestMapping("/confirmUniv.do") //api창에서 확인버튼누르면 들어오는 컨트롤러 - 파라미터로 대학이름 넘겨받기  
+	public String handleRequest2(@RequestParam String univName, Model model) throws Exception {
+		System.out.println("/confirmUniv.do : " + univName);
+	
+		model.addAttribute("univName", univName);		
 		
-		
-		return "account/searchUniv";  // 수정하기 : 에딧 인지 회원가입인지 구분해서 그 페이지에 대학교이름 완전 박아두기 
+		return "account/EditAccountForm";  
+		// 주의: 에딧 인지 회원가입인지 구분해서 리턴하기 - 그 페이지에 대학교이름 완전 박아두기 
 		// 나중에 REGISTER 버튼 누르면 그때 실질적으로 디비에 대학교 도메인객체가 들어가게된다. 
 	}
 	
 	
 	private static void parsing(String result) throws ParseException, Exception {
 
-			System.out.println("parsing 메소드 진입");
 			JSONParser jsonparser = new JSONParser();
 	        JSONObject jsonobject = (JSONObject)jsonparser.parse(result); // Json 객체로 만들어줌
 	        JSONObject dataSearch =  (JSONObject) jsonobject.get("dataSearch");
@@ -96,11 +99,9 @@ public class SearchUnivController {
 	            String link = (String)entity.get("link");
 	            String adres = (String)entity.get("adres");
 	            
-	            //DTO 객체 생성 및 값을 저장 
+	            //DTO 객체 생성 및 값을 저장  -> 너는 완전히 확정된것 
 	            university = new University(schoolName,link,adres);
 	    
-	         
-	            System.out.println("학교 이름 결과 : " + schoolName);
 	            schNameList.add(schoolName);
 	        }
 	}

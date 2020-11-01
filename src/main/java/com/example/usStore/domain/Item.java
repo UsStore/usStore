@@ -19,20 +19,22 @@ public class Item implements Serializable, Comparable<Item> {
    private List<Tag> tags = new ArrayList<Tag>();
    private String userId; // (FK)
    private int productId; // (FK)
+   private String imgUrl;
 
    public Item() {}
    
-   public Item(int unitCost, String title, String description, int qty, String userId, int productId) {
+   public Item(int unitCost, String title, String description, int qty, String userId, int productId, String imgUrl) {
       this.unitCost = unitCost;
       this.title = title;
       this.description = description;
       this.qty = qty;
       this.userId = userId;
       this.productId = productId;
+      this.imgUrl = imgUrl;
    }
 
    public Item(int itemId, int unitCost, String title, String description, int viewCount, int qty, List<Tag> tags, 
-         String userId, int productId) {
+         String userId, int productId, String imgUrl) {
       this.itemId = itemId;
       this.unitCost = unitCost;
       this.title = title;
@@ -42,6 +44,7 @@ public class Item implements Serializable, Comparable<Item> {
       this.tags = tags;
       this.userId = userId;
       this.productId = productId;
+      this.imgUrl = imgUrl;
    }
    
    /* JavaBeans Properties */
@@ -117,6 +120,14 @@ public class Item implements Serializable, Comparable<Item> {
       this.tags = tags; 
    }
    
+   public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+   
    public void makeTags(Tag tag) {   //빈값 아니면 태그 생성
       if(tag.getTagName() != null && tag.getTagName().trim() != "") {
          tags.add(tag);
@@ -127,7 +138,7 @@ public class Item implements Serializable, Comparable<Item> {
    public String toString() {
       return "Item [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description=" + description
             + ", viewCount=" + viewCount + ", qty=" + qty + ", userId=" + userId + ", productId="
-            + productId + "]";
+            + productId + ", imgUrl=" + imgUrl + "]";
    }
 
    @Override

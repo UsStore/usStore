@@ -31,6 +31,7 @@
       I.QTY,
        I.USERID,
         I.PRODUCTID,
+        I.IMGURL,
        G.DISCOUNT,
         G.LISTPRICE,
         G.DEADLINE, 

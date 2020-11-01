@@ -199,6 +199,14 @@ newtime = window.setTimeout("getTime();", 1000);
          <tr><td colspan="2" style="padding: 15px;">${gb.description}<br></td></tr>
          
          <tr>
+            <th style="border-right: 1px solid black;">제품 사진</th>
+            <td>
+            <img src="getImage.do?itemId=${gb.itemId}" width="350" height="230" onerror="this.style.display='none'" />
+               <br/>
+            </td>
+         </tr>
+         
+         <tr>
             <th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
             <td>
             <c:forEach var="tag" items="${tags}">        

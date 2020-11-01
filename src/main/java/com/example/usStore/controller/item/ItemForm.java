@@ -15,6 +15,7 @@ public class ItemForm {
      private List<Tag> tags;	//태그 리스트
      private String userId;       //작성자
      private int productId;        //판매 카테고리
+     private String imgUrl;	//이미지 경로
      
      public ItemForm() {}
 
@@ -90,11 +91,20 @@ public class ItemForm {
      public void setTags(List<Tag> tags) {
       this.tags = tags;
      }
+     
+     public String getImgUrl() {
+         return imgUrl;
+      }
+
+      public void setImgUrl(String imgUrl) {
+         this.imgUrl = imgUrl;
+      }
+
 
      @Override
      public String toString() {
       return "ItemForm [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description="
             + description + ", viewCount=" + viewCount + ", qty=" + qty + "tags = " + tags + ", userId=" + userId
-            + ", productId=" + productId + "]";
+            + ", productId=" + productId + ", imgUrl=" + imgUrl + "]";
      }
 }

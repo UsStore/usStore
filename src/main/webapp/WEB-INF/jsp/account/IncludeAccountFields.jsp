@@ -3,15 +3,11 @@
 
 <h6 class="card-title text-center"> University </h6>
 <div class="form-label-group">
-	<form:input path="account.university" id="inputUniversity" class="form-control" />
+	<!-- form:input value에 api에서 구한 대학교 이름이 제대로 자동으로 들어가야함   -->
+	<form:input path="account.university" id="inputUniversity" value="${accountForm.account.university}" class="form-control" />
 	<B><form:errors path="account.university" cssClass="error" /></B>
 	<!-- <button class="btn btn-lg btn-light btn-block text-uppercase" type="button">대학 찾기</button> -->
-	<button id="button1" onclick="popup();">대학교 찾기</button>
-	<script>
-		function button1_click() {
-			alert("버튼1을 누르셨습니다.");
-		}
-	</script>
+	<button id="buttonApi" onclick="popup();">대학교 찾기</button>
 	<script>
         function popup(){
             var url = "http://localhost:8080/usStore/searchUniv.do";
