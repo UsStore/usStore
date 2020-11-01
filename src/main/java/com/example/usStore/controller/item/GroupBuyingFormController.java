@@ -159,8 +159,24 @@ public class GroupBuyingFormController {
       
     //업로드 파일이 저장될 경로
       String root_path = rq.getSession().getServletContext().getRealPath("/");  
+      
       //파일경로
       String attach_path = "images" + File.separator + "uploadImg" + File.separator;
+      
+      File Folder = new File(root_path + attach_path);
+      
+	   // 해당 디렉토리가 없을경우 디렉토리를 생성
+	  	if (!Folder.exists()) {
+	  		try{
+	  		    Folder.mkdir(); //폴더 생성
+	  		    System.out.println("폴더가 생성되었습니다.");
+	  	        } 
+	  	        catch(Exception e){
+	  		    e.getStackTrace();
+	  		}        
+	           }else {
+	  		System.out.println("이미 폴더가 생성되어 있습니다.");
+	  	}
       
       //파일 이름
       MultipartFile file = multi.getFile("file");
