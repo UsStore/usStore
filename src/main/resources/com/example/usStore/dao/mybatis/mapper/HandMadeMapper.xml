@@ -30,8 +30,8 @@
     SELECT I.PRODUCTID, I.ITEMID, I.USERID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, I.IMGURL, LISTPRICE
     FROM HANDMADE H, ITEM I, ACCOUNT A
 	WHERE A.USERID = I.USERID AND H.ITEMID = I.ITEMID
-	<if test="university != null">
-	    	ORDER BY DECODE ( UNIVERSITY, #{university}, 1)
+	<if test="university!= null">
+	    	ORDER BY DECODE ( univName, #{university}, 1)
 	</if>
   </select>
   
