@@ -95,6 +95,9 @@
 											
 										<li><a href="<c:url value="/shop/listOrders.do"/>">
 											My Orders</a></li>
+											
+										<li><a href="<c:url value="/shop/viewCalendar.do"/>">
+											출석 체크</a></li>
 									</ul>
 								</div>
 								

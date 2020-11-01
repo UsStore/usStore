@@ -58,6 +58,7 @@
         	<mvc:mapping path="/shop/listOrders.do"/>
         	<mvc:mapping path="/shop/viewOrder.do"/>
         	<mvc:mapping path="/shop/newOrder.do"/>
+        	<mvc:mapping path="/shop/viewCalendar.do"/>
         	<mvc:mapping path="/shop/item/addItem.do"/>
         	<mvc:mapping path="/shop/auction/participateItem.do"/>
         	<mvc:mapping path="/shop/groupBuying/joint.do"/>
