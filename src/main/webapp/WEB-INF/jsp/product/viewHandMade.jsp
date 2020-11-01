@@ -53,20 +53,21 @@ function getReview(itemId) {   //매개변수 전달 시도
                   "<tr><th style='border-bottom: none; text-align: left;'>평점"+
                   "</th><th style='border-bottom: none; text-align: left;'>구매자</th>" + 
                   "<th style='border-bottom: none; text-align: left;'>리뷰</th></tr><hr width = 100% align='left'></table>");
+
+      	$("#result > div").append("<table>");
 			if(obj.length == 0) {   $("#result > div").append("<tr><td>작성된 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
 			else {
-				$("#result > div").append("<table>");
 				for (var i in obj) {
 					$("#result > div").append("<tr><td style='text-align: left;'>" + obj[i].rating + 
-											"점</td><td style='text-align: left;'>익명<td style='text-align: left; width: 90%'>" + 
+											"점</td><td style='text-align: left;'>익명<td style='text-align: left; width: 80%'>" + 
 						                     obj[i].description + "</td></tr>");
 					}
 			}
 			$("#result > div").append("<tr><td colspan='2' style='border-bottom: hidden; text-align: left;'>" + 
-						"<a href='<c:url value='/shop/AllReviewList.do?itemId=" + itemId + "'/>'> >모든 리뷰 보기</a></td>" + 
-						"<td style='border-bottom: hidden; text-align: right;'>" + 
+						"<a href='<c:url value='/shop/AllReviewList.do?itemId=" + itemId + "'/>'> [모든 리뷰 보기] </a>&nbsp;&nbsp;" + 
+						
 						"<a href='<c:url value='/shop/goAddReview.do?itemId=" + itemId + 
-						"'/>'> 리뷰 작성하기 </a></td></tr><br></table></div>");
+						"'/>'> [리뷰 작성하기] </a></td></tr><br></table></div>");
 	         },
 	         error: function(request,status,error){
 	            alert("code = "+ request.status + " message = " + request.responseText);
