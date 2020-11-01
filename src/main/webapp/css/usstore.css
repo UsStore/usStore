@@ -104,13 +104,12 @@ table.n23 tr td {
 table.orderInfo {
 	background-color: #f6f6f6;
     border: none;
-    border-spacing: 2px;
-    width: 50%;
+    border-spacing: 1px;
+    width: 70%;
 }
 table.orderInfo tr {
     background-color: #f6f6f6;
 }
 table.orderInfo tr td {
     padding: 1em;
-    width: 100%;
 }

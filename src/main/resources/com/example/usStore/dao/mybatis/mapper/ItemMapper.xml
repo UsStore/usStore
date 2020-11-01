@@ -7,8 +7,8 @@
 			SELECT ITEMID_seq.nextval AS itemId FROM DUAL
 		</selectKey> 
 		INSERT INTO ITEM
-		(ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, QTY, USERID, PRODUCTID) VALUES
-		(#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{qty}, #{userId}, #{productId})
+		(ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, QTY, USERID, PRODUCTID, IMGURL) VALUES
+		(#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{qty}, #{userId}, #{productId}, #{imgUrl})
 	</insert>
 
 	<update id="updateItem">
@@ -18,7 +18,8 @@
 			TITLE = #{title},
 			DESCRIPTION = #{description},
 			VIEWCOUNT = #{viewCount},
-			QTY = #{qty}
+			QTY = #{qty},
+			IMGURL = #{imgUrl}
 		WHERE itemId = #{itemId}
 	</update>
 
@@ -37,7 +38,8 @@
          I.VIEWCOUNT,
          I.QTY,
          I.USERID,
-         I.PRODUCTID
+         I.PRODUCTID,
+         I.IMGURL
       FROM ITEM I
       WHERE I.PRODUCTID = #{productId}
    </select>
@@ -56,7 +58,8 @@
 			VIEWCOUNT,
 			QTY,
 			USERID,
-			PRODUCTID
+			PRODUCTID,
+			IMGURL
 		FROM ITEM
 		WHERE ITEMID = #{itemId}
 	</select>
@@ -88,7 +91,8 @@
 			VIEWCOUNT,
 			QTY,
 			USERID,
-			PRODUCTID
+			PRODUCTID,
+			IMGURL
 		FROM ITEM
 		WHERE lower(title) like #{title}
 	</select>

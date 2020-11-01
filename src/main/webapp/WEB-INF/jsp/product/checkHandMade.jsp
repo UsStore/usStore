@@ -32,6 +32,7 @@
 			<font color="blue">#</font>${tag.tagName}                  
 		</c:if>	              
 	</c:forEach>
+<label>상품 사진</label>: ${imgName} <br><br>
 <br> 
 
 <a href="<c:url value='/shop/handMade/addItem2.do'>

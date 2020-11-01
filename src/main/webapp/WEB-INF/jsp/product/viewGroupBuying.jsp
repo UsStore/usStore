@@ -3,40 +3,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-   function getReview(itemId) {   //매개변수 전달 시도 
-      var reqUrl = "/usStore/rest/shop/getReview.do/" + itemId;
-       $.ajax({         /* Ajax 호출을 위해  JQuery 이용 */
-         type: "get",
-         url: reqUrl,
-         processData: false,
-         success: function(responseJson){   // responseJson: JS object parsed from JSON text
-         $("#result").html("<div><div id = 'addItemForm'>");
-            // var index = 1;
-            var obj = responseJson;
-            $("#result > div").append("<table>" +
-                    "<tr><th style='border-bottom: none; text-align: left;'>평점"+
-                    "</th><th style='border-bottom: none; text-align: left;'>구매자</th>" + 
-                    "<th colspan='2' style='border-bottom: none; text-align: left;'>리뷰</th></tr><hr width = '800px' align='left'>");
+function getReview(itemId) {   //매개변수 전달 시도 
+    var reqUrl = "/usStore/rest/shop/getReview.do/" + itemId;
+     $.ajax({         /* Ajax 호출을 위해  JQuery 이용 */
+       type: "get",
+       url: reqUrl,
+       processData: false,
+       success: function(responseJson){   // responseJson: JS object parsed from JSON text
+       $("#result").html("<div>");
+          // var index = 1;
+          var obj = responseJson;
+          $("#result > div").append("<table>" +
+                  "<tr><th style='border-bottom: none; text-align: left;'>평점"+
+                  "</th><th style='border-bottom: none; text-align: left;'>구매자</th>" + 
+                  "<th style='border-bottom: none; text-align: left;'>리뷰</th></tr><hr width = 100% align='left'></table>");
 
-			if(obj.length == 0) {   $("#result > div").append("<tr><td colspan='4'>작성된 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
+      	$("#result > div").append("<table>");
+			if(obj.length == 0) {   $("#result > div").append("<tr><td>작성된 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
 			else {
 				for (var i in obj) {
 					$("#result > div").append("<tr><td style='text-align: left;'>" + obj[i].rating + 
-											"점</td><td style='text-align: left;'>익명<td colspan='2' style='text-align: left;'>" + 
+											"점</td><td style='text-align: left;'>익명<td style='text-align: left; width: 80%'>" + 
 						                     obj[i].description + "</td></tr>");
 					}
 			}
 			$("#result > div").append("<tr><td colspan='2' style='border-bottom: hidden; text-align: left;'>" + 
-						"<a href='<c:url value='/shop/AllReviewList.do?itemId=" + itemId + "'/>'> >모든 리뷰 보기</a></td>" + 
-						"<td colspan='2' style='border-bottom: hidden; text-align: right;'>" + 
+						"<a href='<c:url value='/shop/AllReviewList.do?itemId=" + itemId + "'/>'> [모든 리뷰 보기] </a>&nbsp;&nbsp;" + 
+						
 						"<a href='<c:url value='/shop/goAddReview.do?itemId=" + itemId + 
-						"'/>'> 리뷰 작성하기 </a></td></tr><br></table></div></div>");
+						"'/>'> [리뷰 작성하기] </a></td></tr><br></table></div>");
 	         },
 	         error: function(request,status,error){
 	            alert("code = "+ request.status + " message = " + request.responseText);
 	         }
-      });
-   };
+    });
+ };
 </script>
 <html>
 <head>
@@ -46,7 +47,6 @@
    a { text-decoration:none } 
 </style> 
 <style>
-
    table#detail {
       border: none;
       text-align: center;
@@ -92,13 +92,6 @@
              padding: 15px;
    }
    
-   div#addItemForm {
-		position: absolute;
-		left: 18%;
-		border: none;
-		padding: 20px;
-	}
-   
 </style>
 <script>
 function gbJoint(itemId) {
@@ -106,29 +99,24 @@ function gbJoint(itemId) {
 	    document.location.href="/usStore/shop/groupBuying/goCart.do?workingItemId=" + itemId + "&productId=0";	//확인 클릭
 	 }
 }
-
 function removeGb(itemId) {
 	if(confirm("정말 공동구매를 삭제하시겠습니까?")){
 	    document.location.href="/usStore/shop/groupBuying/delete.do?itemId=" + itemId;	//확인 클릭
 	 }
 }
-
 function editGb(itemId) {
 	if(confirm("공동구매를 수정하시겠습니까?")){
 	    document.location.href="/usStore/shop/groupBuying/edit.do?itemId=" + itemId;	//확인 클릭
 	 }
 }
-
 function getTime() { 
    var time = "${gb.deadLine}";
-
    var year = time.substring(0, 4);
    var month = time.substring(5, 7) - 1;
    var day = time.substring(8, 10);
    var hour = time.substring(11, 13);
    var minute = time.substring(14, 16);
    var second = time.substring(17);
-
    
 now = new Date(); 
 dday = new Date(year, month, day, hour, minute, second); 
@@ -141,7 +129,6 @@ minutes = (dday - now) / 1000 /60 - (24 * 60 * daysRound) - (60 * hoursRound);
 minutesRound = Math.floor(minutes); 
 seconds = (dday - now) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); 
 secondsRound = Math.round(seconds); 
-
 document.getElementById("counter0").innerHTML = daysRound; 
 document.getElementById("counter1").innerHTML = hoursRound; 
 document.getElementById("counter2").innerHTML = minutesRound; 
@@ -150,7 +137,6 @@ newtime = window.setTimeout("getTime();", 1000);
 } 
 </script>
 <body>
-<div id = "addItemForm">
 <h3>공동구매</h3>
 <hr width = "927px" align="center"><br>
    <table id="detail" style="margin-left: auto; margin-right: auto;">
@@ -197,6 +183,14 @@ newtime = window.setTimeout("getTime();", 1000);
          </tr>
          
          <tr><td colspan="2" style="padding: 15px;">${gb.description}<br></td></tr>
+         
+         <tr>
+            <th style="border-right: 1px solid black;">제품 사진</th>
+            <td>
+            <img src="getImage.do?itemId=${gb.itemId}" width="350" height="230" onerror="this.style.display='none'" />
+               <br/>
+            </td>
+         </tr>
          
          <tr>
             <th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
@@ -284,6 +278,5 @@ newtime = window.setTimeout("getTime();", 1000);
                </div>
    </form>
       <br><br>
-   </div>
 </body>
 </html>
