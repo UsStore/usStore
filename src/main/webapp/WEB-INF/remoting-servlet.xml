@@ -43,13 +43,5 @@
 	<bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter"
 		p:baseAddress="http://localhost:8080/services/" />
 
-	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
-	    <property name="serviceName" value="RmiOrderService"/>
-	    <property name="service" ref="orderServiceImpl"/>
-	    <property name="serviceInterface" value="com.example.usStore.service.OrderService"/>
-	    <property name="registryPort" value="1099"/>
-	    <property name="alwaysCreateRegistry" value="true"/>    
-	</bean>
-	<!-- RMI exporter for the usStore OrderService -->
 	
 </beans>
