@@ -4,10 +4,7 @@ import java.io.Serializable;
 
 import com.example.usStore.domain.Account;
 
-/**
- * @author Juergen Hoeller
- * @since 01.12.2003
- */
+
 @SuppressWarnings("serial")
 public class AccountForm implements Serializable {
 
