@@ -39,40 +39,40 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-   function getReview(itemId) {   //매개변수 전달 시도 
-      var reqUrl = "/usStore/rest/shop/getReview.do/" + itemId;
-       $.ajax({         /* Ajax 호출을 위해  JQuery 이용 */
-         type: "get",
-         url: reqUrl,
-         processData: false,
-         success: function(responseJson){   // responseJson: JS object parsed from JSON text
-         $("#result").html("<div><div id = 'addItemForm'>");
-            // var index = 1;
-            var obj = responseJson;
-            $("#result > div").append("<table>" +
-                    "<tr><th style='border-bottom: none; text-align: left;'>평점"+
-                    "</th><th style='border-bottom: none; text-align: left;'>구매자</th>" + 
-                    "<th colspan='2' style='border-bottom: none; text-align: left;'>리뷰</th></tr><hr width = '800px' align='left'>");
-
-         if(obj.length == 0) {   $("#result > div").append("<tr><td colspan='4'>작성된 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
-         else {
-            for (var i in obj) {
-               $("#result > div").append("<tr><td style='text-align: left;'>" + obj[i].rating + 
-                                 "점</td><td style='text-align: left;'>익명<td colspan='2' style='text-align: left;'>" + 
-                                       obj[i].description + "</td></tr>");
-               }
-         }
-         $("#result > div").append("<tr><td colspan='2' style='border-bottom: hidden; text-align: left;'>" + 
-                  "<a href='<c:url value='/shop/AllReviewList.do?itemId=" + itemId + "'/>'> >모든 리뷰 보기</a></td>" + 
-                  "<td colspan='2' style='border-bottom: hidden; text-align: right;'>" + 
-                  "<a href='<c:url value='/shop/goAddReview.do?itemId=" + itemId + 
-                  "'/>'> 리뷰 작성하기 </a></td></tr><br></table></div></div>");
-            },
-            error: function(request,status,error){
-               alert("code = "+ request.status + " message = " + request.responseText);
-            }
-      });
-   };
+function getReview(itemId) {   //매개변수 전달 시도 
+    var reqUrl = "/usStore/rest/shop/getReview.do/" + itemId;
+     $.ajax({         /* Ajax 호출을 위해  JQuery 이용 */
+       type: "get",
+       url: reqUrl,
+       processData: false,
+       success: function(responseJson){   // responseJson: JS object parsed from JSON text
+       $("#result").html("<div>");
+          // var index = 1;
+          var obj = responseJson;
+          $("#result > div").append("<table>" +
+                  "<tr><th style='border-bottom: none; text-align: left;'>평점"+
+                  "</th><th style='border-bottom: none; text-align: left;'>구매자</th>" + 
+                  "<th style='border-bottom: none; text-align: left;'>리뷰</th></tr><hr width = 100% align='left'></table>");
+			if(obj.length == 0) {   $("#result > div").append("<tr><td>작성된 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
+			else {
+				$("#result > div").append("<table>");
+				for (var i in obj) {
+					$("#result > div").append("<tr><td style='text-align: left;'>" + obj[i].rating + 
+											"점</td><td style='text-align: left;'>익명<td style='text-align: left; width: 90%'>" + 
+						                     obj[i].description + "</td></tr>");
+					}
+			}
+			$("#result > div").append("<tr><td colspan='2' style='border-bottom: hidden; text-align: left;'>" + 
+						"<a href='<c:url value='/shop/AllReviewList.do?itemId=" + itemId + "'/>'> >모든 리뷰 보기</a></td>" + 
+						"<td style='border-bottom: hidden; text-align: right;'>" + 
+						"<a href='<c:url value='/shop/goAddReview.do?itemId=" + itemId + 
+						"'/>'> 리뷰 작성하기 </a></td></tr><br></table></div>");
+	         },
+	         error: function(request,status,error){
+	            alert("code = "+ request.status + " message = " + request.responseText);
+	         }
+    });
+ };
 </script>
 
 <body>
@@ -196,7 +196,7 @@
 	<br>
 	<form name="pform" action="">
 		<div style="font-size: 15px">
-			<script>getReview(${gb.itemId});</script>
+			<script>getReview(${handMade.itemId});</script>
 			<div id="result"></div>
 		</div>
 	</form>
