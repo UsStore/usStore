@@ -264,10 +264,6 @@ public class GroupBuyingFormController {
       
       HttpSession session = rq.getSession(false);
       
-      //이미지 위한 경로 확인
-      System.out.println("경로: " + rq.getSession().getServletContext().getRealPath("/")); 
-      System.out.println(File.separator + "& " + "/");
-      
       if(session.getAttribute("userSession") != null) {         
          UserSession userSession = (UserSession) session.getAttribute("userSession");
          victim = userSession.getAccount().getUserId();

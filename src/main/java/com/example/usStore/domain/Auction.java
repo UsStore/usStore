@@ -20,7 +20,7 @@ public class Auction extends Item implements Serializable {
 	
 	public Auction(Item item, int auctionState, String deadLine, int startPrice, int bidPrice) {
 		super(item.getItemId(), item.getUnitCost(), item.getTitle(), item.getDescription(), item.getViewCount(), item.getQty(), item.getTags(), 
-				item.getUserId(), item.getProductId());
+				item.getUserId(), item.getProductId(), item.getImgUrl());
 		this.itemId = item.getItemId();
 		this.auctionState = auctionState;
 		this.deadLine = deadLine;

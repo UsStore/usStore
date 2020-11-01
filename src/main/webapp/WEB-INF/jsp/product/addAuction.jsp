@@ -22,7 +22,7 @@
 <hr width = "927px" align="left"><br><br>
 	<spring:hasBindErrors name="Auction" />
 
-	<form:form modelAttribute="Auction" method="post" action="step3.do">
+	<form:form modelAttribute="Auction" method="post" enctype="multipart/form-data" action="step3.do?${_csrf.parameterName}=${_csrf.token}">
 		
 	시작 가격 : <form:input type="int" path="startPrice" value="${startPrice}"/>
 	<form:errors path="startPrice"/> <br>	
@@ -31,6 +31,8 @@
 	<form:input type="time" path="time"/> 
 	<form:errors path="deadLine"/> 
 	<br>
+	
+	상품 사진 추가 : <input type="file" name="file" /><br/><br/>
 	
 	<a href="<c:url value='/shop/auction/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>

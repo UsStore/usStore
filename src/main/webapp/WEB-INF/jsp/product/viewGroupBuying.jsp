@@ -270,13 +270,14 @@ newtime = window.setTimeout("getTime();", 1000);
    * 세션에 로그인 정보가 없으면, 즉 null이어도 수정/삭제 안보여줌-->
       </table>
       <br>
-    
-     <form name="pform" action="">
-               <div style="font-size: 15px">
-                  <script>getReview(${gb.itemId});</script>
-                  <div id="result"></div>
-               </div>
-   </form>
-      <br><br>
+
+	<form name="pform" action="">
+		<div style="font-size: 15px">
+			<script>getReview(${gb.itemId});</script>
+			<div id="result"></div>
+		</div>
+	</form>
+	<br>
+	<br>
 </body>
 </html>

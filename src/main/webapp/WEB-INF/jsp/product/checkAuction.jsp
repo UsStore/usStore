@@ -33,8 +33,9 @@
 
 <br><br>
 <label>시작 가격</label> : ${Auction.startPrice} <br> 
-<label>마감 기한</label> : ${Auction.deadLine}<br><br>
+<label>마감 기한</label> : ${Auction.deadLine}
 <br><br>
+<label>상품 사진</label>: ${imgName} <br><br>
 <label>경매 생성 시간</label> : ${date} <br><br>
 
 <a href="<c:url value='/shop/auction/addItem2.do'>
