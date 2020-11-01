@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,15 +23,22 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Cart;
+import com.example.usStore.domain.KakaoPayApproval;
 import com.example.usStore.service.OrderValidator;
 import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.UsStoreFacade;
+
+import lombok.Setter;
+import lombok.extern.java.Log;
 
 /**
  * @author Juergen Hoeller
  * @since 01.12.2003
  * @modified by Changsup Park
+ * @modified by Jieun Lee
  */
+
+@Log
 @Controller
 @SessionAttributes({"sessionCart", "orderForm"})
 public class OrderController {
@@ -37,6 +49,9 @@ public class OrderController {
 	@Autowired
 	private UsStoreFacade usStore;
 	
+    @Setter(onMethod_ = @Autowired)
+    private Kakaopay kakaopay;
+    
 	@Autowired
 	private OrderValidator orderValidator;
 	
@@ -51,7 +66,7 @@ public class OrderController {
 		ArrayList<String> creditCardTypes = new ArrayList<String>();
 		creditCardTypes.add("Visa");
 		creditCardTypes.add("MasterCard");
-		// add kakao pay -> connect I'mPort API
+		// add kakao pay 
 		creditCardTypes.add("Kakao Pay");
 		return creditCardTypes;			
 	}
@@ -62,6 +77,7 @@ public class OrderController {
 			@ModelAttribute("orderForm") OrderForm orderForm) throws ModelAndViewDefiningException {
 		
 		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
+		request.setAttribute("orderForm", orderForm);
 		if (cart != null) {
 			// Re-read account from DB at team's request.
 			Account account = usStore.getAccountByUserId(userSession.getAccount().getUserId());
@@ -81,6 +97,7 @@ public class OrderController {
 			@ModelAttribute("orderForm") OrderForm orderForm, BindingResult result) {
 		
 		System.out.println("여기다....?");
+		
 		if (orderForm.didShippingAddressProvided() == false) {	
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
@@ -104,8 +121,28 @@ public class OrderController {
 			return "order/ConfirmOrder";
 		}
 	}
-	
-	// 여기로 넘어가기 전에 카카오페이 결제가 완료되어야 함.
+
+    @RequestMapping("/shop/kakaoPay.do")
+    public String kakaoPay(HttpServletRequest request, @ModelAttribute("orderForm") OrderForm orderForm) {
+    	System.out.println("kakaopay");
+        log.info("kakaoPay post............................................");
+        HttpSession session = request.getSession();
+        return "redirect:" + kakaopay.kakaoPayReady(session, orderForm);
+ 
+    }
+    
+    @RequestMapping("/shop/kakaoPaySuccess.do")
+    public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpServletRequest request,
+			@ModelAttribute("orderForm") OrderForm orderForm) {
+        log.info("kakaoPaySuccess get............................................");
+        log.info("kakaoPaySuccess pg_token : " + pg_token);
+        
+        KakaoPayApproval kakaopayApproval = kakaopay.kakaoPayInfo(pg_token);
+        log.info(kakaopayApproval.toString());
+        
+        return "redirect:/shop/newOrder.do";
+    }
+    
 	// 카카오페이 결제 완료 후 이 컨트롤러로 넘기면 될듯.
 	@RequestMapping("/shop/confirmOrder.do")
 	protected ModelAndView confirmOrder(

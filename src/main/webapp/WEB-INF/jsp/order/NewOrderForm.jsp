@@ -198,6 +198,13 @@
 							<B><form:errors path="order.expiryDate" cssClass="error" /></B>
 							<label for="inputName">Expiry Date (MM/YY)</label>
 						</div>
+						
+						<font color="red" size="2">* 아이콘을 눌러 결제를 진행해주세요 *</font>
+						<div class="form-label-group">
+							<a href="<c:url value="/shop/kakaoPay.do"/>">
+			            		<img src="${pageContext.request.contextPath}/images/payment_icon_yellow_large.png" alt="kakaoPay로 결제하기">
+			        		</a>  
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
