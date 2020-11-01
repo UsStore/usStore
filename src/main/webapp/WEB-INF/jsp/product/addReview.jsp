@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script>
 	function addReview() {
-		 if (confirm("등록 후 수정이 불가능합니다.\n리뷰를 등록하시겠습니까?") == true){    //확인
+		 if (confirm("등록 후 수정이 불가능합니다.\n정말 리뷰를 등록하시겠습니까?") == true){    //확인
 		     document.addReviewfrm.submit();	//폼 제출
 		 }else{   //취소
 		     return false;

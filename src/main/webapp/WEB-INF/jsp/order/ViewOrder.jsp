@@ -150,27 +150,31 @@
         <table class="n23" style="width:100%">
           <tr style="background-color:#CCCCCC;">
             <td><b>Item ID</b></td>
-            <td><b>Description</b></td>
             <td><b>Quantity</b></td>
             <td><b>Price</b></td>
             <td><b>Total Cost</b></td>
+            <td></td>
           </tr>
           <c:forEach var="lineItem" items="${order.lineItems}">
             <tr>
               <td>
-                <b><a href='<c:url value="/shop/viewItem.do">
-                  <c:param name="itemId" value="${lineItem.itemId}"/></c:url>'>
+                <b><a href='<c:url value="/shop/order/viewItem.do">
+                  <c:param name="itemId" value="${lineItem.itemId}"/>
+                  </c:url>'>
                     <font color="black"><c:out value="${lineItem.itemId}" /></font>
                 </a></b></td>
-              <td>
-                <c:out value="${lineItem.item.title}" />
-                <c:out value="${lineItem.item.description}" />                 
-              </td>
               <td><c:out value="${lineItem.quantity}" /></td>
               <td align="right"><fmt:formatNumber
                   value="${lineItem.unitPrice}" pattern="###,###,###원" /></td>
               <td align="right"><fmt:formatNumber
                   value="${lineItem.totalPrice}" pattern="###,###,###원" /></td>
+              <td><b><a href='<c:url value="/shop/order/goAddReview.do">
+                  <c:param name="itemId" value="${lineItem.itemId}"/>
+                  <c:param name="userId" value="${order.userId}"/>
+                  </c:url>'>
+                    <font color="black">리뷰 작성</font>
+                </a></b>
+              </td>
             </tr>
           </c:forEach>
           <tr>
