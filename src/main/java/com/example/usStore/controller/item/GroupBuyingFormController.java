@@ -1,7 +1,6 @@
 package com.example.usStore.controller.item;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -170,13 +169,11 @@ public class GroupBuyingFormController {
       String imgName = file.getOriginalFilename();
       String fileName = uuid.toString() + "_" + imgName;
       String imgPath = root_path + attach_path + fileName;
-      System.out.println("저장될 파일 경로 : " + imgPath);
       
       //파일 업로드
       try {
          file.transferTo(new File(imgPath));   //업로드 한 파일 데이터를 지정한 경로(파일)에 저장                  
          itemForm.setImgUrl(imgPath);
-         System.out.println("이미지 경로 : " + itemForm.getImgUrl());
       } catch(Exception e) {
     	  System.out.println("이미지 업로드 오류");
       }
@@ -224,8 +221,6 @@ public class GroupBuyingFormController {
       for(int i = 0; i < itemformSession.getTags().size(); i++) {
          item.makeTags(itemformSession.getTags().get(i));  
       }
-      
-      System.out.println("아이템 - " + item.toString());
       
       GroupBuying gb = new GroupBuying(item, groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());
       
@@ -280,8 +275,6 @@ public class GroupBuyingFormController {
    
    @RequestMapping(value="/shop/groupBuying/getImage.do")
    public void getImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-      System.out.println("getImg");
-      
       int itemId = Integer.parseInt(request.getParameter("itemId"));
       
       GroupBuying groupBuying = itemFacade.getGroupBuyingItem(itemId);
