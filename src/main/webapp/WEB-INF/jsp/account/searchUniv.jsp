@@ -29,20 +29,21 @@
 	// [확인버튼]을 누르면 -> radioVal를 컨트롤러로 보내서 -> jsp로 넘겨주기     
 	function setConfirm(name, link, addr){
 		if(name != null){ // 확인버튼을 누르면 이 창이 닫히고 대학네임을 넘겨줘야함 
-			window.opener.location.href="http://localhost:8080/usStore/shop/editAccount.do?" 
+			// 회원가입이면 인터셉터 안걸리도록 해야함 
+			window.opener.location.href="/usStore/shop/newAccount.do?" 
 				+ "univName=" + name
 				+ "&univLink=" + link
 				+ "&univAddr=" + addr;
 			window.close();
 		}else{ // 라디오 버튼(대학) 선택안했으면 리다이렉트? 
-			window.location.href="http://localhost:8080/usStore/shop/searchUniv.do";
+			window.location.href="/usStore/shop/searchUniv.do";
 		}
 	}
 	  
 </script>
 </head>
 <body>
-	<form action="http://localhost:8080/usStore/api/university.do" method="post">
+	<form action="/usStore/api/university.do" method="post">
 	    <div>
 	      <label>지역</label> 
 	      <select id="region" name="region">

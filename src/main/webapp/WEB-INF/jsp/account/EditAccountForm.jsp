@@ -11,7 +11,33 @@
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
             <form:form class="form-signin" modelAttribute="accountForm" method="post">
- 			<form:errors cssClass="error" /> 			
+ 			<form:errors cssClass="error" /> 
+ 			
+ 			<h6 class="card-title text-center"> University </h6>
+			<div class="form-label-group">
+				<!-- form:input value에 api에서 구한 대학교 이름이 제대로 자동으로 들어가야함   -->
+				<c:if test="${accountForm.newAccount}">
+				        <form:input path="account.university" id="inputUniversity" value="${accountForm.account.university}" class="form-control" />
+						<B><form:errors path="account.university" cssClass="error" /></B>
+				</c:if> 
+				<c:if test="${!accountForm.newAccount}">
+				          <form:input path="account.university" id="inputUniversity" value="${accountForm.account.university}" class="form-control" />
+				</c:if>
+				
+				<!-- <button class="btn btn-lg btn-light btn-block text-uppercase" type="button">대학 찾기</button> -->
+				<!-- <button id="buttonApi" onclick="popup();">대학교 찾기</button> -->
+				<input type="button" value="대학교 찾기" onclick="popup();">
+				<script>
+			        function popup(){
+			            var url = "/usStore/searchUniv.do";
+			            var name = "univAPI";
+			            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+			            window.open(url, name, option);
+			        }
+			    </script>
+			</div>
+			<hr class="my-4">
+ 						
               <div class="form-label-group">
                 <c:if test="${accountForm.newAccount}">
 	              <form:input path="account.userId" class="form-control"/>

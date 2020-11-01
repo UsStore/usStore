@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.WebUtils;
-
 import com.example.usStore.domain.University;
 import com.example.usStore.service.AccountFormValidator;
-import com.example.usStore.service.facade.MyPageFacade;
 import com.example.usStore.service.facade.UsStoreFacade;
 
 @Controller
 @RequestMapping({"/shop/newAccount.do","/shop/editAccount.do"})
+@SessionAttributes("accountForm")
 public class AccountFormController { 
 
 	@Value("account/EditAccountForm")
@@ -35,9 +35,6 @@ public class AccountFormController {
 	}
 	
 	@Autowired
-	private MyPageFacade mypageFacade;
-	
-	@Autowired
 	private AccountFormValidator validator;
 	public void setValidator(AccountFormValidator validator) {
 		this.validator = validator;
@@ -46,7 +43,7 @@ public class AccountFormController {
 	@ModelAttribute("accountForm")
 	public AccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
-		System.out.println("formBackingObject");
+		System.out.println("before show Form ? ");
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
@@ -64,8 +61,10 @@ public class AccountFormController {
 			@RequestParam(value="univAddr", required=false) String univAddr,
 			@ModelAttribute("accountForm") AccountForm accountForm) { 
 		// 작성 또는 수정을 위해 폼을 열었을 때 
+		System.out.println("show Form ");
+		
 		if(univName != null) {
-			System.out.println("pop up 에서대학 찾은거 넘겨준거 : " + univName);
+			System.out.println("pop에서 넘겨준거 : " + univName);
 			accountForm.getAccount().setUniversity(univName);
 			
 			University university =  new University(univName, univLink, univAddr);
