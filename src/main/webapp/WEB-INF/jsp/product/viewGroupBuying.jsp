@@ -268,16 +268,13 @@ newtime = window.setTimeout("getTime();", 1000);
    * 작성자 정보는 controller에서 model(db에서 suppId찾아옴)로 넘겨줌
    * model로 넘어온 suppId와 세션의 로그인Id를 비교함 
    * 세션에 로그인 정보가 없으면, 즉 null이어도 수정/삭제 안보여줌-->
-      </table>
-      <br>
+      </table><br>
 
 	<form name="pform" action="">
 		<div style="font-size: 15px">
 			<script>getReview(${gb.itemId});</script>
 			<div id="result"></div>
 		</div>
-	</form>
-	<br>
-	<br>
+	</form><br><br>
 </body>
 </html>

@@ -157,7 +157,7 @@ public class GroupBuyingFormController {
       String deadLine = groupBuyingForm.getDate() + " " + groupBuyingForm.getTime() + ":00";
       groupBuyingForm.setDeadLine(deadLine);
       
-    //업로드 파일이 저장될 경로
+      //업로드 파일이 저장될 경로
       String root_path = rq.getSession().getServletContext().getRealPath("/");  
       
       //파일경로

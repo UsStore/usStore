@@ -13,6 +13,7 @@
 		      I.QTY,
 		      I.USERID,
 		      I.PRODUCTID,
+		      I.IMGURL,
 	    	  S.DISCOUNT,
 	    	  S.LISTPRICE 
 	    FROM SECONDHAND S, ITEM I, ACCOUNT A
@@ -52,6 +53,7 @@
   		I.QTY,
 		I.USERID,
 		I.PRODUCTID,
+		I.IMGURL,
 		S.DISCOUNT,
 		S.LISTPRICE
 	FROM ITEM I, SECONDHAND S

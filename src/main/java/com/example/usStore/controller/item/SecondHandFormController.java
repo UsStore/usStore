@@ -1,10 +1,16 @@
 package com.example.usStore.controller.item;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
+import java.net.URL;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.usStore.controller.mypage.UserSession;
+import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
@@ -81,7 +90,7 @@ public class SecondHandFormController {
    @PostMapping("/shop/secondHand/step3.do")      // step2 -> step3
    public String goCheck(
 		   @ModelAttribute("secondHandForm") SecondHandForm secondHandForm, BindingResult result,
-		   Model model, HttpServletRequest rq) {   
+		   Model model, HttpServletRequest rq, MultipartHttpServletRequest multi) {   
 	   
 	    HttpSession session = rq.getSession(false);
 	    new SecondHandFormValidator().validate(secondHandForm, result);
@@ -95,8 +104,46 @@ public class SecondHandFormController {
 			model.addAttribute("productId", itemForm.getProductId());
 			return "product/addSecondHand";
 		}
+		
+		// 업로드 파일이 저장될 경로
+		String root_path = rq.getSession().getServletContext().getRealPath("/");
+
+		// 파일경로
+		String attach_path = "images" + File.separator + "uploadImg" + File.separator;
+
+		File Folder = new File(root_path + attach_path);
+
+		// 해당 디렉토리가 없을경우 디렉토리를 생성
+		if (!Folder.exists()) {
+			try {
+				Folder.mkdir(); // 폴더 생성
+				System.out.println("폴더가 생성되었습니다.");
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		} else {
+			System.out.println("이미 폴더가 생성되어 있습니다.");
+		}
+
+		// 파일 이름
+		MultipartFile file = multi.getFile("file");
+
+		UUID uuid = UUID.randomUUID(); // 파일명 중복 방지
+		String imgName = file.getOriginalFilename();
+		String fileName = uuid.toString() + "_" + imgName;
+		String imgPath = root_path + attach_path + fileName;
+
+		// 파일 업로드
+		try {
+			file.transferTo(new File(imgPath)); // 업로드 한 파일 데이터를 지정한 경로(파일)에 저장
+			itemForm.setImgUrl(imgPath);
+		} catch (Exception e) {
+			System.out.println("이미지 업로드 오류");
+		}
 	   
 	   model.addAttribute("tags", itemForm.getTags());
+	   model.addAttribute("imgName", imgName);
+	   
 	   return "product/checkSecondHand";      // step3(CHECK_FORM3)
    }
    
@@ -127,7 +174,7 @@ public class SecondHandFormController {
 	
 		//put itemform to item domain 세션에 저장된 커맨드객체를 도메인에 저장하기 
 		Item item = new Item(itemform.getUnitCost(), itemform.getTitle(), 
-				itemform.getDescription(), itemform.getQty(), suppId, itemform.getProductId());
+				itemform.getDescription(), itemform.getQty(), suppId, itemform.getProductId(), itemform.getImgUrl());
 		
 		if(status != 0) { // 수정할 때 
 			item.setItemId(status);
@@ -168,6 +215,19 @@ public class SecondHandFormController {
 		
 		return "redirect:/shop/secondHand/viewItem.do?itemId=" + secondHand.getItemId() + "&productId=" + item.getProductId();
 	} 
+	
+	@RequestMapping(value="/shop/secondHand/getImage.do")
+	   public void getImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	      int itemId = Integer.parseInt(request.getParameter("itemId"));
+	      
+	      SecondHand sh = itemFacade.getSecondHandItem(itemId);
+	      
+	      String url = sh.getImgUrl();
+	      System.out.println("url: " + url);
+
+	      URL fileUrl = new URL("file:///" + url);
+	      IOUtils.copy(fileUrl.openStream(), response.getOutputStream());   // IOUtils.copy는 input에서 output으로 encoding 맞춰서 복사하는 메소드
+	   }
 	
 	@RequestMapping("/shop/secondHand/edit.do") //edit Item
 	public String editItem(@RequestParam("itemId") int itemId, HttpServletRequest rq)

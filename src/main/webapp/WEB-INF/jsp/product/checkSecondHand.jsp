@@ -41,6 +41,7 @@ div#addItemForm {
                      <font color="blue">#</font>${tag.tagName}
                   </c:if>
                </c:forEach><br>
+      <label>상품 사진</label>: ${imgName} <br><br>
 
       <a href="<c:url value='/shop/secondHand/addItem2.do'>
          <c:param name="productId" value="${itemForm.productId}"/></c:url>">[이전 단계로]&nbsp;&nbsp;</a> 
