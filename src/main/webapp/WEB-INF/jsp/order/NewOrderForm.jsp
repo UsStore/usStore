@@ -1,12 +1,13 @@
 <%@ include file="../account/IncludeAccount.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="targetUrl">
 	<c:url value="/shop/newOrderSubmitted.do" />
 </c:set>
 
+<%
+	System.out.println(request.getParameter("payFlag"));
+%>
 <script>
 	$(document).ready(function(){
 	    $("#checkBoxId").change(function(){
@@ -21,6 +22,28 @@
 	        }
 	    });
 	});
+
+	$(document).ready(function() {
+		$("#cardType").change(function(){
+			var cardType = document.getElementById("cardType");
+			var selectValue = cardType.options[cardType.selectedIndex].value;
+			
+			if(selectValue == "KakaoPay") {
+				$("#card").hide();
+				$("#modalButton").hide();
+				$("#kakaopay").show();
+			} else if(selectValue == "Visa" || selectValue == "MasterCard") {
+				$("#card").show();
+				$("#kakaopay").hide();
+				$("#modalButton").show();
+			} else {
+				$("#card").hide();
+				$("#kakaopay").hide();
+				$("#modalButton").show();
+			}
+		});
+	});
+	
 </script>
 
 <div align="center">
@@ -158,8 +181,12 @@
 		</table>
 		<br>
 		<p>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">결제하기</button>
-			<input type="submit" value="결제하기"/>
+			<c:if test="${param.payFlag eq 'success'}">
+					<button type="submit" class="btn btn-primary">주문하기</button>
+			</c:if>
+			<c:if test="${param.payFlag ne 'success'}">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">결제하기</button>
+			</c:if>
 		</p>
 		
 		<!-- Payment Modal -->
@@ -180,12 +207,14 @@
 						<h6 class="card-title">Card Type</h6>
 						<div class="form-label-group">
 							<B><form:errors path="order.cardType" cssClass="error" /></B>
-							<form:select path="order.cardType" class="form-control">
+							<form:select path="order.cardType" class="form-control" id="cardType">
 								<option value="Card Type"></option>
 								<form:options items="${creditCardTypes}" />
 							</form:select>
 						</div>
-						
+					</div>
+					
+					<div class="modal-body" id="card" style="display: none">	
 						<font color="red" size="2">* Use a fake number!</font>
 						<div class="form-label-group">
 							<form:input path="order.creditCard" id="inputCardNumber"
@@ -198,17 +227,20 @@
 							<B><form:errors path="order.expiryDate" cssClass="error" /></B>
 							<label for="inputName">Expiry Date (MM/YY)</label>
 						</div>
-						
+					</div>
+					
+					<div class="modal-footer" id="modalButton">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+						<button type="submit" class="btn btn-primary">주문하기</button>
+					</div>
+					
+					<div class="modal-body" id="kakaopay" style="display: none">
 						<font color="red" size="2">* 아이콘을 눌러 결제를 진행해주세요 *</font>
 						<div class="form-label-group">
 							<a href="<c:url value="/shop/kakaoPay.do"/>">
 			            		<img src="${pageContext.request.contextPath}/images/payment_icon_yellow_large.png" alt="kakaoPay로 결제하기">
 			        		</a>  
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-						<button type="button" class="btn btn-primary">결제</button>
 					</div>
 				</div>
 			</div>

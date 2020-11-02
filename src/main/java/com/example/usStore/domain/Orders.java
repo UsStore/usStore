@@ -264,7 +264,7 @@ public class Orders implements Serializable {
 	
 	    creditCard = "999 9999 9999 9999";
 	    expiryDate = "12/03";
-	    cardType = "Visa";
+	    cardType = "결제 수단을 선택해주세요.";
 	    courier = "UPS";
 	    locale = "CA";
 	    status = "P";

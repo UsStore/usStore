@@ -62,15 +62,18 @@ public class OrderController {
 	public List<String> referenceData() {
 		
 		ArrayList<String> creditCardTypes = new ArrayList<String>();
+		creditCardTypes.add("결제 수단을 선택해주세요.");
 		creditCardTypes.add("Visa");
 		creditCardTypes.add("MasterCard");
 		// add kakao pay 
-		creditCardTypes.add("Kakao Pay");
+		creditCardTypes.add("KakaoPay");
 		return creditCardTypes;			
 	}
 	
 	@RequestMapping("/shop/newOrder.do")
-	public String initNewOrder(HttpServletRequest request,
+	public String initNewOrder(
+			@RequestParam(value="payFlag", required=false) String payFlag,
+			HttpServletRequest request,
 			@ModelAttribute("sessionCart") Cart cart,
 			@ModelAttribute("orderForm") OrderForm orderForm) throws ModelAndViewDefiningException {
 		
@@ -137,22 +140,24 @@ public class OrderController {
         KakaoPayApproval kakaopayApproval = kakaopay.kakaoPayInfo(pg_token);
         log.info(kakaopayApproval.toString());
         
-        return "redirect:/shop/newOrder.do";
+        return "redirect:/shop/newOrder.do?payFlag=success";
     }
     
+    // 카카오페이 결제 실패시
     @RequestMapping("/shop/kakaoPaySuccessFail.do")
     public String kakaoPaySuccessFail() {
-        log.info("kakaoPaySuccessFail get............................................");
+        log.info("kakaoPaySuccessFail");
         log.info("kakaoPaySuccessFail");
         
-        return "redirect:/shop/newOrder.do";
+        return "redirect:/shop/newOrder.do?payFlag=fail";
     }
     
+    // 카카오페이 결제 취소시
     @RequestMapping("/shop/kakaoPayCancel.do")
     public String kakaoPayCancel() {
-        log.info("kakaoPayCancel get............................................");
+        log.info("kakaoPayCancel get");
 
-        return "redirect:/shop/newOrder.do";
+        return "redirect:/shop/newOrder.do?payFlag=cancel";
     }
     
     
