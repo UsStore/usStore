@@ -90,6 +90,7 @@
 		<collection property="lineItems" ofType="LineItem">
 			<id column="ORDERID" property="orderId" />
 			<id column="LINENUM" property="lineNum" />
+			<result column="TITLE" property="title" />
 			<result column="ITEMID" property="itemId" />
 			<result column="QUANTITY" property="quantity" />
 			<result column="UNITPRICE" property="unitPrice" />
@@ -103,7 +104,7 @@
 			SHIPCITY, SHIPCOUNTRY, SHIPTOUSERNAME, SHIPZIP, CARDTYPE, COURIER,
 			CREDITCARD, EXPRDATE AS expiryDate, LOCALE, ORDERDATE, ORDERS.ORDERID,
 			TOTALPRICE, USERID, STATUS,
-			LINEITEM.LINENUM, LINEITEM.ITEMID, LINEITEM.QUANTITY, LINEITEM.UNITPRICE
+			LINEITEM.LINENUM, LINEITEM.ITEMID, LINEITEM.TITLE, LINEITEM.QUANTITY, LINEITEM.UNITPRICE
 		FROM ORDERS, LINEITEM
 		WHERE ORDERS.ORDERID = #{value}
 				AND ORDERS.ORDERID = LINEITEM.ORDERID

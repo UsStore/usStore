@@ -11,6 +11,7 @@ public class LineItem implements Serializable {
   /* Private Fields */
   private int orderId;
   private int lineNum;
+  private String title;
   private int itemId;
   private int quantity;
   private int unitPrice;
@@ -25,6 +26,7 @@ public class LineItem implements Serializable {
 	this.lineNum = lineNum;
     this.itemId = cartItem.getItem().getItemId();
     this.quantity = cartItem.getQuantity();
+    this.title = cartItem.getTitle();
     this.unitPrice = cartItem.getItem().getUnitCost();
     this.item = cartItem.getItem();
   }
@@ -82,13 +84,22 @@ public class LineItem implements Serializable {
 	public int getUnitPrice() {
 		return unitPrice;
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	@Override
 	public String toString() {
-		return "LineItem [orderId=" + orderId + ", lineNum=" + lineNum + ", itemId=" + itemId + ", quantity=" + quantity
-				+ ", item=" + item + ", getOrderId()=" + getOrderId() + ", getLineNum()=" + getLineNum()
-				+ ", getItemId()=" + getItemId() + ", getQuantity()=" + getQuantity() + ", getItem()=" + getItem()
-				+ ", getTotalPrice()=" + getTotalPrice() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "LineItem [orderId=" + orderId + ", lineNum=" + lineNum + ", title=" + title + ", itemId=" + itemId
+				+ ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", item=" + item + ", getLineNum()="
+				+ getLineNum() + ", getItemId()=" + getItemId() + ", getQuantity()=" + getQuantity() + ", getItem()="
+				+ getItem() + ", getTotalPrice()=" + getTotalPrice() + ", getOrderId()=" + getOrderId()
+				+ ", getUnitPrice()=" + getUnitPrice() + ", getTitle()=" + getTitle() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 }

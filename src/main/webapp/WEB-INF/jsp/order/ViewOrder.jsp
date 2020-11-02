@@ -38,6 +38,34 @@
 	<link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
 
 </head>
+<style>
+.simple_table {
+	width: 70%;
+	border: none;
+	border-collapse: separate;
+	border-spacing: 2px;
+}
+
+.simple_table th {
+	padding: 15px;
+	border: none;
+	border-left: 5px solid #C03;
+	border-bottom: 1px solid #DDD;
+	background: #FCF0F3;
+	font-weight: normal;
+	text-align: center;
+	text-shadow: 0 1px #FFF;
+	vertical-align: middle;
+}
+
+.simple_table td {
+	padding: 15px;
+	border: none;
+	border-bottom: 1px solid #DDD;
+	text-align: left;
+	vertical-align: baseline;
+}
+</style>
 <body>
 
  <nav class="navbar navbar-light" style="background-color: #000000; height: 74px; font-size: 20px;">
@@ -59,7 +87,7 @@
   </c:if>
   <h2>Order Infomation</h2>
   <p></p>
-  <table class="n13">
+  <table class="simple_table">
     <tr>
       <td align="center" colspan="2"><font size="4">
         <b>Order #<c:out value="${order.orderId}" /></b></font> <br />
@@ -68,7 +96,7 @@
         </font></td>
     </tr>
     <tr>
-      <td colspan="2"><font color="green" size="4"><b>Payment Details</b></font></td>
+      <td colspan="2"><font color="#308C7B" size="4"><b>Payment Details</b></font></td>
     </tr>
     <tr>
       <td>Card Type:</td>
@@ -84,7 +112,7 @@
       <td><c:out value="${order.expiryDate}" /></td>
     </tr>
     <tr>
-      <td colspan="2"><font color="green" size="4"><b>Billing Address</b></font></td>
+      <td colspan="2"><font color="#308C7B" size="4"><b>Billing Address</b></font></td>
     </tr>
     <tr>
       <td>name:</td>
@@ -111,7 +139,7 @@
       <td><c:out value="${order.billCountry}" /></td>
     </tr>
     <tr>
-      <td colspan="2"><font color="green" size="4"><b>Shipping Address</b></font></td>
+      <td colspan="2"><font color="#308C7B" size="4"><b>Shipping Address</b></font></td>
     </tr>
     <tr>
       <td>name:</td>
@@ -142,14 +170,15 @@
       <td><c:out value="${order.courier}" /></td>
     </tr>
     <tr>
-      <td colspan="2"><b><font color="green" size="4">Status:</font> 
+      <td colspan="2"><b><font color="#308C7B" size="4">Status:</font> 
         <c:out value="${order.status}" /></b></td>
     </tr>
     <tr>
       <td colspan="2">
-        <table class="n23" style="width:100%">
-          <tr style="background-color:#CCCCCC;">
+        <table class="n23" style="width:90%">
+          <tr style="background-color:#81CABD;">
             <td><b>Item ID</b></td>
+            <td><b>Title</b></td>
             <td><b>Quantity</b></td>
             <td><b>Price</b></td>
             <td><b>Total Cost</b></td>
@@ -162,17 +191,23 @@
                   <c:param name="itemId" value="${lineItem.itemId}"/>
                   </c:url>'>
                     <font color="black"><c:out value="${lineItem.itemId}" /></font>
-                </a></b></td>
+                </a></b>
+              </td>
+              <td>
+              	<font color="black"><c:out value="${lineItem.title}" /></font>
+              </td>
               <td><c:out value="${lineItem.quantity}" /></td>
-              <td align="right"><fmt:formatNumber
-                  value="${lineItem.unitPrice}" pattern="###,###,###원" /></td>
-              <td align="right"><fmt:formatNumber
-                  value="${lineItem.totalPrice}" pattern="###,###,###원" /></td>
+              <td align="right">
+              	<fmt:formatNumber value="${lineItem.unitPrice}" pattern="###,###,###원" />
+              </td>
+              <td align="right">
+              	<fmt:formatNumber value="${lineItem.totalPrice}" pattern="###,###,###원" />
+              </td>
               <td><b><a href='<c:url value="/shop/order/goAddReview.do">
                   <c:param name="itemId" value="${lineItem.itemId}"/>
                   <c:param name="userId" value="${order.userId}"/>
-                  </c:url>'>
-                    <font color="black">리뷰 작성</font>
+                  </c:url>' class="badge badge-pill" style="font-size: 15px; background-color: #164038;">
+                    <font color="white">리뷰 작성</font>
                 </a></b>
               </td>
             </tr>
@@ -187,7 +222,7 @@
   </table>
   <br>
   <a href="<c:url value="/shop/listOrders.do"/>"
-  	class="badge badge-pill badge-light" style="font-size: 30px">
-        	내 주문 목록 보기</a>
+  	class="badge badge-pill" style="font-size: 30px; background-color: #40bea7;">
+        	<font color="white">내 주문 목록 보기</font></a>
 </div>
 <br><br><br>
