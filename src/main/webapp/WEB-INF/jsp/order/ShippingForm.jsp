@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="../account/IncludeAccount.jsp" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ include file="../header.jsp" %>
 
 <c:set var="targetUrl"><c:url value="/shop/newOrderSubmitted.do" /></c:set>
 
@@ -51,3 +49,4 @@
   </p>
 </form:form>
 </div>
+<%@ include file="../IndexBottom.jsp" %>
