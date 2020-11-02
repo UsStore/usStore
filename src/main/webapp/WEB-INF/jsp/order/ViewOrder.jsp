@@ -193,7 +193,7 @@
   <br>
   <center>
 	  <a href="<c:url value="/shop/listOrders.do"/>"
-	  	class="badge badge-pill" style="font-size: 30px; background-color: #40bea7;">
+	  	class="badge badge-pill" style="font-size: 30px; padding: 10px; background-color: #40bea7;">
 	        	<font color="white">내 주문 목록 보기</font>
 	  </a>
   </center>
