@@ -4,7 +4,7 @@
   <cache />
 
   <select id="getUnivByName" resultType="University">
-    SELECT univName, univLink, univAddr
+    SELECT univName, univLink, univAddr, region
     FROM university
     WHERE univName = #{univName}
   </select>
@@ -23,8 +23,8 @@
   	</selectKey>
   	
   	<if test="isExistUniv == 0">
-  	 	INSERT INTO university (univName, univLink, univAddr)
-	    VALUES (#{univName}, #{univLink}, #{univAddr})
+  	 	INSERT INTO university (univName, univLink, univAddr, region)
+	    VALUES (#{univName}, #{univLink}, #{univAddr}, #{region})
   	</if>
   </insert>
 
