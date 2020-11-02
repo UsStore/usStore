@@ -48,7 +48,7 @@ public class OrderController {
 	private UsStoreFacade usStore;
 	
     @Setter(onMethod_ = @Autowired)
-    private Kakaopay kakaopay;
+    private KakaoPayService kakaopay;
     
 	@Autowired
 	private OrderValidator orderValidator;
