@@ -65,10 +65,7 @@ public class AccountFormController {
 		System.out.println("show Form ");
 		
 		if(univName != null) {
-			System.out.println("pop에서 넘겨준거 : " + univName);
-			System.out.println("pop에서 region : " + region);
 			accountForm.getAccount().setUniversity(univName);
-			
 			University university =  new University(univName, univLink, univAddr, region);
 			session.setAttribute("university", university);
 		}
@@ -85,22 +82,23 @@ public class AccountFormController {
 		System.out.println("onSubmit");
 		
 		if (result.hasErrors()) { return formViewName;}
-		
+
 		University university = (University)session.getAttribute("university");
-		
-		try {
-			if (accountForm.isNewAccount()){
-				System.out.println("newAccount");
-				// 트랜젝션
-				usStore.insertAccount(accountForm.getAccount(), university);
-			}else {
-				usStore.updateAccount(accountForm.getAccount(), university);
+		if(university != null) {
+			try {
+				if (accountForm.isNewAccount()){
+					System.out.println("newAccount");
+					// 트랜젝션
+					usStore.insertAccount(accountForm.getAccount(), university);
+				}else { 
+					usStore.updateAccount(accountForm.getAccount(), university);
+				}
 			}
-		}
-		catch (DataIntegrityViolationException ex) {
-			result.rejectValue("account.username", "USER_ID_ALREADY_EXISTS",
-					"User ID already exists: choose a different ID.");
-			return formViewName; 
+			catch (DataIntegrityViolationException ex) {
+				result.rejectValue("account.username", "USER_ID_ALREADY_EXISTS",
+						"User ID already exists: choose a different ID.");
+				return formViewName; 
+			}
 		}
 		
 		UserSession userSession = new UserSession(accountForm.getAccount());

@@ -84,7 +84,6 @@ public class SearchUnivController {
             
             //DTO 객체 생성 및 값을 저장 
             university = new University(schoolName,link,adres, region);
-            System.out.println("변경 : " + university);
             schNameList.add(university);
         }		
 	}

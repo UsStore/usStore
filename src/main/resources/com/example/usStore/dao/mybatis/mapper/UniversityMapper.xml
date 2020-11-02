@@ -17,7 +17,7 @@
  
   <insert id="insertUniv" parameterType="University">
   	<selectKey keyProperty="isExistUniv" resultType="int" order="BEFORE">
-  		select count(univName)
+  		select count(*) 
 		from university
 		where univName=#{univName}
   	</selectKey>
