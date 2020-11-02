@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="itemTop.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="../header.jsp" %>
+<%@ include file="../IndexMenu.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
    function getJson(productId) {   //매개변수 전달 시도 
@@ -43,11 +41,10 @@ th, td {
 </head>
 
 <body>    
-   <form name="pform" action=""
-      style="position: absolute; left: 53%; margin: 0 0 0 -420px;">
-      <div class="container">
+   <form name="pform" action="" style="min-height:100%;">
+       <div class="container" align="center">
          <div class="row" style="display: inline">
-            <div style="display: inline; float: left;">
+            <div style="display: inline;">
                <div style="font-size: 15px">
                   <h3>조회수 랭킹</h3>
 
@@ -71,5 +68,6 @@ th, td {
          </div>
       </div>
    </form>
-</body>
-</html>
+  
+
+<%@ include file="../IndexBottom.jsp" %>
