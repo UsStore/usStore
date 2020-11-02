@@ -4,21 +4,27 @@
   <cache />
 
   <select id="getUnivByName" resultType="University">
-    SELECT univName, univLink, univAddr
+    SELECT univName, univLink, univAddr, region
     FROM university
     WHERE univName = #{univName}
   </select>
  
+  <select id="getUnivAddrByName" resultType="String">
+  	select univAddr
+	from university
+	where univName=#{univName}
+  </select>
+ 
   <insert id="insertUniv" parameterType="University">
   	<selectKey keyProperty="isExistUniv" resultType="int" order="BEFORE">
-  		select count(univName)
+  		select count(*) 
 		from university
 		where univName=#{univName}
   	</selectKey>
   	
   	<if test="isExistUniv == 0">
-  	 	INSERT INTO university (univName, univLink, univAddr)
-	    VALUES (#{univName}, #{univLink}, #{univAddr})
+  	 	INSERT INTO university (univName, univLink, univAddr, region)
+	    VALUES (#{univName}, #{univLink}, #{univAddr}, #{region})
   	</if>
   </insert>
 

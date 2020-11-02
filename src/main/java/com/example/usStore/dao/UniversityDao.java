@@ -10,4 +10,5 @@ public interface UniversityDao {
 	
 	void insertUniv(University university) throws DataAccessException;
 	 
+	String getUnivAddrByName(String univName) throws DataAccessException;
 }

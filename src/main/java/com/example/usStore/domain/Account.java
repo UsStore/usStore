@@ -2,6 +2,8 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /*
  * Account Domain Class
  * */
@@ -19,6 +21,7 @@ public class Account implements Serializable {
     private String zip;
     private String country;
     private String phone;
+    @NotEmpty
     private String university;
 
   	/* JavaBeans Properties */

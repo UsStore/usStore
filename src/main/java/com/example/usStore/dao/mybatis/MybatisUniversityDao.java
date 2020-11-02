@@ -17,13 +17,18 @@ public class MybatisUniversityDao implements UniversityDao{
 	
 
 	@Override
-	public University getUnivByName(String univNameU) throws DataAccessException {
-		return univMapper.getUnivByName(univNameU);
+	public University getUnivByName(String univName) throws DataAccessException {
+		return univMapper.getUnivByName(univName);
 	}
 
 	@Override
 	public void insertUniv(University university) throws DataAccessException {
 		univMapper.insertUniv(university);
+	}
+
+	@Override
+	public String getUnivAddrByName(String univName) throws DataAccessException {
+		return univMapper.getUnivAddrByName(univName);
 	}
 
 }

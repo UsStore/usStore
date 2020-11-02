@@ -21,7 +21,5 @@ public enum UnivRegionEnum {
 	public static int getCode(String region) {
 		return 	UnivRegionEnum.valueOf(region).getCode();
 	}
- 
-
 	
 }

@@ -59,15 +59,14 @@ public class AccountFormController {
 	public String showForm(HttpSession session, @RequestParam(value="univName", required=false) String univName,
 			@RequestParam(value="univLink", required=false) String univLink,
 			@RequestParam(value="univAddr", required=false) String univAddr,
+			@RequestParam(value="region", required=false) String region,
 			@ModelAttribute("accountForm") AccountForm accountForm) { 
 		// 작성 또는 수정을 위해 폼을 열었을 때 
 		System.out.println("show Form ");
 		
 		if(univName != null) {
-			System.out.println("pop에서 넘겨준거 : " + univName);
 			accountForm.getAccount().setUniversity(univName);
-			
-			University university =  new University(univName, univLink, univAddr);
+			University university =  new University(univName, univLink, univAddr, region);
 			session.setAttribute("university", university);
 		}
 		return formViewName;
@@ -83,22 +82,23 @@ public class AccountFormController {
 		System.out.println("onSubmit");
 		
 		if (result.hasErrors()) { return formViewName;}
-		
+
 		University university = (University)session.getAttribute("university");
-		
-		try {
-			if (accountForm.isNewAccount()){
-				System.out.println("newAccount");
-				// 트랜젝션
-				usStore.insertAccount(accountForm.getAccount(), university);
-			}else {
-				usStore.updateAccount(accountForm.getAccount(), university);
+		if(university != null) {
+			try {
+				if (accountForm.isNewAccount()){
+					System.out.println("newAccount");
+					// 트랜젝션
+					usStore.insertAccount(accountForm.getAccount(), university);
+				}else { 
+					usStore.updateAccount(accountForm.getAccount(), university);
+				}
 			}
-		}
-		catch (DataIntegrityViolationException ex) {
-			result.rejectValue("account.username", "USER_ID_ALREADY_EXISTS",
-					"User ID already exists: choose a different ID.");
-			return formViewName; 
+			catch (DataIntegrityViolationException ex) {
+				result.rejectValue("account.username", "USER_ID_ALREADY_EXISTS",
+						"User ID already exists: choose a different ID.");
+				return formViewName; 
+			}
 		}
 		
 		UserSession userSession = new UserSession(accountForm.getAccount());

@@ -80,9 +80,10 @@ public class SearchUnivController {
             String schoolName = (String) entity.get("schoolName");
             String link = (String)entity.get("link");
             String adres = (String)entity.get("adres");
+            String region = (String)entity.get("region");
             
             //DTO 객체 생성 및 값을 저장 
-            university = new University(schoolName,link,adres);
+            university = new University(schoolName,link,adres, region);
             schNameList.add(university);
         }		
 	}
