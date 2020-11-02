@@ -62,6 +62,12 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 	
 	@Override
+	public List<SecondHand> getSHListByRegion(HashMap<String, String> param) throws DataAccessException {
+		return secondHandMapper.getSHListByRegion(param);
+	}
+	
+	
+	@Override
 	public int getQuantity(int itemId, int productId) throws DataAccessException {
 		return secondHandMapper.getQuantity(itemId, productId);
 	}
@@ -78,8 +84,8 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	
 
 	@Override
-	public List<SecondHand> getSecondHandList(Account account) throws DataAccessException {
-		return secondHandMapper.getSecondHandList(account);
+	public List<SecondHand> getSecondHandList(String univName) throws DataAccessException {
+		return secondHandMapper.getSecondHandList(univName);
 	}
 	
 	@Override
@@ -133,6 +139,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	public List<Item> getItemByTitle(String title) {
 		return secondHandMapper.getItemByTitle("%" + title.toLowerCase() + "%");
 	}
-	
+
+
 
 }

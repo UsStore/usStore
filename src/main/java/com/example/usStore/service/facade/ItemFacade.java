@@ -1,6 +1,7 @@
 package com.example.usStore.service.facade;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.example.usStore.domain.Account;
@@ -13,6 +14,7 @@ import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.Review;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.domain.University;
 
 /*
  * ItemFacade
@@ -82,13 +84,15 @@ public interface ItemFacade {
    /////////////////////////////////////////////////////////////////////////
    /* SecondHand */
    /////////////////////////////////////////////////////////////////////////   
-   List<SecondHand> getSecondHandList(Account account);
+   List<SecondHand> getSecondHandList(String univName);
    
    SecondHand getSecondHandItem(int itemId);
    
    public void insertSecondHand(SecondHand secondHand);
    
    public void updateSecondHand(SecondHand secondHand);
+   
+   public List<SecondHand> getSHListByRegion(HashMap<String, String> param);
    
    /////////////////////////////////////////////////////////////////////////
    /* Auction */

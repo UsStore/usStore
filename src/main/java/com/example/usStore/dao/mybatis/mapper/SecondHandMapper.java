@@ -1,5 +1,6 @@
 package com.example.usStore.dao.mybatis.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.example.usStore.domain.Account;
@@ -8,7 +9,7 @@ import com.example.usStore.domain.SecondHand;
 
 public interface SecondHandMapper extends ItemMapper {
 
-	List<SecondHand> getSecondHandList(Account account);
+	List<SecondHand> getSecondHandList(String univName);
 
 	SecondHand getSecondHandItem(int itemId);
 	
@@ -18,6 +19,6 @@ public interface SecondHandMapper extends ItemMapper {
 	
 	public void deleteSecondHand(int itemId);
 	
-	
+	public List<SecondHand> getSHListByRegion(HashMap<String, String> param);
 	
 }
