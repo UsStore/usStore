@@ -223,6 +223,23 @@ public class Orders implements Serializable {
 		this.lineItems = lineItems;
 	}
 
+	public int getTotalQuentity() {
+		int count = 0;
+		for(LineItem lineItem : lineItems) {
+			count += lineItem.getQuantity();
+		}
+		return count;
+	}
+	
+	public String getItemName() {
+		String rslt = "";
+		rslt = lineItems.get(0).getItem().getTitle();
+		if(lineItems.size() >= 2) {
+			rslt += " 외 ";
+			rslt += lineItems.size() - 1 + "개";
+		}
+		return rslt;
+	}
 	/* Public Methods */
 
 	public void initOrder(Account account, Cart cart, String status) { //���⼭ status�� OrderStatus���̺��� ������ 
@@ -247,7 +264,7 @@ public class Orders implements Serializable {
 	
 	    creditCard = "999 9999 9999 9999";
 	    expiryDate = "12/03";
-	    cardType = "Visa";
+	    cardType = "결제 수단을 선택해주세요.";
 	    courier = "UPS";
 	    locale = "CA";
 	    status = "P";

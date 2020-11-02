@@ -15,7 +15,7 @@ div#addItemForm {
 	<br>
 	<br>
 
-	<form:form modelAttribute="secondHandForm"  method="post" action="step3.do">
+	<form:form modelAttribute="secondHandForm"  method="post" enctype="multipart/form-data" action="step3.do?${_csrf.parameterName}=${_csrf.token}">
 		
 	정가: <form:input type="text" path="listPrice" value="${listPrice}" />
 		<form:errors path="listPrice" />
@@ -25,6 +25,7 @@ div#addItemForm {
 	가격 흥정 여부: 
 		<form:radiobuttons items="${radioKind}" path="discount"/>
 		<br><br>
+	상품 사진 추가 : <input type="file" name="file" /><br><br>
 
 		<a href="<c:url value='/shop/secondHand/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>

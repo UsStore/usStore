@@ -1,8 +1,5 @@
 package com.example.usStore.controller.mypage;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +10,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.WebUtils;
-import com.example.usStore.domain.Account;
+import com.example.usStore.domain.University;
 import com.example.usStore.service.AccountFormValidator;
 import com.example.usStore.service.facade.UsStoreFacade;
 
-/**
- * @author Juergen Hoeller
- * @since 01.12.2003
- * @modified by Changsup Park
- * @modified by Jieun Lee
- */
 @Controller
 @RequestMapping({"/shop/newAccount.do","/shop/editAccount.do"})
+@SessionAttributes("accountForm")
 public class AccountFormController { 
 
 	@Value("account/EditAccountForm")
@@ -39,26 +33,17 @@ public class AccountFormController {
 	public void setusStore(UsStoreFacade usStore) {
 		this.usStore = usStore;
 	}
-
+	
 	@Autowired
 	private AccountFormValidator validator;
 	public void setValidator(AccountFormValidator validator) {
 		this.validator = validator;
 	}
 	
-	@ModelAttribute("universityKinds")
-	public List<String> referenceData() throws Exception {
-		List<String> universityKinds = new ArrayList<String>();
-		universityKinds.add("동덕여자대학교");
-		universityKinds.add("성신여자대학교");
-		universityKinds.add("카이스트");
-		return universityKinds;	
-	}
-
 	@ModelAttribute("accountForm")
 	public AccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
-		System.out.println("formBackingObject");
+		System.out.println("before show Form ? ");
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
@@ -71,46 +56,49 @@ public class AccountFormController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showForm() {
+	public String showForm(HttpSession session, @RequestParam(value="univName", required=false) String univName,
+			@RequestParam(value="univLink", required=false) String univLink,
+			@RequestParam(value="univAddr", required=false) String univAddr,
+			@RequestParam(value="region", required=false) String region,
+			@ModelAttribute("accountForm") AccountForm accountForm) { 
+		// 작성 또는 수정을 위해 폼을 열었을 때 
+		System.out.println("show Form ");
+		
+		if(univName != null) {
+			accountForm.getAccount().setUniversity(univName);
+			University university =  new University(univName, univLink, univAddr, region);
+			session.setAttribute("university", university);
+		}
 		return formViewName;
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping(method = RequestMethod.POST)
-	public String onSubmit(
+	public String onSubmit( // 디비에 저장하려고 등록 버튼 눌렀을 때 
 			HttpServletRequest request, HttpSession session,
-			@ModelAttribute("accountForm") AccountForm accountForm,
+			@ModelAttribute("accountForm") AccountForm accountForm, 
 			BindingResult result) throws Exception {
 
 		validator.validate(accountForm, result);
 		System.out.println("onSubmit");
-		if (result.hasErrors())
-			return formViewName;
 		
-		System.out.println();
-		//대학교 이름과 도로명 주소 맵핑
-		if(accountForm.getAccount().getUniversity().equals("동덕여자대학교")) {
-			accountForm.getAccount().setUniversity("서울특별시 성북구 월곡2동 화랑로13길 60");
-		}else if(accountForm.getAccount().getUniversity().equals("성신여자대학교")) {
-			accountForm.getAccount().setUniversity("서울특별시 성북구 돈암동 보문로34다길 2");
-		}else if(accountForm.getAccount().getUniversity().equals("카이스트")) {
-			accountForm.getAccount().setUniversity("대전광역시 유성구 어은동 대학로 291");
-		}
-		
-		try {
-			if (accountForm.isNewAccount()) {
-				System.out.println("newAccount");
-				usStore.insertAccount(accountForm.getAccount());
+		if (result.hasErrors()) { return formViewName;}
+
+		University university = (University)session.getAttribute("university");
+		if(university != null) {
+			try {
+				if (accountForm.isNewAccount()){
+					System.out.println("newAccount");
+					// 트랜젝션
+					usStore.insertAccount(accountForm.getAccount(), university);
+				}else { 
+					usStore.updateAccount(accountForm.getAccount(), university);
+				}
 			}
-			else {
-				System.out.println("updateAccount");
-				usStore.updateAccount(accountForm.getAccount());
+			catch (DataIntegrityViolationException ex) {
+				result.rejectValue("account.username", "USER_ID_ALREADY_EXISTS",
+						"User ID already exists: choose a different ID.");
+				return formViewName; 
 			}
-		}
-		catch (DataIntegrityViolationException ex) {
-			result.rejectValue("account.username", "USER_ID_ALREADY_EXISTS",
-					"User ID already exists: choose a different ID.");
-			return formViewName; 
 		}
 		
 		UserSession userSession = new UserSession(accountForm.getAccount());

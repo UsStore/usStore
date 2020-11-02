@@ -17,11 +17,7 @@ import com.example.usStore.service.facade.UsStoreFacade;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.ui.Model;
 
-/**
- * @author Juergen Hoeller
- * @since 30.11.2003
- * @modified-by Changsup Park
- */
+
 @Controller
 public class SignonController { 
 

@@ -34,6 +34,7 @@
                </c:forEach>
 <br> 
 <label>마감기한</label>: ${GroupBuying.deadLine} <br><br>
+<label>상품 사진</label>: ${imgName} <br><br>
 
 <a href="<c:url value='/shop/groupBuying/addItem2.do'>
          <c:param name="productId" value="${itemForm.productId}"/>

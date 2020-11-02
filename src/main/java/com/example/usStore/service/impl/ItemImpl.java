@@ -1,10 +1,8 @@
 package com.example.usStore.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -16,6 +14,7 @@ import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.GroupBuyingDao;
 import com.example.usStore.dao.HandMadeDao;
 import com.example.usStore.dao.ItemDao;
+import com.example.usStore.dao.ReviewDao;
 import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.TagDao;
 import com.example.usStore.domain.Account;
@@ -25,6 +24,7 @@ import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Orders;
+import com.example.usStore.domain.Review;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
@@ -51,6 +51,8 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	@Autowired // applicationContext.xml占쎈퓠 占쎌젟占쎌벥占쎈쭆 scheduler 揶쏆빘猿쒐몴占 雅뚯눘 뿯 獄쏆룇 벉
 	private ThreadPoolTaskScheduler scheduler;
 
@@ -166,14 +168,13 @@ public class ItemImpl implements ItemFacade {
 		Runnable updateTableRunner = new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("close메소드 실행");
+				System.out.println("스케쥴러 - close메소드 실행");
 				Date curTime = new Date();
 				groupBuyingDao.closeGroupBuying(curTime); // state 변경
+				System.out.println("스케쥴러 - 현재시간 : " + curTime.toString());
 			}
 		};
 		scheduler.schedule(updateTableRunner, deadLine);
-
-		System.out.println("GB updateTableRunner has been scheduled to execute at " + deadLine);
 	}
 	
 	//기한 마감시 삭제
@@ -187,8 +188,8 @@ public class ItemImpl implements ItemFacade {
 	}
 	
 	@Override
-	public List<SecondHand> getSecondHandList(Account account) {
-		return secondHandDao.getSecondHandList(account);
+	public List<SecondHand> getSecondHandList(String univName) {
+		return secondHandDao.getSecondHandList(univName);
 	}
 
 	@Override
@@ -196,6 +197,11 @@ public class ItemImpl implements ItemFacade {
 		return secondHandDao.getSecondHandItem(itemId);
 	}
 
+	@Override
+	public List<SecondHand> getSHListByRegion(HashMap<String, String> param) {
+		return secondHandDao.getSHListByRegion(param);
+	}
+	
 	@Override
 	public void insertSecondHand(SecondHand secondHand) {
 		secondHandDao.insertSecondHand(secondHand);
@@ -348,4 +354,26 @@ public class ItemImpl implements ItemFacade {
 		return itemDao.getItemByPId(productId);
 	}
 
+	@Override
+	public void insertReview(Review review) {
+		reviewDao.insertReview(review);
+	}
+
+	@Override
+	public void deleteReview(int itemId) {
+		reviewDao.deleteReview(itemId);
+	}
+
+	@Override
+	public List<Review> getReviewListByItemId(int itemId) {
+		return reviewDao.getReviewListByItemId(itemId);
+	}
+
+	@Override
+	public Review findReviewByuserIdAndItemId(int itemId, String buyer) {
+		return reviewDao.findReviewByuserIdAndItemId(itemId, buyer);
+	}
+
+	
+	
 }

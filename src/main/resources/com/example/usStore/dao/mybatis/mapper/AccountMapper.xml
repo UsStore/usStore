@@ -5,21 +5,21 @@
 
   <select id="getAccountByUserId" resultType="Account">
     SELECT USERID, PASSWORD, USERNAME, EMAIL,
-    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY
+    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVNAME AS university
     FROM ACCOUNT
     WHERE USERID = #{userId}
   </select>
   
    <select id="getAccountByUsername" resultType="Account">
     SELECT USERID, PASSWORD, USERNAME, EMAIL,
-    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY
+    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVNAME AS university
     FROM ACCOUNT
     WHERE USERNAME = #{username}
   </select>
 
   <select id="getAccountByUserIdAndPassword" resultType="Account">
     SELECT USERID, PASSWORD, USERNAME, EMAIL,
-    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY
+    ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVNAME AS university
     FROM ACCOUNT
     WHERE USERID = #{param1} AND PASSWORD = #{param2}
   </select>
@@ -28,21 +28,21 @@
     UPDATE ACCOUNT SET
     USERID = #{userId}, 
     PASSWORD = #{password}, 
-    USERNAME = #{username}, 
     EMAIL = #{email}, 
+    USERNAME = #{username}, 
     ADDR1 = #{addr1},
     ADDR2 = #{addr2}, 
     CITY = #{city}, 
     ZIP = #{zip}, 
     COUNTRY = #{country}, 
     PHONE = #{phone}, 
-    UNIVERSITY = #{university}
+    UNIVNAME = #{university}
     WHERE USERID = #{userId}
   </update>
 
   <insert id="insertAccount" parameterType="Account">
     INSERT INTO ACCOUNT
-      (USERID, PASSWORD, USERNAME, EMAIL, ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVERSITY)
+      (USERID, PASSWORD, USERNAME, EMAIL, ADDR1, ADDR2, CITY, ZIP, COUNTRY, PHONE, UNIVNAME)
     VALUES
       (#{userId}, #{password}, #{username}, #{email}, #{addr1}, #{addr2,jdbcType=VARCHAR}, #{city}, #{zip}, #{country}, #{phone}, #{university})
   </insert>

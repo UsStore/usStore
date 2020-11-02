@@ -22,7 +22,7 @@ import com.example.usStore.service.OrderService;
  *
  * @author Juergen Hoeller
  * @since 26.12.2003
- * @see org.spfringframework.samples.usStore.service.OrderService
+ * @see org.springframework.samples.usStore.service.OrderService
  */
 public class OrderServiceClient_rmi {
 

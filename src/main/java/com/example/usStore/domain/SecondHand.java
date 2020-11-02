@@ -18,7 +18,7 @@ public class SecondHand extends Item implements Serializable {
 	
 	public SecondHand(Item item, int discount, int listPrice) {
 	      super(item.getItemId(), item.getUnitCost(), item.getTitle(), item.getDescription(), item.getViewCount(), item.getQty(), item.getTags(), 
-	            item.getUserId(), item.getProductId());
+	            item.getUserId(), item.getProductId(), item.getImgUrl());
 	      this.itemId = item.getItemId();
 	      this.discount = discount;
 	      this.listPrice = listPrice;

@@ -1,4 +1,4 @@
-package com.example.usStore.controller;
+package com.example.usStore.controller.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,7 @@ import com.example.usStore.service.facade.UsStoreFacade;
  * @since 01.12.2003
  * @modified by Changsup Park
  */
+
 @Controller
 @SessionAttributes("userSession")
 public class ListOrdersController {
@@ -22,7 +23,7 @@ public class ListOrdersController {
 	private UsStoreFacade usStoreFacade;
 
 	@Autowired
-	public void setPetStore(UsStoreFacade usStoreFacade) {
+	public void setUsStore(UsStoreFacade usStoreFacade) {
 		this.usStoreFacade = usStoreFacade;
 	}
 

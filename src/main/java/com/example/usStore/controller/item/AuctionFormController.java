@@ -1,16 +1,20 @@
 package com.example.usStore.controller.item;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.net.URL; 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.controller.mypage.UserSession;
@@ -252,7 +258,7 @@ public class AuctionFormController {
 	
 	@PostMapping("/shop/auction/step3.do")		// step2 -> step3
 	public String goCheck(@ModelAttribute("Auction") AuctionForm auctionForm, BindingResult result,
-			HttpServletRequest rq, ItemForm itemForm, Model model) throws ParseException {	
+			HttpServletRequest rq, ItemForm itemForm, Model model, MultipartHttpServletRequest multi) throws ParseException {	
 		System.out.println("step3.do(before check form)");
 		HttpSession session = rq.getSession(false);
 		
@@ -269,11 +275,50 @@ public class AuctionFormController {
 			return ADD_Auction_FORM;
 		}
 		
+		// 업로드 파일이 저장될 경로
+		String root_path = rq.getSession().getServletContext().getRealPath("/");
+
+		// 파일경로
+		String attach_path = "images" + File.separator + "uploadImg" + File.separator;
+
+		File Folder = new File(root_path + attach_path);
+
+		// 해당 디렉토리가 없을경우 디렉토리를 생성
+		if (!Folder.exists()) {
+			try {
+				Folder.mkdir(); // 폴더 생성
+				System.out.println("폴더가 생성되었습니다.");
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		} else {
+			System.out.println("이미 폴더가 생성되어 있습니다.");
+		}
+
+		// 파일 이름
+		MultipartFile file = multi.getFile("file");
+
+		UUID uuid = UUID.randomUUID(); // 파일명 중복 방지
+		String imgName = file.getOriginalFilename();
+		String fileName = uuid.toString() + "_" + imgName;
+		String imgPath = root_path + attach_path + fileName;
+
+		System.out.println("이미지 경로: " + imgPath);
+		
+		// 파일 업로드
+		try {
+			file.transferTo(new File(imgPath)); // 업로드 한 파일 데이터를 지정한 경로(파일)에 저장
+			itemForm.setImgUrl(imgPath);
+		} catch (Exception e) {
+			System.out.println("이미지 업로드 오류");
+		}
+		
 		model.addAttribute("tags", itemForm.getTags());
 		model.addAttribute(itemForm);
 		
 		Date date = new Date();
 		model.addAttribute(date);
+		model.addAttribute("imgName", imgName);
 		
 		return CHECK_FORM3;		// step3(CHECK_FORM3)
 	}
@@ -306,8 +351,8 @@ public class AuctionFormController {
 	
 		//put itemformSession to item
 		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	//�씤�꽣�뀎�꽣 ��怨� �삤�땲源� suppId 臾댁“嫄� �엳�쓬
-				itemformSession.getProductId());
+				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	
+				itemformSession.getProductId(), itemformSession.getImgUrl());
 		
 		  
 		if(status != 0) {
@@ -347,6 +392,19 @@ public class AuctionFormController {
 		
 		return "redirect:/shop/auction/viewItem.do?itemId=" + auction.getItemId() + "&productId=" + item.getProductId();
 	}
+	
+	@RequestMapping(value="/shop/auction/getImage.do")
+	   public void getImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	      int itemId = Integer.parseInt(request.getParameter("itemId"));
+	      
+	      Auction auction = itemFacade.getAuctionById(itemId);
+	      
+	      String url = auction.getImgUrl();
+	      System.out.println("url: " + url);
+
+	      URL fileUrl = new URL("file:///" + url);
+	      IOUtils.copy(fileUrl.openStream(), response.getOutputStream());   // IOUtils.copy는 input에서 output으로 encoding 맞춰서 복사하는 메소드
+	   }
 	
 	//경매 수정
    @RequestMapping("/shop/auction/updateItem.do") 

@@ -2,7 +2,44 @@
 <%@ include file="itemTop.jsp"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+function getReview(itemId) {   //매개변수 전달 시도 
+    var reqUrl = "/usStore/rest/shop/getReview.do/" + itemId;
+     $.ajax({         /* Ajax 호출을 위해  JQuery 이용 */
+       type: "get",
+       url: reqUrl,
+       processData: false,
+       success: function(responseJson){   // responseJson: JS object parsed from JSON text
+       $("#result").html("<div>");
+          // var index = 1;
+          var obj = responseJson;
+          $("#result > div").append("<table>" +
+                  "<tr><th style='border-bottom: none; text-align: left;'>평점"+
+                  "</th><th style='border-bottom: none; text-align: left;'>참여자</th>" + 
+                  "<th style='border-bottom: none; text-align: left;'>리뷰</th></tr><hr width = 100% align='left'></table>");
+
+      	$("#result > div").append("<table>");
+			if(obj.length == 0) {   $("#result > div").append("<tr><td>작성된 리뷰가 없습니다.</td></tr>");   }   //리뷰가 존재하지 않을 경우
+			else {
+				for (var i in obj) {
+					$("#result > div").append("<tr><td style='text-align: left;'>" + obj[i].rating + 
+											"점</td><td style='text-align: left;'>익명<td style='text-align: left; width: 80%'>" + 
+						                     obj[i].description + "</td></tr>");
+					}
+			}
+			$("#result > div").append("<tr><td colspan='2' style='border-bottom: hidden; text-align: left;'>" + 
+						"<a href='<c:url value='/shop/AllReviewList.do?itemId=" + itemId + "'/>'> [모든 리뷰 보기] </a>&nbsp;&nbsp;" + 
+						
+						"<a href='<c:url value='/shop/goAddReview.do?itemId=" + itemId + 
+						"'/>'> [리뷰 작성하기] </a></td></tr><br></table></div>");
+	         },
+	         error: function(request,status,error){
+	            alert("code = "+ request.status + " message = " + request.responseText);
+	         }
+    });
+ };
+</script>
 <html>
 <head>
 <title>경매 상세 페이지</title>
@@ -126,6 +163,14 @@ newtime = window.setTimeout("getTime();", 1000);
    		<tr><td colspan="2" style="padding: 15px;">${auction.description}<br></td></tr>
    		
    		<tr>
+            <th style="border-right: 1px solid black;">제품 사진</th>
+            <td>
+            <img src="getImage.do?itemId=${auction.itemId}" width="350" height="230" onerror="this.style.display='none'" />
+               <br/>
+            </td>
+         </tr>
+   		
+   		<tr>
    			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련 태그</th>
    			<td>
    			<c:forEach var="tag" items="${tags}">        
@@ -224,6 +269,15 @@ newtime = window.setTimeout("getTime();", 1000);
 		 </tr>
 		</c:if>
    	</table>
-   	<br><br>
+   	<br>
+
+	<form name="pform" action="">
+		<div style="font-size: 15px">
+			<script>getReview(${auction.itemId});</script>
+			<div id="result"></div>
+		</div>
+	</form>
+	<br>
+	<br>
 </body>
 </html>

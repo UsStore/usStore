@@ -22,9 +22,10 @@
 
   <bean id="jaxwsOrderService"
     class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"
-    p:wsdlDocumentUrl="http://localhost:8080/services/OrderService?wsdl"
+    p:wsdlDocumentUrl="http://localhost:8081/services/OrderService?wsdl"
     p:serviceName="OrderService"
     p:portName="OrderServiceEndpointPort"
     p:serviceInterface="com.example.usStore.service.OrderService"
     p:namespaceUri="http://service.usStore.example.com/" />
+
 </beans>

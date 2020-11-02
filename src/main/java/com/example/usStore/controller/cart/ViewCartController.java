@@ -25,37 +25,37 @@ public class ViewCartController {
 	
 	@ModelAttribute("sessionCart")
 	public Cart createCart(HttpSession session) {
+		// create cart object
 		Cart cart = (Cart)session.getAttribute("sessionCart");
-		if (cart == null) cart = new Cart();
+		if (cart == null) {
+			cart = new Cart();
+		}
 		return cart;
 	}
 	
 	@RequestMapping("/shop/viewCart.do")
-	public ModelAndView viewCart(
-			HttpServletRequest request,
+	public ModelAndView viewCart(HttpServletRequest request,
 			@RequestParam(value="page", required=false) String page,
-			@ModelAttribute("sessionCart") Cart cart) 
-			throws Exception {
-		UserSession userSession = 
-			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
+			@ModelAttribute("sessionCart") Cart cart) throws Exception {
+		// view cart item list
+		UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		handleRequest(page, cart, userSession);
 		return new ModelAndView("order/Cart", "cart", cart);
 	}
 
 	@RequestMapping("/shop/checkout.do")
-	public ModelAndView checkout(
-			HttpServletRequest request,
+	public ModelAndView checkout(HttpServletRequest request,
 			@RequestParam(value="page", required=false) String page,
-			@ModelAttribute("sessionCart") Cart cart) 
-			throws Exception {
-		UserSession userSession = 
-			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
+			@ModelAttribute("sessionCart") Cart cart) throws Exception {
+		// checkout orders
+		UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		handleRequest(page, cart, userSession);
 		return new ModelAndView("order/Checkout", "cart", cart);
 	}
 	
-	private void handleRequest(String page, Cart cart, UserSession userSession)
-			throws Exception {
+	// pagination about cart object list
+	private void handleRequest(String page, Cart cart, UserSession userSession) throws Exception {
+		
 		if (userSession != null) {
 			if ("next".equals(page)) {
 				userSession.getMyList().nextPage();

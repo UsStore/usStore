@@ -39,7 +39,6 @@ public class ViewAccountController {
 	@ModelAttribute("accountForm")
 	public AccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
-		System.out.println("formBackingObject");
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
@@ -53,7 +52,6 @@ public class ViewAccountController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForm(Model model, HttpServletRequest rq) {
-		//select from accuse 
 		HttpSession session = rq.getSession(false);
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
 		String victim = userSession.getAccount().getUserId();
@@ -64,7 +62,7 @@ public class ViewAccountController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String goEdit() {
+	public String goEdit() {  // url 바꾸고 GET으로 수정해보기 
 		return "redirect:/shop/editAccount.do";
 	}
 }

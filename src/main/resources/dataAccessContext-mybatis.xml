@@ -29,6 +29,16 @@
 	<!-- Configurer that replaces ${...} placeholders with values from properties files -->
 	<!-- (in this case, mail and JDBC related properties) -->
 	<context:property-placeholder location="classpath:jdbc.oracle.properties" />
+	<!-- 
+	<bean id="propertyConfigurer" 
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.hsqldb.properties</value> 				
+			</list>
+		</property>
+	</bean> 
+	 -->
 	 
 	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
 
@@ -48,6 +58,9 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
+    <!-- enable transaction demarcation with annotations -> refer to applicationContext.xml -->
+	<!-- <tx:annotation-driven /> -->
+
     <!-- define the SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -57,5 +70,9 @@
 
     <!-- scan for mappers and let them be autowired -->
     <mybatis:scan base-package="com.example.usStore.dao.mybatis.mapper" />
-
+    <!-- 
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.usStore.dao.mybatis.mapper" />
+    </bean> 
+    -->
 </beans>

@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <html>
 <head>
 	<title>UsStore</title>
@@ -15,8 +17,8 @@
 	<meta name="description" content="2020-01 소프트웨어 시스템 개발 ">
 	<meta name="author" content="愛+">
 	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/usstore.css?after" type="text/css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css?after" type="text/css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/usstore.css?" type="text/css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css?" type="text/css" />
 	
 	<!-- Bootstrap core JavaScript -->
 	<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
@@ -44,17 +46,16 @@
 	}
 </script>
 <body>
-	<nav class="navbar navbar-light bg-light">
-	
-	  <a class="navbar-brand" href="<c:url value="/shop/index.do"/>">
-	  	<img src="${pageContext.request.contextPath}/images/logo.png" width="200" height="100" alt="UsStore">
-	  </a>
-	  
-	  <ul class="navbar-nav">
-	  	<li class="nav-item active">
-	    	<a class="nav-link" href="#" onclick="goClick();">
-	    		Previous Page
-	    	</a>
-	    </li>
-	  </ul>
-	</nav>
+
+ <nav class="navbar navbar-light" style="background-color: #000000; height: 74px; font-size: 20px;">
+	<ul class="navbar-nav">
+		<li class="nav-item active">
+			<a class="nav-link" href="#" onclick="goClick();">
+				<img border="0" src="${pageContext.request.contextPath}/images/back.png"
+					style="float: left; width: 30; height: 30; border: 0;" /> &nbsp;
+				<font color="white" font-size="10px"> BACK </font>
+			</a>
+		</li>
+	</ul>
+</nav>
+<br>

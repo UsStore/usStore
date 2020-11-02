@@ -1,6 +1,7 @@
 package com.example.usStore.controller.item;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,22 +53,31 @@ public class SecondHandController {
       this.usStoreFacade = usStoreFacade;
    }
 
+   //같은 url에서 pathVariable하나더 추가해서 region을 구분하는코드로 변경하기 
    @RequestMapping("/shop/secondHand/listItem.do")
    public String secondHandList(@RequestParam("productId") int productId, Model model, HttpServletRequest rq) throws Exception {
       /*현재 로그인한 유저가 있다면 그 유저의 대학 필드를 우선적으로 보여주고 
          만약 로그인이 안된 상태에서는 대학 필터링 없이 보여준다.*/
      HttpSession session = rq.getSession(false);
    
-     Account account = null;
+    // Account account = null;
+     String univName = null; //Account에 속한 필드 의미 
      if (session.getAttribute("userSession") != null) {
             UserSession userSession = (UserSession)session.getAttribute("userSession") ;
             if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
-               account = userSession.getAccount();
+            	Account account = userSession.getAccount();
+            	univName = account.getUniversity();
             }
      }
     
+     // 여기서 region은 jsp에서 사용자가 선택한 지역 값 이다. -> select 로 구현 
+//     HashMap<String,String> param = new HashMap<String,String>(2);
+//     param.put("region", value);
+//     param.put("univName", univName);
+//     itemFacade.getSHListByRegion(param);
+     
       PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
-            this.itemFacade.getSecondHandList(account));
+            this.itemFacade.getSecondHandList(univName));
       secondHandList.setPageSize(4);
 
       model.addAttribute("secondHandList", secondHandList);
@@ -106,8 +116,9 @@ public class SecondHandController {
       }
       
       //판매자 대학교 도로명 주소 
-      String university = this.usStoreFacade.getAccountByUserId(attacker).getUniversity();
-    		  
+      String univName = this.usStoreFacade.getAccountByUserId(attacker).getUniversity(); 
+      String univAddr = myPageFacade.getUnivAddrByName(univName);
+      
       List<Tag> tags = itemFacade.getTagByItemId(itemId);
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
       this.itemFacade.updateViewCount(sh.getViewCount() + 1, itemId); //조회수 1증가
@@ -115,7 +126,7 @@ public class SecondHandController {
       model.addAttribute("sh", sh);
       model.addAttribute("isAccuse", isAccuse);
       model.addAttribute("tags", tags);
-      model.addAttribute("university", university);
+      model.addAttribute("university", univAddr);
       return "product/viewSecondHand";
    }
    

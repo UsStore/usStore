@@ -3,7 +3,7 @@
 <mapper namespace="com.example.usStore.dao.mybatis.mapper.SecondHandMapper">
   <cache />
 
- 	<select id="getSecondHandList" resultType="SecondHand">
+ 	<select id="getSecondHandList" parameterType="String" resultType="SecondHand">
 	    SELECT 
 	     	  I.ITEMID,
 		      I.UNITCOST,
@@ -13,15 +13,37 @@
 		      I.QTY,
 		      I.USERID,
 		      I.PRODUCTID,
+		      I.IMGURL,
 	    	  S.DISCOUNT,
 	    	  S.LISTPRICE 
 	    FROM SECONDHAND S, ITEM I, ACCOUNT A
 	    WHERE A.USERID = I.USERID AND S.ITEMID = I.ITEMID
-	    <if test="university != null">
-	    	ORDER BY DECODE ( UNIVERSITY, #{university}, 1)
+	    <if test="value != null">
+	    	ORDER BY DECODE (univName, #{value}, 1)
 	    </if>
 	</select>
 	
+	<select id="getSHListByRegion" parameterType="java.util.Map" resultType="SecondHand">
+	    SELECT 
+	     	  I.ITEMID,
+		      I.UNITCOST,
+		      I.TITLE,
+		      I.DESCRIPTION,
+		      I.VIEWCOUNT,
+		      I.QTY,
+		      I.USERID,
+		      I.PRODUCTID,
+		      I.IMGURL,
+	    	  S.DISCOUNT,
+	    	  S.LISTPRICE 
+	    FROM SECONDHAND S, ITEM I, ACCOUNT A, UNIVERSITY U
+	    WHERE A.USERID = I.USERID AND S.ITEMID = I.ITEMID
+	    	AND U.UNIVNAME = A.UNIVNAME
+	    	AND U.REGION = #{region}
+	     <if test="univName != null">
+	    	ORDER BY DECODE (univName, #{univName}, 1)
+	    </if>
+	</select>
 
 	<resultMap id="tagMap" type="SecondHand">
 		<id  property="itemId" column="ITEMID" jdbcType="NUMERIC"/>
@@ -52,6 +74,7 @@
   		I.QTY,
 		I.USERID,
 		I.PRODUCTID,
+		I.IMGURL,
 		S.DISCOUNT,
 		S.LISTPRICE
 	FROM ITEM I, SECONDHAND S
