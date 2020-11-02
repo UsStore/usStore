@@ -53,7 +53,7 @@ public class SecondHandController {
       this.usStoreFacade = usStoreFacade;
    }
 
-   //같은 url에서 pathVariable하나더 추가해서 region을 구분하는코드로 변경하기 
+   
    @RequestMapping("/shop/secondHand/listItem.do")
    public String secondHandList(@RequestParam("productId") int productId, Model model, HttpServletRequest rq) throws Exception {
       /*현재 로그인한 유저가 있다면 그 유저의 대학 필드를 우선적으로 보여주고 
@@ -86,6 +86,17 @@ public class SecondHandController {
       return "product/secondHand";
    }
 
+   
+   //pathVariable하나더 추가해서 region을 구분하는코드로 변경하기 
+   @RequestMapping("/shop/secondHand/region/{region}")
+   public String filterRegion(@PathVariable String region) {
+	   System.out.println(region);
+	   
+	   return null; 
+   }
+   
+   
+   
    @RequestMapping("/shop/secondHand/listItem2.do")
    public String secondHandList2(@ModelAttribute("secondHandList") PagedListHolder<Item> secondHandList,
          @RequestParam("pageName") String page, @RequestParam("productId") int productId, Model model)
