@@ -15,7 +15,6 @@ import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.dao.mybatis.mapper.SecondHandMapper;
 import com.example.usStore.dao.mybatis.mapper.TagMapper;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.LineItem;
 import com.example.usStore.domain.Orders;

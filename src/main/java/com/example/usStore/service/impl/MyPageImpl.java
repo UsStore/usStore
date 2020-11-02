@@ -59,4 +59,6 @@ public class MyPageImpl implements MyPageFacade {
 	public String getUnivAddrByName(String univName) {
 		return univDao.getUnivAddrByName(univName);
 	}
+
+	
 }
