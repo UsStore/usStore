@@ -1,6 +1,7 @@
 package com.example.usStore.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,8 +188,8 @@ public class ItemImpl implements ItemFacade {
 	}
 	
 	@Override
-	public List<SecondHand> getSecondHandList(Account account) {
-		return secondHandDao.getSecondHandList(account);
+	public List<SecondHand> getSecondHandList(String univName) {
+		return secondHandDao.getSecondHandList(univName);
 	}
 
 	@Override
@@ -196,6 +197,11 @@ public class ItemImpl implements ItemFacade {
 		return secondHandDao.getSecondHandItem(itemId);
 	}
 
+	@Override
+	public List<SecondHand> getSHListByRegion(HashMap<String, String> param) {
+		return secondHandDao.getSHListByRegion(param);
+	}
+	
 	@Override
 	public void insertSecondHand(SecondHand secondHand) {
 		secondHandDao.insertSecondHand(secondHand);
@@ -367,5 +373,7 @@ public class ItemImpl implements ItemFacade {
 	public Review findReviewByuserIdAndItemId(int itemId, String buyer) {
 		return reviewDao.findReviewByuserIdAndItemId(itemId, buyer);
 	}
+
+	
 	
 }
