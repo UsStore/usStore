@@ -1,19 +1,23 @@
 package com.example.usStore.dao.mybatis;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.AccountDao;
 import com.example.usStore.dao.mybatis.mapper.AccountMapper;
+import com.example.usStore.dao.mybatis.mapper.AttendanceMapper;
 import com.example.usStore.domain.Account;
 
+@Transactional
 @Repository
 public class MybatisAccountDao implements AccountDao {
 
 	@Autowired
 	private AccountMapper accountMapper;
+	@Autowired
+	private AttendanceMapper attendanceMapper;
 	
 	public Account getAccountByUserId(String username) throws DataAccessException {
 		return accountMapper.getAccountByUserId(username);
@@ -40,5 +44,12 @@ public class MybatisAccountDao implements AccountDao {
 		{
 			accountMapper.updateAccount(account);
 		}
+	}
+	
+	//포인트 & 날짜 출석 트랜잭션
+	@Override
+	public void updatePoint(String userId, int point) {
+		accountMapper.updatePoint(userId, point);
+		attendanceMapper.insertAttend(userId);
 	}
 }

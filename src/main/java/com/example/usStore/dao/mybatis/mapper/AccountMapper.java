@@ -17,4 +17,7 @@ public interface AccountMapper {
 	
 	// 계정 수정
 	void updateAccount(Account account);
+	
+	//포인트 적립
+	void updatePoint(String userId, int point);
 }

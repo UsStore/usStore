@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.SecondHand;
 
 

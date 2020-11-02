@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.usStore.dao.mybatis.mapper.AttendanceMapper">
+  <cache />
+
+	<insert id="insertAttend">
+		<selectKey keyProperty="attendId" resultType="int" order="BEFORE">
+				SELECT attendId_seq.nextval AS attendId FROM DUAL
+		</selectKey> 
+		INSERT INTO ATTENDANCE
+		(ATTENDID, USERID, ATTENDDATE)
+		VALUES(#{attendId}, #{userId}, to_date(sysdate,'yyyy-mm-dd'));
+	</insert>
+	
+	<select id="getCalendarByDate" resultType="Attendance">
+		SELECT T.ATTENDID, T.USERID, T.ATTENDDATE
+		FROM ATTENDANCE T, ACCOUNT A
+		WHERE T.USERID = A.USERID
+	</select>
+	 
+  </mapper>

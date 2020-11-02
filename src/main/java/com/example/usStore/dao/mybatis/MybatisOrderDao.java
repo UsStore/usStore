@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.OrderDao;
-import com.example.usStore.dao.SequenceDao;
 import com.example.usStore.dao.mybatis.mapper.LineItemMapper;
 import com.example.usStore.dao.mybatis.mapper.OrderMapper;
 import com.example.usStore.domain.LineItem;
