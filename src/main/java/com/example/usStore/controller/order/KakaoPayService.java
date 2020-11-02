@@ -19,7 +19,7 @@ import lombok.extern.java.Log;
 @Service
 @Log
 @SessionAttributes({"sessionCart", "orderForm"})
-public class Kakaopay {
+public class KakaoPayService {
  
     private static final String HOST = "https://kapi.kakao.com";
     
@@ -57,9 +57,9 @@ public class Kakaopay {
         params.add("quantity", quantity);
         params.add("total_amount", total_amount);
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/usStore/shop/kakaoPaySuccess.do");
-        params.add("cancel_url", "http://localhost:8080/usStore/shop/kakaoPayCancel.do");
-        params.add("fail_url", "http://localhost:8080/usStore/shop/kakaoPaySuccessFail.do");
+        params.add("approval_url", "http://localhost:8089/usStore/shop/kakaoPaySuccess.do");
+        params.add("cancel_url", "http://localhost:8089/usStore/shop/kakaoPayCancel.do");
+        params.add("fail_url", "http://localhost:8089/usStore/shop/kakaoPaySuccessFail.do");
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
  
