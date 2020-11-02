@@ -77,8 +77,10 @@ public class OrderController {
 			@ModelAttribute("sessionCart") Cart cart,
 			@ModelAttribute("orderForm") OrderForm orderForm) throws ModelAndViewDefiningException {
 		
+		// restore orderForm in session
 		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
 		request.setAttribute("orderForm", orderForm);
+		
 		if (cart != null) {
 			// Re-read account from DB at team's request.
 			Account account = usStore.getAccountByUserId(userSession.getAccount().getUserId());
@@ -92,12 +94,11 @@ public class OrderController {
 		}
 	}
 	
-	// process 변경 필요.
+	
 	@RequestMapping("/shop/newOrderSubmitted.do")
 	public String bindAndValidateOrder(HttpServletRequest request,
 			@ModelAttribute("orderForm") OrderForm orderForm, BindingResult result) {
-		
-		System.out.println("여기다....?");
+
 		
 		if (orderForm.didShippingAddressProvided() == false) {	
 			// from NewOrderForm
@@ -125,21 +126,17 @@ public class OrderController {
 
     @RequestMapping("/shop/kakaoPay.do")
     public String kakaoPay(HttpServletRequest request, @ModelAttribute("orderForm") OrderForm orderForm) {
-    	System.out.println("kakaopay");
-        log.info("kakaoPay post............................................");
+        log.info("kakaoPay.do");
         HttpSession session = request.getSession();
+        
         return "redirect:" + kakaopay.kakaoPayReady(session, orderForm);
- 
     }
     
     @RequestMapping("/shop/kakaoPaySuccess.do")
     public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
-        log.info("kakaoPaySuccess get............................................");
-        log.info("kakaoPaySuccess pg_token : " + pg_token);
-        
+        log.info("kakaoPaySuccess pg_token : " + pg_token);        
         KakaoPayApproval kakaopayApproval = kakaopay.kakaoPayInfo(pg_token);
-        log.info(kakaopayApproval.toString());
-        
+
         return "redirect:/shop/newOrder.do?payFlag=success";
     }
     
@@ -147,16 +144,13 @@ public class OrderController {
     @RequestMapping("/shop/kakaoPaySuccessFail.do")
     public String kakaoPaySuccessFail() {
         log.info("kakaoPaySuccessFail");
-        log.info("kakaoPaySuccessFail");
-        
         return "redirect:/shop/newOrder.do?payFlag=fail";
     }
     
     // 카카오페이 결제 취소시
     @RequestMapping("/shop/kakaoPayCancel.do")
     public String kakaoPayCancel() {
-        log.info("kakaoPayCancel get");
-
+        log.info("kakaoPayCancel");
         return "redirect:/shop/newOrder.do?payFlag=cancel";
     }
     
