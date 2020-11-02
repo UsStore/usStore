@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -132,8 +130,7 @@ public class OrderController {
     }
     
     @RequestMapping("/shop/kakaoPaySuccess.do")
-    public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpServletRequest request,
-			@ModelAttribute("orderForm") OrderForm orderForm) {
+    public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         
@@ -142,6 +139,22 @@ public class OrderController {
         
         return "redirect:/shop/newOrder.do";
     }
+    
+    @RequestMapping("/shop/kakaoPaySuccessFail.do")
+    public String kakaoPaySuccessFail() {
+        log.info("kakaoPaySuccessFail get............................................");
+        log.info("kakaoPaySuccessFail");
+        
+        return "redirect:/shop/newOrder.do";
+    }
+    
+    @RequestMapping("/shop/kakaoPayCancel.do")
+    public String kakaoPayCancel() {
+        log.info("kakaoPayCancel get............................................");
+
+        return "redirect:/shop/newOrder.do";
+    }
+    
     
 	// 카카오페이 결제 완료 후 이 컨트롤러로 넘기면 될듯.
 	@RequestMapping("/shop/confirmOrder.do")
