@@ -17,16 +17,16 @@
 			<div class="form-label-group">
 				<!-- form:input value에 api에서 구한 대학교 이름이 제대로 자동으로 들어가야함   -->
 				<c:if test="${accountForm.newAccount}">
-				        <form:input path="account.university" id="inputUniversity" value="${accountForm.account.university}" class="form-control" />
+				        <form:input path="account.university" id="inputUniversity" readonly="true" value="${accountForm.account.university}" class="form-control" />
 						<B><form:errors path="account.university" cssClass="error" /></B>
 				</c:if> 
 				<c:if test="${!accountForm.newAccount}">
-				          <form:input path="account.university" id="inputUniversity" value="${accountForm.account.university}" class="form-control" />
+				          <form:input path="account.university" id="inputUniversity" readonly="true" value="${accountForm.account.university}" class="form-control" />
 				</c:if>
 				
 				<!-- <button class="btn btn-lg btn-light btn-block text-uppercase" type="button">대학 찾기</button> -->
-				<!-- <button id="buttonApi" onclick="popup();">대학교 찾기</button> -->
-				<input type="button" value="대학교 찾기" onclick="popup();">
+				<button id="button" onclick="popup();">대학교 찾기</button>
+			<!-- 	<input type="button" value="대학교 찾기" onclick="popup();"> -->
 				<script>
 			        function popup(){
 			            var url = "/usStore/searchUniv.do";
