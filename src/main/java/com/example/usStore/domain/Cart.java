@@ -43,6 +43,7 @@ public class Cart implements Serializable {
 			cartItem.setItem(item);
 			cartItem.setQuantity(0);
 			cartItem.setInStock(isInStock);
+			cartItem.setTitle(item.getTitle());
 			itemMap.put(item.getItemId(), cartItem);
 			itemList.getSource().add(cartItem);
 		}

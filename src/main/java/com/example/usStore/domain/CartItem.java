@@ -14,6 +14,7 @@ public class CartItem implements Serializable {
 	private int quantity;
 	private boolean inStock;
 	private int orderId;
+	private String title;
 	
 	/* JavaBeans Properties */
 
@@ -49,6 +50,14 @@ public class CartItem implements Serializable {
 		this.orderId = orderId;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	public double getTotalPrice() {
 		if (item != null) {
 			return item.getUnitCost() * quantity;
@@ -56,6 +65,8 @@ public class CartItem implements Serializable {
 			return 0;
 		}
 	}
+	
+	
 
 	/* Public methods */
 
