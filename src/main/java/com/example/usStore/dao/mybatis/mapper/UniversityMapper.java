@@ -9,6 +9,7 @@ public interface UniversityMapper {
 	University getUnivByName(String univNameU);
 	
 	void insertUniv(University university);
-	 
+	
+	String getUnivAddrByName(String univName);
 
 }

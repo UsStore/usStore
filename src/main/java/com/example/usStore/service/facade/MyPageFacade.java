@@ -19,9 +19,10 @@ public interface MyPageFacade {
 	/////////////////////////////////////////////////////////////////////////
 	/* University */
 	/////////////////////////////////////////////////////////////////////////
-	University getUnivByName(String univNameU);
+	University getUnivByName(String univName);
 	
 	void insertUniv(University university);
-	 
+	
+	String getUnivAddrByName(String univName);
 	
 }

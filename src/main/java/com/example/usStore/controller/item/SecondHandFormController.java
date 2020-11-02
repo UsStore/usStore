@@ -31,7 +31,7 @@ import com.example.usStore.service.facade.ItemFacade;
 @Controller /* SecondHandForm 커맨드 객체를 관리하는 컨트롤러 */
 @SessionAttributes("secondHandForm")
 public class SecondHandFormController {
-   
+	
    private ItemFacade itemFacade;
    
    @Autowired

@@ -46,12 +46,17 @@ public class MyPageImpl implements MyPageFacade {
 	}
 
 	@Override
-	public University getUnivByName(String univNameU) {
-		return univDao.getUnivByName(univNameU);
+	public University getUnivByName(String univName) {
+		return univDao.getUnivByName(univName);
 	}
 
 	@Override
 	public void insertUniv(University university) {
 		univDao.insertUniv(university);
+	}
+
+	@Override
+	public String getUnivAddrByName(String univName) {
+		return univDao.getUnivAddrByName(univName);
 	}
 }

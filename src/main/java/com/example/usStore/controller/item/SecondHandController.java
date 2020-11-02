@@ -106,8 +106,9 @@ public class SecondHandController {
       }
       
       //판매자 대학교 도로명 주소 
-      String university = this.usStoreFacade.getAccountByUserId(attacker).getUniversity();
-    		  
+      String univName = this.usStoreFacade.getAccountByUserId(attacker).getUniversity(); 
+      String univAddr = myPageFacade.getUnivAddrByName(univName);
+      
       List<Tag> tags = itemFacade.getTagByItemId(itemId);
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
       this.itemFacade.updateViewCount(sh.getViewCount() + 1, itemId); //조회수 1증가
@@ -115,7 +116,7 @@ public class SecondHandController {
       model.addAttribute("sh", sh);
       model.addAttribute("isAccuse", isAccuse);
       model.addAttribute("tags", tags);
-      model.addAttribute("university", university);
+      model.addAttribute("university", univAddr);
       return "product/viewSecondHand";
    }
    

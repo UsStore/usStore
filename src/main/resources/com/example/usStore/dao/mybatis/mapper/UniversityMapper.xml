@@ -9,6 +9,12 @@
     WHERE univName = #{univName}
   </select>
  
+  <select id="getUnivAddrByName" resultType="String">
+  	select univAddr
+	from university
+	where univName=#{univName}
+  </select>
+ 
   <insert id="insertUniv" parameterType="University">
   	<selectKey keyProperty="isExistUniv" resultType="int" order="BEFORE">
   		select count(univName)
