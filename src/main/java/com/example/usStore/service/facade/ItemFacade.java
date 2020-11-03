@@ -57,8 +57,10 @@ public interface ItemFacade {
    
    public void updateHandMade(HandMade handmade);
    
-   List<HandMade> getHandMadeList(Account account);
+   List<HandMade> getHandMadeList(String univName);
    
+   public List<HandMade> getHMListByRegion(HashMap<String, String> param);
+
    HandMade getHandMadeById(int itemId);
    
    List<HandMade> getHandMadeListByProductId(int productId);
@@ -70,7 +72,9 @@ public interface ItemFacade {
    
    public void updateGroupBuying(GroupBuying GroupBuying);
    
-   List<GroupBuying> getGroupBuyingList(Account account);
+   List<GroupBuying> getGroupBuyingList(String univName);
+   
+   public List<GroupBuying> geGBListByRegion(HashMap<String, String> param);
    
    GroupBuying getGroupBuyingItem(int itemId);
    
@@ -97,7 +101,9 @@ public interface ItemFacade {
    /////////////////////////////////////////////////////////////////////////
    /* Auction */
    /////////////////////////////////////////////////////////////////////////
-   List<Auction> getAuctionList(Account account);
+   List<Auction> getAuctionList(String univName);
+   
+   public List<Auction> getACListByRegion(HashMap<String, String> param);
    
    public void insertAuction(Auction auction);
     
