@@ -15,7 +15,7 @@
 		WHERE T.USERID = A.USERID AND T.USERID = #{userId}
 	</select>
 	
-	<select id="getCalendarByDate">
+	<select id="getCalendarByDate" resultType="String">
 		SELECT ATTENDDATE
 		FROM ATTENDANCE
 		WHERE USERID = #{userId}
