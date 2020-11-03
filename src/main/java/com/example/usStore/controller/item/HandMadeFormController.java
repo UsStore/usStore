@@ -84,7 +84,7 @@ public class HandMadeFormController {
 
 		PagedListHolder<HandMade> handMadeList = new PagedListHolder<HandMade>(
 				this.itemFacade.getHandMadeList(account));
-		handMadeList.setPageSize(4);
+		handMadeList.setPageSize(8);
 
 		model.put("handMadeList", handMadeList);
 		model.put("productId", productId);

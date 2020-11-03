@@ -29,11 +29,12 @@
 		});
 	};
 </script>
-<div align="center" width="500">
+<div align="center" style="padding: 30px;">
   <p>
     <h2>My Order</h2>
   </p>
- 
+</div>
+ <div align="center" style="padding: 30px;">
   <!-- REST API 내용 부분 -->
   <table>
 	<tr>
@@ -43,8 +44,8 @@
 	</tr>
   </table>
 
-  <table class="table table-hover">
-    <tr bgcolor="#CCCCCC">
+  <table class="table" style="width: 80%;'">
+    <tr bgcolor="#40BEA7">
       <th scope="col">Order ID</th> 
       <th scope="col">Date</th> 
       <th scope="col">Total Price</th>

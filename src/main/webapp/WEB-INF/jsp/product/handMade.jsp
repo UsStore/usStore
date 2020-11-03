@@ -1,85 +1,95 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="itemTop.jsp"%>
-<style>
-	th, td {
-		text-align: center;
-		height: 70px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-</style>
-<form name="pform" action="" style="position: absolute; left: 45%; margin: 0 0 0 -420px;">
-	<div class="container">
-		<div class="row" style="display: inline">
-			<div style="display: inline; float: left;">
-				<div style="font-size: 15px">
-					<h2>HandMade List</h2>
-					<p style="text-align: right;">
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="ItemHeader.jsp"%>
+
+<form name="pform" action="">
+	<div class="featured-items">
+		<div class="container">
+			<div class="row" style="padding: 10px">
+				<ul class="nav nav-tabs nav-product-tabs">
+					<li class="active">
+						<a href="#trending" data-toggle="tab">
+							<font size="5">HandMade List</font></a>
+					</li>
+					<li class="pull-right collection-url">
 						<a href="<c:url value='/shop/item/addItem.do'>
-		               		<c:param name="productId" value="${productId}"/></c:url>">
-		               		수공예  판매하기 </a>
-					</p>
-					<!-- 로그인 여부 인터셉터로 이동 -->
-					<hr>
-					<table>
-						<tr>
-							<th>제품명</th>
-							<th>가격</th>
-							<th>판매자</th>
-							<th>구매 가능 여부</th>
-							<th>&nbsp;</th>
-						</tr>
-						<tbody>
-							<c:forEach var="item" items="${handMadeList.pageList}">
-								<tr style="height: 70px;">
-									<td>
+		               			<c:param name="productId" value="${productId}"/></c:url>">
+							<font size="5">수공예 판매하기 </font></a>
+					</li>
+				</ul>
+				<!-- 로그인 여부 인터셉터로 이동 -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="trending">
+						<c:forEach var="item" items="${handMadeList.pageList}">
+							<!--repeat part -->
+							<div class="col-md-3 col-sm-4" style="padding: 10px">
+								<div class="single-product">
+									<div class="product-block">
+										
+										<c:if test="${item.imgUrl eq null}">
+											<img src="${pageContext.request.contextPath}/images/logo.png" alt="" class="thumbnail" width="350" height="230" style="padding:20px">
+										</c:if>
+										<c:if test="${item.imgUrl ne null}">
+											<img src="getImage.do?itemId=${item.itemId}" width="350" height="230" style="padding:20px" onerror="this.src='${pageContext.request.contextPath}/images/logo.png'" />
+										</c:if>
+
 										<a href="<c:url value='/shop/handMade/viewItem.do'>
 			                               			<c:param name="productId" value="${item.productId}"/>
 				                                	<c:param name="itemId" value="${item.itemId}"/>
-	                                			</c:url>"> <font>${item.title}</font>
+	                                			</c:url>"> 
+											<div class="product-description" style="padding: 10px">
+	
+												<p class="title">제품명 : ${item.title}</p>
+												<p class="user">판매자 : ${item.userId}</p>
+												<hr>
+												<p class="price" align="right">${item.unitCost}원</p>
+											</div>
 										</a>
-									</td>
-									<td>${item.unitCost}원</td>
-									<td>${item.userId}</td>
-									<c:if test="${item.qty > 0}">
-										<td>${item.qty}</td>
-										<td><a href='<c:url value="/shop/addItemToCart.do">
-					            				<c:param name="workingItemId" value="${item.itemId}"/>
-					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
-					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td> 
-									</c:if>
-									<c:if test="${item.qty <= 0}">
-										<td><button type="button" class="btn btn-outline-danger">품절</button></td>
-									</c:if>
-								</tr>
-							</c:forEach>
-						</tbody>
-						<!-- 페이지 구분  -->
-						<tr>
-							<td colspan="2">
-								<c:if test="${!handMadeList.firstPage}">
-									<a href='<c:url value="/shop/handMade/listItem2.do">
-											<c:param name="productId" value="${productId}"/>
-	           								<c:param name="pageName" value="previous"/></c:url>'>
-										<font color="black"><B>&lt;&lt; Prev</B></font>
-									</a>
-								</c:if>
-							</td>
-							<td colspan="2">
-								<c:if test="${!handMadeList.lastPage}">
-									<a href='<c:url value="/shop/handMade/listItem2.do">/>
-											 <c:param name="productId" value="${productId}"/>
-	            							 <c:param name="pageName" value="next"/></c:url>'>
-										<font color="black"><B>Next &gt;&gt;</B></font>
-									</a>
-								</c:if>
-							</td>
-						</tr>
-					</table>
+										<div class="product-hover">
+											<ul>
+												<li><a href="<c:url value="/shop/addItemToCart.do">
+													         <c:param name="workingItemId" value="${item.itemId}"/>
+													         <c:param name="productId" value="${item.productId}"/></c:url>">
+													 <i class="fa fa-cart-arrow-down"></i></a>
+												</li>
+												<li><a href="<c:url value='/shop/handMade/viewItem.do'>
+			                               			<c:param name="productId" value="${item.productId}"/>
+				                                	<c:param name="itemId" value="${item.itemId}"/>
+	                                			</c:url>"> <i class="fa fa-arrows-h"></i></a></li>
+												<li><a href=""><i class="fa fa-heart-o"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--repeat part -->
+
+							</tr>
+						</c:forEach>
+					</div>
 				</div>
+				<!-- 페이지 구분  -->
 			</div>
 		</div>
 	</div>
-	<br>
-	<br>
+	
+	<div align="center">
+		<div style="padding: 30px; width: 150px; height: 150px;">
+			<c:if test="${!handMadeList.firstPage}">
+				<a href='<c:url value="/shop/handMade/listItem2.do">
+						<c:param name="productId" value="${productId}"/>
+						<c:param name="pageName" value="previous"/></c:url>'>
+					<img src="${pageContext.request.contextPath}/images/backpage.png" width="20" height="50"/><font size="5">BACK </font>
+				</a>
+			</c:if>		
+			<c:if test="${!handMadeList.lastPage}">
+				<a href='<c:url value="/shop/handMade/listItem2.do">/>
+						<c:param name="productId" value="${productId}"/>
+			            <c:param name="pageName" value="next"/></c:url>'>
+			        <img src="${pageContext.request.contextPath}/images/nextpage.png" width="20" height="50"/><font size="5">NEXT </font>
+				</a>
+			</c:if>			
+		</div>
+	</div>
 </form>
+
+<%@ include file="../IndexBottom.jsp"%>
