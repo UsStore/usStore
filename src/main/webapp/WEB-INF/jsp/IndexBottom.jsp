@@ -37,13 +37,13 @@
                         <h2 class="widget-title">Dev Tools</h2>
 	
 						<div class="col-md-4 col-sm-2">
-                        	<img src="${pageContext.request.contextPath}/images/github.png" alt="github">
+                        	<img id="bottomImg" src="${pageContext.request.contextPath}/images/github.png" alt="github">
 						</div>
 						<div class="col-md-4 col-sm-2">
-							<img src="${pageContext.request.contextPath}/images/notion.png" alt="notion">
+							<img id="bottomImg" src="${pageContext.request.contextPath}/images/notion.png" alt="notion">
 						</div>
 						<div class="col-md-4 col-sm-2">
-							<img src="${pageContext.request.contextPath}/images/youtube.png"alt="youtube">	
+							<img id="bottomImg" src="${pageContext.request.contextPath}/images/youtube.png"alt="youtube">	
 						</div>
                     </div>
 

@@ -44,6 +44,7 @@
 </script>
 </head>
 <body>
+	<input type="button" name="exit" onClick="window.close();" value="닫기" style="float: right;"/>
 	<form action="/usStore/api/university.do" method="post">
 	    <div>
 	      <label>지역</label> 
@@ -94,13 +95,8 @@
 	                  </c:forEach>
 	            </tbody>
 	        	</table>
-	        	<!-- <div id="confirmDiv" >
-					<input type="button" name="confirm" id="confirmButton" value="확인" onclick="setConfirm();"/> 
-				</div> -->
         </c:if>
 	    </div>
 	</form>
-
-	<input type="button" name="exit" onClick="window.close();" value="닫기"/>
 </body>
 </html>
