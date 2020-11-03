@@ -75,7 +75,7 @@ public class GroupBuyingFormController {
 	  }
 	  
       PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(account));
-      groupBuyingList.setPageSize(4);	//페이지 넘김 처리
+      groupBuyingList.setPageSize(8);	//페이지 넘김 처리
       
       for(GroupBuying groupBuying : itemFacade.getGroupBuyingList(account)) {	//만일 재고가 0인 상품이 있을경우, 공동구매 진행 마감
 	      if(groupBuying.getQty() == 0) { itemFacade.soldOutGroupBuying(groupBuying.getItemId());  }
