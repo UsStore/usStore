@@ -68,9 +68,8 @@ public class MybatisAuctionDao implements AuctionDao {
    }
 
    @Override
-   public List<Auction> getAuctionList(Account account) throws DataAccessException {
-      // TODO Auto-generated method stub
-      return auctionMapper.getAuctionList(account);
+   public List<Auction> getAuctionList(String unuvName) throws DataAccessException {
+      return auctionMapper.getAuctionList(unuvName);
    }
 
    @Override
@@ -166,5 +165,10 @@ public class MybatisAuctionDao implements AuctionDao {
 	
 	public List<Item> getItemByTitle(String title) {
 		return auctionMapper.getItemByTitle("%" + title.toLowerCase() + "%");
+	}
+
+	@Override
+	public List<Auction> getACListByRegion(HashMap<String, String> param) throws DataAccessException {
+		return auctionMapper.getACListByRegion(param);
 	}
 }

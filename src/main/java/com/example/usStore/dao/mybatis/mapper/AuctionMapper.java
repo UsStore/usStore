@@ -12,7 +12,9 @@ import com.example.usStore.domain.Item;
 public interface AuctionMapper extends ItemMapper {
 	
 	// select Auction
-	List<Auction> getAuctionList(Account account);
+	List<Auction> getAuctionList(String univName);
+	
+	public List<Auction> getACListByRegion(HashMap<String, String> param);
 
 	// insert Auction
 	public void insertAuction(Auction auction);
