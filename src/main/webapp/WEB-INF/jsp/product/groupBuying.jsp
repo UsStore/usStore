@@ -37,6 +37,7 @@
 <body>    
    <form name = "pform" action="" style="position:absolute; left:42%; margin:0 0 0 -400px;">
       <div class="container" >
+      <%@ include file="filterRegion.jsp"%>
          <div class="row"  style="display:inline">
             <div style="display:inline;float:left;">
                <div style="font-size:15px">
