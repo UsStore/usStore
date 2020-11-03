@@ -3,7 +3,7 @@
 <mapper
 	namespace="com.example.usStore.dao.mybatis.mapper.AuctionMapper">
 	<cache />
-	<select id="getAuctionList" resultType="Auction">
+	<select id="getAuctionList" parameterType="String" resultType="Auction">
 		SELECT
 			I.ITEMID,
 			I.UNITCOST,
@@ -20,9 +20,32 @@
 			A.BIDPRICE
 		FROM AUCTION A, ITEM I, ACCOUNT AC
 		WHERE AC.USERID = I.USERID AND A.ITEMID = I.ITEMID
-		<if test="university != null">
-			ORDER BY DECODE ( univName, #{university}, 1)
-		</if>
+		<if test="value != null">
+	    	ORDER BY DECODE (univName, #{value}, 1)
+	    </if>
+	</select>
+	
+	<select id="getACListByRegion"  parameterType="java.util.Map" resultType="Auction">
+		SELECT
+			I.ITEMID,
+			I.UNITCOST,
+			I.TITLE,
+			I.DESCRIPTION,
+			I.VIEWCOUNT,
+			I.QTY,
+			I.USERID,
+			I.PRODUCTID,
+			I.IMGURL,
+			A.AUCTIONSTATE,
+			A.DEADLINE,
+			A.STARTPRICE,
+			A.BIDPRICE
+		FROM AUCTION A, ITEM I, ACCOUNT AC, UNIVERSITY U
+		WHERE AC.USERID = I.USERID AND A.ITEMID = I.ITEMID
+			AND U.REGION = #{region}
+	     <if test="univName != null">
+	    	ORDER BY DECODE (univName, #{univName}, 1)
+	    </if>
 	</select>
 
 	<insert id="insertAuction" parameterType="Auction">
