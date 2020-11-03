@@ -91,7 +91,7 @@ public class AuctionFormController {
       al = this.itemFacade.getAuctionList(account);
       
       PagedListHolder<Auction> auctionList = new PagedListHolder<Auction>(al);
-      auctionList.setPageSize(4);
+      auctionList.setPageSize(8);
       
       //낙찰자 리스트 구하기 (jsp 에서는 경매가 종료된(auctionState = 1) 상태여야 bidder 을 보여줄 수 있게 해야한다.
       List<Bidder> bidderList = new ArrayList<Bidder>();
@@ -118,7 +118,7 @@ public class AuctionFormController {
       }
       
       PagedListHolder<Bidder> resultBidder = new PagedListHolder<Bidder>(bl);
-      resultBidder.setPageSize(4);    
+      resultBidder.setPageSize(8);    
       
       model.addAttribute("productId", productId);
       model.addAttribute("auctionList", auctionList);

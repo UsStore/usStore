@@ -1,126 +1,116 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="itemTop.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<% request.setCharacterEncoding("UTF-8"); %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="ItemHeader.jsp"%>
+<!-- db에서 select 결과 보여주는 페이지 -->
+<form name="pform" action="">
+	<div class="featured-items">
+		<div class="container">
+			<div class="row" style="padding: 10px">
+				<ul class="nav nav-tabs nav-product-tabs">
+					<li class="active">
+						<a href="#trending" data-toggle="tab">
+							<font size="5">SecondHand List</font></a>
+					</li>
+					<li class="pull-right collection-url">
+						<a href="<c:url value='/shop/item/addItem.do'>
+		               			<c:param name="productId" value="${productId}"/></c:url>">
+							<font size="5">중고거래 물품 판매하기</font></a>
+					</li>
+				</ul>
+				<!-- 로그인 여부 인터셉터로 이동 -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="trending">
+						<c:forEach var="item" items="${secondHandList.pageList}">  
+							<!--repeat part -->
+							<div class="col-md-3 col-sm-4" style="padding: 10px">
+								<div class="single-product">
+									<div class="product-block">
+										
+										<c:if test="${item.imgUrl eq null}">
+											<img src="${pageContext.request.contextPath}/images/picture.png" class="thumbnail" alt="">
+										</c:if>
+										<c:if test="${item.imgUrl ne null}">
+											<img src="getImage.do?itemId=${item.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
+										</c:if>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>중고거래 게시물 목록</title>
-<style>
-			th, td {
-			    text-align: center;
-			    height:70px;
-			    padding-left:50px;
-			    padding-right:50px;
-			}
-</style>
-</head>
-<body>
-   <!-- db에서 select 결과 보여주는 페이지 -->
-   <form name = "pform" action="" style="position:absolute; left:45%; margin:0 0 0 -420px;">
-      <div class="container" >
-         <div class="row"  style="display:inline">
-            <div style="display:inline;float:left;">
-               <div style="font-size:15px">
-                  <h2>
-                     SecondHand List
-                  </h2>
-                    <p style="text-align:right;">
-	                   	<a href="<c:url value='/shop/item/addItem.do'>
-	                       <c:param name="productId" value="${productId}"/></c:url>">중고거래 물품 판매하기
-	                  	</a>
-					</p>		
-	                <div>    
-	                  	<p style="text-align:right;">
-					      <label>지역별 게시물</label> 
-					      <select id="region" name="region" onchange="location.href=this.value">
-					      	<option value="선택하세요">선택하세요</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=서울특별시">서울특별시</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=부산광역시">부산광역시</option> 
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=인천광역시">인천광역시</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=대전광역시">대전광역시</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=대구광역시">대구광역시</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=울산광역시">울산광역시</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=광주광역시">광주광역시</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경기도">경기도</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=강원도">강원도</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=충청북도">충청북도</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=충청남도">충청남도</option>
-					        <option value="/usStore/shop/secondHand/listItem.do?productId=2&region=전라북도">전라북도</option>
-					        <option value="/usStore/shop/secondHand/listItem.do?productId=2&region=전라남도">전라남도</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경상북도">경상북도</option>
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경상남도">경상남도</option>	      	
-					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=제주특별자치도">제주도</option>
-					      </select>
-						</p>	
-			  	   </div>	
-                  <hr>                                
-				<table>
-   				<tr>
-   					<th>제목</th>
-   					<th>흥정 가능 여부</th>
-   					<th>정가</th>
-   					<th>판매가</th>
-   					<th>&nbsp;</th>
-   				</tr>
-  				<tbody> 
-	    			<c:forEach var="item" items="${secondHandList.pageList}">
-		      			<tr style="height:70px;">
-		         		<td>
-                                <a href="<c:url value='/shop/secondHand/viewItem.do'>
-                                    <c:param name="itemId" value="${item.itemId}"/>
-                                    <c:param name="productId" value="${productId}"/>
-                                         </c:url>">
-                                      <font style="padding-left:30px"><c:out value="${item.title}"/></font>
-                                </a>
-                   		</td>
-		         		<c:choose>
-	   					 	<c:when test="${item.discount eq 1}">
-							        <td style="padding-left:120px"><c:out value="에눌 가능" /></td> 
-							</c:when>
-							<c:otherwise>
-							 		<td style="padding-left:120px"> <c:out value="에눌 불가능" /></td> 
-						    </c:otherwise>
-						</c:choose>
-				 		<td><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>              
-						<td><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>
-		      			<td><a href='<c:url value="/shop/addItemToCart.do">
-					            				<c:param name="workingItemId" value="${item.itemId}"/>
-					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
-					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td>
-						</tr>
-	     			</c:forEach></tbody>
-	     			
-	     			 <tr>
-      					<td style="text-align: left;">
-        					<c:if test="${!secondHandList.firstPage}">
-          					<a href='<c:url value="/shop/secondHand/listItem2.do">
-	           								<c:param name="pageName" value="previous"/>
-	           								<c:param name="productId" value="${productId}"/>
-	           								</c:url>'> 
-	           					<font color="black"><B>&lt;&lt; Prev</B></font>
-        					</a>
-        					</c:if></td><td/><td/>
-        						<td style="text-align: right;">
-								<c:if test="${!secondHandList.lastPage}">
-									<a href='<c:url value="/shop/secondHand/listItem2.do">/>
-	            							 	<c:param name="pageName" value="next"/>
-	            							 	<c:param name="productId" value="${productId}"/>
-	            							 </c:url>'>
-										<font color="black"><B>Next &gt;&gt;</B></font>
-									</a>
-								</c:if>
-							</td>
-    				</tr>
-                </tbody>
-                  </table>
-               </div>
-            </div>
-         </div>
-      </div>
-   </form>
-</body>
-</html>
+										<a href="<c:url value='/shop/secondHand/viewItem.do'>
+			                               			<c:param name="productId" value="${item.productId}"/>
+				                                	<c:param name="itemId" value="${item.itemId}"/>
+	                                			</c:url>"> 
+											<div class="product-description" style="padding: 10px">
+
+												<p class="title">제품명 : ${item.title}</p>
+												<hr>
+												<p class="price" align="right">
+													정가 : 
+													<fmt:formatNumber value="${item.listPrice}" pattern="###,###원" />
+												</p>
+												<p class="price" align="right">
+													판매가 : 
+													<fmt:formatNumber value="${item.unitCost}" pattern="###,###원" />
+												</p>
+												<p class="discount" align="right">
+													흥정 가능 여부 : 
+													<c:choose>
+								   					 	<c:when test="${item.discount eq 1}">
+														        <td style="padding-left:120px"><c:out value="에눌 가능" /></td> 
+														</c:when>
+														<c:otherwise>
+														 		<td style="padding-left:120px"> <c:out value="에눌 불가능" /></td> 
+													    </c:otherwise>
+													</c:choose>
+												</p>
+												
+											</div>
+										</a>
+										<div class="product-hover">
+											<ul>
+												<li><a href="<c:url value="/shop/addItemToCart.do">
+													         <c:param name="workingItemId" value="${item.itemId}"/>
+													         <c:param name="productId" value="${item.productId}"/></c:url>">
+													 <i class="fa fa-cart-arrow-down"></i></a>
+												</li>
+												<li><a href="<c:url value='/shop/secondHand/viewItem.do'>
+			                               			<c:param name="productId" value="${item.productId}"/>
+				                                	<c:param name="itemId" value="${item.itemId}"/>
+	                                			</c:url>"> <i class="fa fa-arrows-h"></i></a></li>
+												<li><a href=""><i class="fa fa-heart-o"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--repeat part -->
+
+							</tr>
+						</c:forEach>
+					</div>
+				</div>
+				<!-- 페이지 구분  -->
+			</div>
+		</div>
+	</div>
+	
+	<div align="center">
+		<span style="padding: 30px; width: 50px; height: 50px;">
+			<c:if test="${!secondHandList.firstPage}">
+				<a href='<c:url value="/shop/secondHand/listItem2.do">
+						<c:param name="productId" value="${productId}"/>
+						<c:param name="pageName" value="previous"/></c:url>'>
+					<font size="5">BACK </font>
+					<img src="${pageContext.request.contextPath}/images/backpage.png" width="40" height="50"/>
+				</a>
+			</c:if>	
+		</span>
+		<span style="padding: 30px; width: 50px; height: 50px;">	
+			<c:if test="${!secondHandList.lastPage}">
+				<a href='<c:url value="/shop/secondHand/listItem2.do">/>
+						<c:param name="productId" value="${productId}"/>
+			            <c:param name="pageName" value="next"/></c:url>'>
+			        <img src="${pageContext.request.contextPath}/images/nextpage.png" width="40" height="50"/><font size="5">NEXT </font>
+				</a>
+			</c:if>			
+		</span>
+	</div>
+</form>
+
+<%@ include file="../IndexBottom.jsp"%>
