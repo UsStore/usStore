@@ -25,6 +25,7 @@
 <form name="pform" action="">
 	<div class="featured-items">
 		<div class="container">
+		<%@ include file="filterRegion.jsp"%>
 			<div class="row" style="padding: 10px">
 				<ul class="nav nav-tabs nav-product-tabs">
 					<li class="active">
