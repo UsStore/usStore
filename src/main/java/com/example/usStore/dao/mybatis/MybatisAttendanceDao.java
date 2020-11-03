@@ -21,7 +21,11 @@ public class MybatisAttendanceDao implements AttendanceDao {
 		attendanceMapper.insertAttend(userId);
 	}
 
-	public List<Attendance> getCalendarByDate(String userId) {
+	public List<Attendance> getCalendarList(String userId) {
+		return attendanceMapper.getCalendarList(userId);
+	}
+	
+	public List<String> getCalendarByDate(String userId) {
 		return attendanceMapper.getCalendarByDate(userId);
 	}
 	
