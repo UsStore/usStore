@@ -33,7 +33,6 @@ import com.example.usStore.domain.LineItem;
 import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.Review;
 import com.example.usStore.service.OrderService;
-import com.example.usStore.service.ReviewValidator;
 import com.example.usStore.service.facade.ItemFacade;
 
 @SessionAttributes({"Review", "reviewList"})
@@ -157,13 +156,8 @@ public class ReviewController {
 			@RequestParam("itemId")int itemId, HttpServletRequest rq, SessionStatus sessionStatus) {   
 
 		  HttpSession session = rq.getSession(false);
-		  new ReviewValidator().validate(review, result);
 		  UserSession userSession = (UserSession) session.getAttribute("userSession");
-			      
-	      if (result.hasErrors()) {   //유효성 검증 에러 발생시 다시 입력 폼을 이동
-	          return "redirect:/shop/review.do?itemId=" + itemId;	
-	       }
-	      	      
+			      	      	      
 	      String buyer = userSession.getAccount().getUserId();
 	      Review reviewObj = new Review(itemId, buyer, review.getDescription(), review.getRating());
 	      	      
