@@ -4,15 +4,35 @@
 <form name="pform" action="">
 	<div class="featured-items">
 		<div class="container">
+			<div>    
+	             <p style="text-align:right;">
+					      <label><font size="3">List By Location &nbsp;</font></label> 
+					      <select id="region" name="region" onchange="location.href=this.value">
+					      	<option value="선택하세요">선택하세요</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=서울특별시">서울특별시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=부산광역시">부산광역시</option> 
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=인천광역시">인천광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=대전광역시">대전광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=대구광역시">대구광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=울산광역시">울산광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=광주광역시">광주광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경기도">경기도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=강원도">강원도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=충청북도">충청북도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=충청남도">충청남도</option>
+					        <option value="/usStore/shop/secondHand/listItem.do?productId=2&region=전라북도">전라북도</option>
+					        <option value="/usStore/shop/secondHand/listItem.do?productId=2&region=전라남도">전라남도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경상북도">경상북도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경상남도">경상남도</option>	      	
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=제주특별자치도">제주도</option>
+					      </select>
+					 </p>	
+			</div>
 			<div class="row" style="padding: 10px">
 				<ul class="nav nav-tabs nav-product-tabs">
 					<li class="active">
 						<a href="#trending" data-toggle="tab">
 							<font size="5">SecondHand List</font></a>
-					</li>
-					<li>
-						<a href="#best-seller" data-toggle="tab">
-							<font size="5">List By Location</font></a>
 					</li>
 					<li class="pull-right collection-url">
 						<a href="<c:url value='/shop/item/addItem.do'>
