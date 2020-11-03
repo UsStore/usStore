@@ -166,9 +166,9 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public List<GroupBuying> geGBListByRegion(HashMap<String, String> param) {
+	public List<GroupBuying> getGBListByRegion(HashMap<String, String> param) {
 		// TODO Auto-generated method stub
-		return groupBuyingDao.geGBListByRegion(param);
+		return groupBuyingDao.getGBListByRegion(param);
 	}
 	
 	@Override

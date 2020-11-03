@@ -17,7 +17,7 @@ public interface GroupBuyingMapper extends ItemMapper {
    // 모든 공동구매 리스트 가져오는 메소드
    List<GroupBuying> getGroupBuyingList(String univName);
    
-   public List<GroupBuying> geGBListByRegion(HashMap<String, String> param);
+   public List<GroupBuying> getGBListByRegion(HashMap<String, String> param);
 
    // itemId를 받아 해당하는 groupBuying 객체를 가져오는 메소드
    GroupBuying getGroupBuyingItem(int itemId);

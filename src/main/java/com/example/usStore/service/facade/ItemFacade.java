@@ -74,7 +74,7 @@ public interface ItemFacade {
    
    List<GroupBuying> getGroupBuyingList(String univName);
    
-   public List<GroupBuying> geGBListByRegion(HashMap<String, String> param);
+   public List<GroupBuying> getGBListByRegion(HashMap<String, String> param);
    
    GroupBuying getGroupBuyingItem(int itemId);
    
