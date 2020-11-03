@@ -1,6 +1,7 @@
 package com.example.usStore.controller.item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +32,7 @@ import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.HandMadeFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
@@ -71,19 +73,29 @@ public class HandMadeFormController {
    // HandMade 리스트 초기 화면 출력시 실행되는 Controller
    @RequestMapping("/shop/handMade/listItem.do")
    public String listHandMade (
-         @RequestParam("productId") int productId, ModelMap model, HttpServletRequest rq) throws Exception {
+         @RequestParam("productId") int productId, 
+         @RequestParam(value="region", required=false) String region,
+         ModelMap model, HttpServletRequest rq) throws Exception {
 	   
 		HttpSession session = rq.getSession(false);
-		Account account = null;
-		if (session.getAttribute("userSession") != null) {
-			UserSession userSession = (UserSession) session.getAttribute("userSession");
-			if (userSession != null) { // 로그인상태이면 대학정보 가져온다
-				account = userSession.getAccount();
-			}
-		}
+		String univName = null; //Account에 속한 필드 의미 
+	     if (session.getAttribute("userSession") != null) {
+	            UserSession userSession = (UserSession)session.getAttribute("userSession") ;
+	            if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
+	            	Account account = userSession.getAccount();
+	            	univName = account.getUniversity();
+	            }
+	     }
 
-		PagedListHolder<HandMade> handMadeList = new PagedListHolder<HandMade>(
-				this.itemFacade.getHandMadeList(account));
+		PagedListHolder<HandMade> handMadeList = null;
+		if(region != null) { 
+			HashMap<String, String> param = new HashMap<String, String>();
+	    	param.put("region", region); 
+	    	param.put("univName", univName);
+	    	handMadeList = new PagedListHolder<HandMade>(this.itemFacade.getHMListByRegion(param));
+		}else {
+			handMadeList =	new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList(univName));
+		}		
 		handMadeList.setPageSize(8);
 
 		model.put("handMadeList", handMadeList);

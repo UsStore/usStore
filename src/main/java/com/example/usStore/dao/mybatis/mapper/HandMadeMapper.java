@@ -1,5 +1,6 @@
 package com.example.usStore.dao.mybatis.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,9 @@ public interface HandMadeMapper extends ItemMapper {
 	public void updateHandMade(HandMade handmade);
 
 	// 모든 수공예 리스트 가져오는 메소드
-	List<HandMade> getHandMadeList(Account account);
+	List<HandMade> getHandMadeList(String univName);
+	
+	public List<HandMade> getHMListByRegion(HashMap<String, String> param);
 
 	// itemId 받아서 해당하는 HandMade 객체 반환
 	HandMade getHandMadeById(int itemId);
