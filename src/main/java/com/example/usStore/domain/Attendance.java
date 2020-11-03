@@ -1,7 +1,6 @@
 package com.example.usStore.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /*
  * Event - Attendance Domain Class
@@ -11,7 +10,7 @@ public class Attendance  implements Serializable {
 	
 	private int attendId;
 	private String userId; 			// (FK) userId
-	private Date attendDate;	// 출석체크한 날짜
+	private String attendDate;	// 출석체크한 날짜
 
 	public int getAttendId() {
 		return attendId;
@@ -25,10 +24,10 @@ public class Attendance  implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Date getAttendDate() {
+	public String getAttendDate() {
 		return attendDate;
 	}
-	public void setAttendDate(Date attendDate) {
+	public void setAttendDate(String attendDate) {
 		this.attendDate = attendDate;
 	}
 	

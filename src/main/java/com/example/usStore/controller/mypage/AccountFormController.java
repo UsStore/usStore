@@ -30,6 +30,7 @@ public class AccountFormController {
 	
 	@Autowired
 	private UsStoreFacade usStore;
+	
 	public void setusStore(UsStoreFacade usStore) {
 		this.usStore = usStore;
 	}

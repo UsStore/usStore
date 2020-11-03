@@ -9,5 +9,8 @@ public interface AttendanceMapper {
 	void insertAttend(String userId);	
 	
 	//출석 정보 가져오기
-	List<Attendance> getCalendarByDate(String userId);	
+	List<Attendance> getCalendarList(String userId);	
+	
+	//출석 날짜만 리스트로
+	List<String> getCalendarByDate(String userId);
 }

@@ -137,7 +137,7 @@ newtime = window.setTimeout("getTime();", 1000);
 } 
 </script>
 <body>
-<h3>공동구매</h3>
+<h2>공동구매</h2>
 <hr width = "927px" align="center"><br>
    <table id="detail" style="margin-left: auto; margin-right: auto;">
    <tr>

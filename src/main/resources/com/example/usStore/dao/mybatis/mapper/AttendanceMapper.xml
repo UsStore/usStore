@@ -4,18 +4,21 @@
   <cache />
 
 	<insert id="insertAttend">
-		<selectKey keyProperty="attendId" resultType="int" order="BEFORE">
-				SELECT attendId_seq.nextval AS attendId FROM DUAL
-		</selectKey> 
 		INSERT INTO ATTENDANCE
 		(ATTENDID, USERID, ATTENDDATE)
-		VALUES(#{attendId}, #{userId}, to_date(sysdate,'yyyy-mm-dd'));
+		VALUES(ATTENDID_seq.nextval , #{userId}, TO_CHAR(SYSDATE,'yyyy-MM-dd')) 
 	</insert>
 	
-	<select id="getCalendarByDate" resultType="Attendance">
+	<select id="getCalendarList" resultType="Attendance">
 		SELECT T.ATTENDID, T.USERID, T.ATTENDDATE
 		FROM ATTENDANCE T, ACCOUNT A
-		WHERE T.USERID = A.USERID
+		WHERE T.USERID = A.USERID AND T.USERID = #{userId}
+	</select>
+	
+	<select id="getCalendarByDate">
+		SELECT ATTENDDATE
+		FROM ATTENDANCE
+		WHERE USERID = #{userId}
 	</select>
 	 
   </mapper>
