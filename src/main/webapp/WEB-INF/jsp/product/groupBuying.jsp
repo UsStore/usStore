@@ -50,7 +50,7 @@
 											<img src="${pageContext.request.contextPath}/images/picture.png" class="thumbnail" alt="">
 										</c:if>
 										<c:if test="${gb.imgUrl ne null}">
-											<img src="getImage.do?itemId=${item.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
+											<img src="getImage.do?itemId=${gb.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
 										</c:if>
 
 										<a href="<c:url value='/shop/groupBuying/viewItem.do'>
