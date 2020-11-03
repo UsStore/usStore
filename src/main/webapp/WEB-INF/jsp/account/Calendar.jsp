@@ -25,11 +25,11 @@ $(document).ready(function(){
                     $.ajax({
 	                    url: "/usStore/rest/shop/checkAttend.do",
 						type: "POST",
-					//	data : {userId: userSession.account.userId},
 						dataType: "text",
 						success: function (date) {
 							$(".fc-custom2-button").prop('disabled', true);
 							$(".fc-custom2-button").html('출석완료');
+							alert('출석 완료! 날짜 : ' + date);
 						}
 					})
 				}
@@ -43,14 +43,15 @@ $(document).ready(function(){
                 
                 	url: '/usStore/rest/shop/checkAttend.do',
                 	type: 'GET',
-        	       	dataType: "TEXT",
-                	success: function (data) { },
+        	       	dataType: "JSON",
+                	success: function (data) {
+                    	alert('get: ' + data); },
                 	error:function(request,status,error){   
-                    	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); }
-
-                	})
-		//		color: 'purple',   
-		//	 	textColor: 'white' 
+                    	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); },
+                    color: '#FE2E64',   
+                	textColor: '#1C1C1C' 
+            })
+		
 	    ]
 	  }); 
 });

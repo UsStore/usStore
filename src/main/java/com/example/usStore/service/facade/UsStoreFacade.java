@@ -50,5 +50,7 @@ public interface UsStoreFacade {
 	/////////////////////////////////////////////////////////////////////////
 	public void insertAttend(String userId);	//출석 처리
 	
-	List<Attendance> getCalendarByDate(String userId);	//출석 정보 가져오기
+	List<Attendance> getCalendarList(String userId);	//출석 정보 가져오기
+	
+	List<String> getCalendarByDate(String userId); //출석 날짜만 리스트로 가져옴
 }

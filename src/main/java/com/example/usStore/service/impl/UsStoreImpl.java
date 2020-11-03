@@ -65,7 +65,6 @@ public class UsStoreImpl implements UsStoreFacade {
 	@Transactional
 	public void updatePoint(String userId, int point) {
 		accountDao.updatePoint(userId, point);
-		attendanceDao.insertAttend(userId);
 	}
 
 	@Override
@@ -104,8 +103,12 @@ public class UsStoreImpl implements UsStoreFacade {
 	}
 
 	@Override
-	public List<Attendance> getCalendarByDate(String userId) {
-		return attendanceDao.getCalendarByDate(userId);
+	public List<Attendance> getCalendarList(String userId) {
+		return attendanceDao.getCalendarList(userId);
 	}
 	 
+	@Override
+	public List<String> getCalendarByDate(String userId) {
+		return attendanceDao.getCalendarByDate(userId);
+	}
 }

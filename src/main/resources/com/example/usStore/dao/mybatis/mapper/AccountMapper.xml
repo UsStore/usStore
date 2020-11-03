@@ -48,7 +48,7 @@
   </insert>
   
   <update id="updatePoint">
-  	UPDATE POINT
+  	UPDATE ACCOUNT
 	SET POINT = POINT + #{param2}
 	WHERE USERID = #{param1}
   </update>
