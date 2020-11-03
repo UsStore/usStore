@@ -26,10 +26,10 @@
 									<div class="product-block">
 										
 										<c:if test="${item.imgUrl eq null}">
-											<img src="${pageContext.request.contextPath}/images/logo.png" alt="" class="thumbnail" width="350" height="230" style="padding:20px">
+											<img src="${pageContext.request.contextPath}/images/picture.png" alt="" class="thumbnail">
 										</c:if>
 										<c:if test="${item.imgUrl ne null}">
-											<img src="getImage.do?itemId=${item.itemId}" width="350" height="230" style="padding:20px" onerror="this.src='${pageContext.request.contextPath}/images/logo.png'" />
+											<img src="getImage.do?itemId=${item.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
 										</c:if>
 
 										<a href="<c:url value='/shop/handMade/viewItem.do'>
@@ -73,22 +73,25 @@
 	</div>
 	
 	<div align="center">
-		<div style="padding: 30px; width: 150px; height: 150px;">
+		<span style="padding: 30px; width: 50px; height: 50px;">
 			<c:if test="${!handMadeList.firstPage}">
 				<a href='<c:url value="/shop/handMade/listItem2.do">
 						<c:param name="productId" value="${productId}"/>
 						<c:param name="pageName" value="previous"/></c:url>'>
-					<img src="${pageContext.request.contextPath}/images/backpage.png" width="20" height="50"/><font size="5">BACK </font>
+					<font size="5">BACK </font>
+					<img src="${pageContext.request.contextPath}/images/backpage.png" width="40" height="50"/>
 				</a>
-			</c:if>		
+			</c:if>	
+		</span>
+		<span style="padding: 30px; width: 50px; height: 50px;">	
 			<c:if test="${!handMadeList.lastPage}">
 				<a href='<c:url value="/shop/handMade/listItem2.do">/>
 						<c:param name="productId" value="${productId}"/>
 			            <c:param name="pageName" value="next"/></c:url>'>
-			        <img src="${pageContext.request.contextPath}/images/nextpage.png" width="20" height="50"/><font size="5">NEXT </font>
+			        <img src="${pageContext.request.contextPath}/images/nextpage.png" width="40" height="50"/><font size="5">NEXT </font>
 				</a>
 			</c:if>			
-		</div>
+		</span>
 	</div>
 </form>
 
