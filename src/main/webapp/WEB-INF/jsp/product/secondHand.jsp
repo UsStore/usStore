@@ -10,6 +10,10 @@
 						<a href="#trending" data-toggle="tab">
 							<font size="5">SecondHand List</font></a>
 					</li>
+					<li>
+						<a href="#best-seller" data-toggle="tab">
+							<font size="5">List By Location</font></a>
+					</li>
 					<li class="pull-right collection-url">
 						<a href="<c:url value='/shop/item/addItem.do'>
 		               			<c:param name="productId" value="${productId}"/></c:url>">
