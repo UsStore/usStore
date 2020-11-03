@@ -52,15 +52,15 @@ public class SecondHandController {
    public void setUsStoreFacade(UsStoreFacade usStoreFacade) {
       this.usStoreFacade = usStoreFacade;
    }
-
    
    @RequestMapping("/shop/secondHand/listItem.do")
-   public String secondHandList(@RequestParam("productId") int productId, Model model, HttpServletRequest rq) throws Exception {
+   public String secondHandList(@RequestParam("productId") int productId, 
+		   @RequestParam(value="region", required=false) String region,
+		   Model model, HttpServletRequest rq) throws Exception {
       /*현재 로그인한 유저가 있다면 그 유저의 대학 필드를 우선적으로 보여주고 
          만약 로그인이 안된 상태에서는 대학 필터링 없이 보여준다.*/
      HttpSession session = rq.getSession(false);
    
-    // Account account = null;
      String univName = null; //Account에 속한 필드 의미 
      if (session.getAttribute("userSession") != null) {
             UserSession userSession = (UserSession)session.getAttribute("userSession") ;
@@ -69,33 +69,24 @@ public class SecondHandController {
             	univName = account.getUniversity();
             }
      }
-    
-     // 여기서 region은 jsp에서 사용자가 선택한 지역 값 이다. -> select 로 구현 
-//     HashMap<String,String> param = new HashMap<String,String>(2);
-//     param.put("region", value);
-//     param.put("univName", univName);
-//     itemFacade.getSHListByRegion(param);
      
-      PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
-            this.itemFacade.getSecondHandList(univName));
-      secondHandList.setPageSize(4);
-
-      model.addAttribute("secondHandList", secondHandList);
-      model.addAttribute("productId", productId);
-
-      return "product/secondHand";
+     PagedListHolder<SecondHand> secondHandList = null;
+     if(region != null) {  // 지역별 게시물 필터링 적용했을 때 
+    	 HashMap<String, String> param = new HashMap<String, String>();
+    	 param.put("region", region); // drop down에서 선택한거 파라미터로 넘겨줌 
+    	 param.put("univName", univName);
+    	 System.out.println(param.toString()); 
+    	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSHListByRegion(param));
+     
+     }else { // 전체 리스트 보여줌 
+    	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList(univName));
+     }
+     secondHandList.setPageSize(8);
+     
+     model.addAttribute("secondHandList", secondHandList);
+     model.addAttribute("productId", productId);
+     return "product/secondHand";
    }
-
-   
-   //pathVariable하나더 추가해서 region을 구분하는코드로 변경하기 
-   @RequestMapping("/shop/secondHand/region/{region}")
-   public String filterRegion(@PathVariable String region) {
-	   System.out.println(region);
-	   
-	   return null; 
-   }
-   
-   
    
    @RequestMapping("/shop/secondHand/listItem2.do")
    public String secondHandList2(@ModelAttribute("secondHandList") PagedListHolder<Item> secondHandList,
@@ -148,7 +139,6 @@ public class SecondHandController {
         this.itemFacade.deleteItem(itemId); 
         return "redirect:/shop/secondHand/listItem.do?productId=" + productId;
      }
-    
 
      @RequestMapping(value = "/rest/user/{userId}", method = RequestMethod.GET, produces="application/json")
      @ResponseBody
@@ -162,5 +152,4 @@ public class SecondHandController {
          }          
          return result;
       }
-
 }
