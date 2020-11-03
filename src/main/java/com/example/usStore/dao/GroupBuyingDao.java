@@ -20,7 +20,7 @@ public interface GroupBuyingDao extends ItemDao {
    // 모든 공동구매 리스트 가져오는 메소드
    List<GroupBuying> getGroupBuyingList(String univName) throws DataAccessException;
    
-   List<GroupBuying> geGBListByRegion(HashMap<String, String> param) throws DataAccessException;
+   List<GroupBuying> getGBListByRegion(HashMap<String, String> param) throws DataAccessException;
    
    // itemId를 받아 해당하는 groupBuying 객체를 가져오는 메소드
    GroupBuying getGroupBuyingItem(int itemId) throws DataAccessException;

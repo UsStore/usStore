@@ -68,10 +68,9 @@ public class GroupBuyingFormController {
     		Model model, HttpServletRequest rq) throws ParseException {
      
 	  HttpSession session = rq.getSession(false);
-	   
 	     
-	  String univName = null;   
-	  if (session.getAttribute("userSession") != null) {
+	  String univName = null; //Account에 속한 필드 의미 
+	     if (session.getAttribute("userSession") != null) {
 	            UserSession userSession = (UserSession)session.getAttribute("userSession") ;
 	            if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
 	            	Account account = userSession.getAccount();
@@ -84,7 +83,8 @@ public class GroupBuyingFormController {
     	  HashMap<String, String> param = new HashMap<String, String>();
      	  param.put("region", region); // drop down에서 선택한거 파라미터로 넘겨줌 
      	  param.put("univName", univName);
-     	  groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.geGBListByRegion(param));
+     	  System.out.println(param);
+     	  groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGBListByRegion(param));
       	 	  
       }else {
     	  groupBuyingList  = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(univName));
