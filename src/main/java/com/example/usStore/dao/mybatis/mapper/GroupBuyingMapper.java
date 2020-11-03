@@ -1,6 +1,7 @@
 package com.example.usStore.dao.mybatis.mapper;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.example.usStore.domain.Account;
@@ -14,7 +15,9 @@ public interface GroupBuyingMapper extends ItemMapper {
    public void updateGroupBuying(GroupBuying GroupBuying);
 
    // 모든 공동구매 리스트 가져오는 메소드
-   List<GroupBuying> getGroupBuyingList(Account account);
+   List<GroupBuying> getGroupBuyingList(String univName);
+   
+   public List<GroupBuying> geGBListByRegion(HashMap<String, String> param);
 
    // itemId를 받아 해당하는 groupBuying 객체를 가져오는 메소드
    GroupBuying getGroupBuyingItem(int itemId);

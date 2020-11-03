@@ -91,9 +91,8 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
    }
    
    @Override
-   public List<GroupBuying> getGroupBuyingList(Account account) throws DataAccessException {
-      // TODO Auto-generated method stub
-      return groupBuyingMapper.getGroupBuyingList(account);
+   public List<GroupBuying> getGroupBuyingList(String univName) throws DataAccessException {
+      return groupBuyingMapper.getGroupBuyingList(univName);
    }
 
    @Override
@@ -149,4 +148,10 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
    public List<Item> getItemByTitle(String title) {
 		return groupBuyingMapper.getItemByTitle("%" + title.toLowerCase() + "%");
 	}
+
+@Override
+public List<GroupBuying> geGBListByRegion(HashMap<String, String> param) throws DataAccessException {
+	// TODO Auto-generated method stub
+	return groupBuyingMapper.geGBListByRegion(param);
+}
 }

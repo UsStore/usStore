@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.net.URL;
@@ -24,6 +25,7 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
 
@@ -61,23 +63,35 @@ public class GroupBuyingFormController {
    }
    
    @RequestMapping("/shop/groupBuying/listItem.do") 
-    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, 
+    public String groupBuyingList(@RequestParam("productId") int productId, 
+    		@RequestParam(value="region", required=false) String region, ModelMap modelMap, 
     		Model model, HttpServletRequest rq) throws ParseException {
      
 	  HttpSession session = rq.getSession(false);
 	   
-	  Account account = null;
+	     
+	  String univName = null;   
 	  if (session.getAttribute("userSession") != null) {
-	       UserSession userSession = (UserSession)session.getAttribute("userSession") ; //로그인상태이면 대학정보 가져온다 
-	       if (userSession != null) { 
-	               account = userSession.getAccount();
-	       }
+	            UserSession userSession = (UserSession)session.getAttribute("userSession") ;
+	            if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
+	            	Account account = userSession.getAccount();
+	            	univName = account.getUniversity();
+	     }
 	  }
 	  
-      PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(account));
-      groupBuyingList.setPageSize(4);	//페이지 넘김 처리
+      PagedListHolder<GroupBuying> groupBuyingList = null;
+      if(region != null) {
+    	  HashMap<String, String> param = new HashMap<String, String>();
+     	  param.put("region", region); // drop down에서 선택한거 파라미터로 넘겨줌 
+     	  param.put("univName", univName);
+     	  groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.geGBListByRegion(param));
+      	 	  
+      }else {
+    	  groupBuyingList  = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(univName));
+      }
+      groupBuyingList.setPageSize(8);	//페이지 넘김 처리
       
-      for(GroupBuying groupBuying : itemFacade.getGroupBuyingList(account)) {	//만일 재고가 0인 상품이 있을경우, 공동구매 진행 마감
+      for(GroupBuying groupBuying : itemFacade.getGroupBuyingList(univName)) {	//만일 재고가 0인 상품이 있을경우, 공동구매 진행 마감
 	      if(groupBuying.getQty() == 0) { itemFacade.soldOutGroupBuying(groupBuying.getItemId());  }
       }
       
