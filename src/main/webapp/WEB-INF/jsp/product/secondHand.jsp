@@ -34,30 +34,28 @@
 	                  	</a>
 					</p>		
 	                <div>    
-	         
 	                  	<p style="text-align:right;">
 					      <label>지역별 게시물</label> 
 					      <select id="region" name="region" onchange="location.href=this.value">
 					      	<option value="선택하세요">선택하세요</option>
-					      	<option value="/usStore/shop/secondHand/region/서울특별시">서울특별시</option>
-					      	<option value="부산광역시">부산광역시</option> 
-					      	<option value="인천광역시">인천광역시</option>
-					      	<option value="대전광역시">대전광역시</option>
-					      	<option value="대구광역시">대구광역시</option>
-					      	<option value="울산광역시">울산광역시</option>
-					      	<option value="광주광역시">광주광역시</option>
-					      	<option value="경기도">경기도</option>
-					      	<option value="강원도">강원도</option>
-					      	<option value="충청북도">충청북도</option>
-					      	<option value="충청남도">충청남도</option>
-					        <option value="전라북도">전라북도</option>
-					        <option value="전라남도">전라남도</option>
-					      	<option value="경상북도">경상북도</option>
-					      	<option value="경상남도">경상남도</option>	      	
-					      	<option value="제주특별자치도">제주도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=서울특별시">서울특별시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=부산광역시">부산광역시</option> 
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=인천광역시">인천광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=대전광역시">대전광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=대구광역시">대구광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=울산광역시">울산광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=광주광역시">광주광역시</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경기도">경기도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=강원도">강원도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=충청북도">충청북도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=충청남도">충청남도</option>
+					        <option value="/usStore/shop/secondHand/listItem.do?productId=2&region=전라북도">전라북도</option>
+					        <option value="/usStore/shop/secondHand/listItem.do?productId=2&region=전라남도">전라남도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경상북도">경상북도</option>
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=경상남도">경상남도</option>	      	
+					      	<option value="/usStore/shop/secondHand/listItem.do?productId=2&region=제주특별자치도">제주도</option>
 					      </select>
 						</p>	
- 
 			  	   </div>	
                   <hr>                                
 				<table>
