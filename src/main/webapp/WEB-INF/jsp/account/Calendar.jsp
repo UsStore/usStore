@@ -32,7 +32,7 @@ function fn_set_calendar(events){
 				    			alert('이미 출석 했습니다!');
 				    		}
 				    		else {
-				    			alert('출석 완료!');
+				    			alert('출석 포인트 1 지급 완료!');
 				    			location.reload();
 					    		}
 				    		$(".fc-custom2-button").prop('disabled', true);
