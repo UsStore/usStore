@@ -1,18 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="ItemHeader.jsp" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>공동구매 리스트 페이지</title>
-<style>
-   th, td {
-      text-align: center;
-      height:70px;
-      padding-left:30px;
-      padding-right:30px;
-   }
-         
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="ItemHeader.jsp"%>
+<!-- db에서 select 결과 보여주는 페이지 -->
+<style>  
    span#black {
       width:10%; 
       height: 10px; 
@@ -33,97 +22,120 @@
       padding: 5px;
    }
 </style>
-</head>
-<body>    
-   <form name = "pform" action="" style="position:absolute; left:42%; margin:0 0 0 -400px;">
-      <div class="container" >
-      <%@ include file="filterRegion.jsp"%>
-         <div class="row"  style="display:inline">
-            <div style="display:inline;float:left;">
-               <div style="font-size:15px">
-                  <h2>
-                        GroupBuying List
-                  </h2>
-                  <p style="text-align:right;">
-                      <a href="<c:url value='/shop/item/addItem.do'>
-                           <c:param name="productId" value="${productId}"/></c:url>
-                  ">공동구매 물품 판매하기
-                  </a>
-               </p>   <!-- 로그인 여부 인터셉터로 이동 -->
-                  <hr>
-                  <table>
-                     <tr>
-                        <th>글 제목</th>
-                        <th>가격</th>
-                        <th>할인율</th>
-                        <th>수량</th>
-                        <th>마감 날짜</th>
-                        <th/>
-                     </tr>
-                     
-                  <tbody>    
-                  
-      
-               <c:forEach var="gb" items="${groupBuyingList.pageList}">         
-                  <tr style="height:70px;">
-                  
-                  <td>
-                                <a href="<c:url value='/shop/groupBuying/viewItem.do'>
-                                           <c:param name="itemId" value="${gb.itemId}"/>
-                                         <c:param name="productId" value="${gb.productId}"/>
-                                       </c:url>">
-                                      <font>${gb.title}</font>
-                                </a>
-                
-                   </td>
-                   <td><del>정가 &nbsp;&nbsp;${gb.listPrice}원</del><br>할인가 &nbsp;${gb.unitCost}원</td>
-                   <td>${gb.discount}%</td>
-                   <td>${gb.qty}</td>
-                   <td>${gb.deadLine}<br></td>
-                   <td>
-                         <c:choose>
-                     <c:when test="${gb.state eq 1}"><span id="black">마감</span></c:when>
-                     <c:otherwise><span id="red"><font color="red">진행중</font></span></c:otherwise>
-                  </c:choose>
-                  &nbsp;&nbsp;
-                   </td>
-                       
-                       </tr>
-                  </c:forEach>
-                  </tbody>
-                  
-                  <tr>
-                     <td style="text-align: left;">
-                        <c:if test="${!groupBuyingList.firstPage}">
-                           <a href='<c:url value="/shop/groupBuying/listItem2.do">
-                                         <c:param name="pageName" value="previous"/>
-                                         <c:param name="productId" value="${productId}"/>
-                                      </c:url>'>
-                              <font color="black"><B>&lt;&lt; Prev</B></font>
-                           </a>
-                        </c:if>
-                     </td><td/><td/><td/><td/>
-                     <td style="text-align: right;">
-                        <c:if test="${!groupBuyingList.lastPage}">
-                           <a href='<c:url value="/shop/groupBuying/listItem2.do">/>
-                                        <c:param name="pageName" value="next"/>
-                                        <c:param name="productId" value="${productId}"/>
-                                     </c:url>'>
-                              <font color="black"><B>Next &gt;&gt;</B></font>
-                           </a>
-                        </c:if>
-                     </td>
-               </tr>
-                  
-                  </table>
-               </div>
-            </div>
-         </div>
-      </div>
-      <br><br>
-      
-      
-   </form>
-  
-</body>
-</html>
+<form name="pform" action="">
+	<div class="featured-items">
+		<div class="container">
+			<div class="row" style="padding: 10px">
+				<ul class="nav nav-tabs nav-product-tabs">
+					<li class="active">
+						<a href="#trending" data-toggle="tab">
+							<font size="5">GroupBuying List</font></a>
+					</li>
+					<li class="pull-right collection-url">
+						<a href="<c:url value='/shop/item/addItem.do'>
+		               			<c:param name="productId" value="${productId}"/></c:url>">
+							<font size="5">공동구매 물품 판매하기</font></a>
+					</li>
+				</ul>
+				<!-- 로그인 여부 인터셉터로 이동 -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="trending">
+						<c:forEach var="gb" items="${groupBuyingList.pageList}"> 
+							<!--repeat part -->
+							<div class="col-md-3 col-sm-4" style="padding: 10px">
+								<div class="single-product">
+									<div class="product-block">
+										
+										<c:if test="${gb.imgUrl eq null}">
+											<img src="${pageContext.request.contextPath}/images/picture.png" class="thumbnail" alt="">
+										</c:if>
+										<c:if test="${gb.imgUrl ne null}">
+											<img src="getImage.do?itemId=${gb.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
+										</c:if>
+
+										<a href="<c:url value='/shop/groupBuying/viewItem.do'>
+			                               			<c:param name="productId" value="${gb.productId}"/>
+				                                	<c:param name="itemId" value="${gb.itemId}"/>
+	                                			</c:url>"> 
+											<div class="product-description" style="padding: 10px">
+
+												<p class="title">제품명 : ${gb.title}</p>
+												<hr>
+												<p class="price" align="right">
+													<del> 정가 : 
+													<fmt:formatNumber value="${gb.listPrice}" pattern="###,###원" /></del>
+													<br>
+													할인가 : 
+													<fmt:formatNumber value="${gb.unitCost}" pattern="###,###원" />
+												</p>
+												<p class="price" align="right">
+													
+													할인율 : ${gb.discount}%
+												</p>
+												<hr>
+												<p class="quantity" align="right">
+													수량 : ${gb.qty}
+												</p>
+												<p class="dueDate" align="right">
+													마감 날짜 : ${gb.deadLine}
+												</p>
+												<p class="state" align="center">
+												<c:choose>
+								                    <c:when test="${gb.state eq 1}"><span id="black">마감</span></c:when>
+								                    <c:otherwise><span id="red"><font color="red">진행중</font></span></c:otherwise>
+								                </c:choose>
+								                </p>
+											</div>
+										</a>
+										<div class="product-hover">
+											<ul>
+												<li><a href="<c:url value="/shop/addItemToCart.do">
+													         <c:param name="workingItemId" value="${gb.itemId}"/>
+													         <c:param name="productId" value="${gb.productId}"/></c:url>">
+													 <i class="fa fa-cart-arrow-down"></i></a>
+												</li>
+												<li><a href="<c:url value='/shop/groupBuying/viewItem.do'>
+			                               			<c:param name="productId" value="${gb.productId}"/>
+				                                	<c:param name="itemId" value="${gb.itemId}"/>
+	                                			</c:url>"> <i class="fa fa-arrows-h"></i></a></li>
+												<li><a href=""><i class="fa fa-heart-o"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--repeat part -->
+
+							</tr>
+						</c:forEach>
+					</div>
+				</div>
+				<!-- 페이지 구분  -->
+			</div>
+		</div>
+	</div>
+	
+	<div align="center">
+		<span style="padding: 30px; width: 50px; height: 50px;">
+			<c:if test="${!groupBuyingList.firstPage}">
+				<a href='<c:url value="/shop/groupBuying/listItem2.do">
+						<c:param name="productId" value="${productId}"/>
+						<c:param name="pageName" value="previous"/></c:url>'>
+					<font size="5">BACK </font>
+					<img src="${pageContext.request.contextPath}/images/backpage.png" width="40" height="50"/>
+				</a>
+			</c:if>	
+		</span>
+		<span style="padding: 30px; width: 50px; height: 50px;">	
+			<c:if test="${!groupBuyingList.lastPage}">
+				<a href='<c:url value="/shop/groupBuying/listItem2.do">/>
+						<c:param name="productId" value="${productId}"/>
+			            <c:param name="pageName" value="next"/></c:url>'>
+			        <img src="${pageContext.request.contextPath}/images/nextpage.png" width="40" height="50"/><font size="5">NEXT </font>
+				</a>
+			</c:if>			
+		</span>
+	</div>
+</form>
+
+<%@ include file="../IndexBottom.jsp"%>
