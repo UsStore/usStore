@@ -98,7 +98,7 @@
 													         <c:param name="productId" value="${al.productId}"/></c:url>">
 													 <i class="fa fa-cart-arrow-down"></i></a>
 												</li>
-												<li><a href="<c:url value='/shop/handMade/viewItem.do'>
+												<li><a href="<c:url value='/shop/auction/viewItem.do'>
 			                               			<c:param name="productId" value="${al.productId}"/>
 				                                	<c:param name="itemId" value="${al.itemId}"/>
 	                                			</c:url>"> <i class="fa fa-arrows-h"></i></a></li>
