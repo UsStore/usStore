@@ -43,7 +43,6 @@ function fn_set_calendar(events){
 			    }
 			  }
 	});
-//	fn_get_events();
 }
 	
 function fn_get_events()

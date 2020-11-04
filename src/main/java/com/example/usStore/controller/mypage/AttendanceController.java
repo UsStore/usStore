@@ -1,14 +1,9 @@
 package com.example.usStore.controller.mypage;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -55,7 +50,7 @@ public class AttendanceController {
       List<Events> events = new ArrayList<>();
       
       for(int i  = 0; i < calList.size(); i ++) {
-    	  Events event = new Events("출석!", calList.get(i).getAttendDate());
+    	  Events event = new Events("출석", calList.get(i).getAttendDate());
     	  events.add(event);
       }
       System.out.println("사용자 출석 날짜 정보: " + events);
