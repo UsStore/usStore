@@ -39,10 +39,10 @@
 	                                			</c:url>"> 
 											<div class="product-description" style="padding: 10px">
 
-												<p class="title">제품명 : ${al.title}</p>
-												<p class="user">판매자 : ${al.userId}</p>
+												<p class="title"><font size="3">제품명 : ${al.title}</font></p>
+												<p class="user"><font size="3">판매자 : ${al.userId}</font></p>
 												<p class="user">
-													낙찰자 : 
+													<font size="3"> 낙찰자 : 
 							                       <!-- 경매 종료시 낙찰자 출력, 경매 진행중일땐 None 출력 --> 
 							                       <c:set var="state" value="${al.auctionState}"/>
 							                       <c:if test="${state eq 0}">
@@ -56,6 +56,7 @@
 							   					   		<c:out value="${(resultBidder.pageList)[status.index].bidder}"/></td>
 							   					   	</c:if>
 												   </c:if>
+												   </font>
 												</p>
 												<hr>
 												<p class="price" align="right">

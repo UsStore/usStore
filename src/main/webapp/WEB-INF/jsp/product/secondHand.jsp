@@ -45,7 +45,7 @@
 	                                			</c:url>"> 
 											<div class="product-description" style="padding: 10px">
 
-												<p class="title">제품명 : ${item.title}</p>
+												<p class="title"><font size="4">${item.title}</font></p>
 												<hr>
 												<p class="price" align="right">
 													정가 : 

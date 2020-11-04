@@ -2,31 +2,24 @@
 <%@ include file="ItemHeader.jsp"%>
 <!-- db에서 select 결과 보여주는 페이지 -->
 <style>  
-   span#black {
-      width:10%; 
-      height: 10px; 
-      border: 1px solid black;
-      border-radius: 2em;
-      font-size: small;
-      text-align: center;
-      padding: 5px;
-   }
+
+   #badge {
+		padding: 5px 10px 5px 10px;
+		font-size: 15px;
+		min-width: 100px;
+		background-color: #29403C;
+	}
+	
+	.product-description {
+	 	min-height: 330px;
+	}
    
-   span#red {
-      width:10%; 
-      height: 10px; 
-      border: 1px solid red;
-      border-radius: 2em;
-      font-size: small;
-      text-align: center;
-      padding: 5px;
-   }
 </style>
 <form name="pform" action="">
 	<div class="featured-items">
 		<div class="container">
 			<%@ include file="filterRegion.jsp"%>
-			<div class="row" style="padding: 10px">
+			<div class="row" style="padding: 10px; min-height: 800px;">
 				<ul class="nav nav-tabs nav-product-tabs">
 					<li class="active"><a href="#trending" data-toggle="tab">
 							<font size="5">GroupBuying List</font>
@@ -38,8 +31,7 @@
 					</a></li>
 				</ul>
 				<!-- 로그인 여부 인터셉터로 이동 -->
-				<div class="tab-content">
-					<div class="tab-pane active" id="trending">
+				<div class="tab-content tab-pane active" id="trending">
 						<c:forEach var="gb" items="${groupBuyingList.pageList}">
 							<!--repeat part -->
 							<div class="col-md-3 col-sm-4" style="padding: 10px">
@@ -51,13 +43,14 @@
 										<c:if test="${gb.imgUrl ne null}">
 											<img src="getImage.do?itemId=${gb.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
 										</c:if>
-
+									</div>
+									<div class="product-description" style="padding: 10px;">
 										<a href="<c:url value='/shop/groupBuying/viewItem.do'>
-			                               			<c:param name="productId" value="${gb.productId}"/>
-				                                	<c:param name="itemId" value="${gb.itemId}"/>
-	                                			</c:url>">
-											<div class="product-description" style="padding: 10px;">
-												<p class="title">제품명 : ${gb.title}</p>
+				                               	<c:param name="productId" value="${gb.productId}"/>
+					                            <c:param name="itemId" value="${gb.itemId}"/>
+		                                	</c:url>">
+										
+												<p class="title"><font size="4">${gb.title}</font></p>
 												<hr>
 												<p class="price" align="right">
 													<del>
@@ -67,21 +60,20 @@
 													<br> 할인가 :
 													<fmt:formatNumber value="${gb.unitCost}" pattern="###,###원" />
 												</p>
-												<p class="price" align="right">할인율 : ${gb.discount}%</p>
-												<hr>
-												<p class="quantity" align="right">수량 : ${gb.qty}</p>
-												<p class="dueDate" align="right">마감 날짜 : ${gb.deadLine}</p>
+									
+												<p class="price" align="right"><font color="#FF4500">${gb.discount}% 할인</font></p>
+												<p class="quantity" align="right">${gb.qty} 개 남았습니다.</p>
+												<br>
 												<p class="state" align="center">
-													<c:choose>
-														<c:when test="${gb.state eq 1}">
-															<span id="black">마감</span>
-														</c:when>
-														<c:otherwise>
-															<span id="red"><font color="red">진행중</font></span>
-														</c:otherwise>
-													</c:choose>
+												<c:choose>
+													<c:when test="${gb.state eq 1}">
+														<span class="badge badge-pill badge-dark" id="badge">마감</span>
+													</c:when>
+													<c:otherwise>
+														<span class="badge badge-pill badge-dark" id="badge">진행중</span>
+													</c:otherwise>
+												</c:choose>
 												</p>
-											</div>
 										</a>
 									</div>
 									<div class="product-hover">
@@ -106,7 +98,6 @@
 							</div>
 						</c:forEach>
 						<!--repeat part -->
-					</div>
 				</div>
 			</div>
 			<!-- 페이지 구분  -->
