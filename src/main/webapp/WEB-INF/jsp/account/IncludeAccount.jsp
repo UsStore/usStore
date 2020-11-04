@@ -40,27 +40,13 @@
 	<link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
 
 </head>
-<script>
-	function goClick() {
-		<%  
-		response.setHeader("Cache-Control","no-store");  
-		response.setHeader("Pragma","no-cache");  
-		response.setDateHeader("Expires",0);  
-		if (request.getProtocol().equals("HTTP/1.1"))
-		        response.setHeader("Cache-Control", "no-cache");
-		%>  
-		history.go(-1);
-	}
-</script>
 <body>
-
  <nav class="navbar navbar-light" style="background-color: #000000; height: 74px; font-size: 20px;">
 	<ul class="navbar-nav">
 		<li class="nav-item active">
-			<a class="nav-link" href="#" onclick="goClick();">
-				<img border="0" src="${pageContext.request.contextPath}/images/back.png"
-					style="float: left; width: 30; height: 30; border: 0;" /> &nbsp;
-				<font color="white" font-size="10px"> BACK </font>
+			<a class="nav-link" href="#">
+				<a href="<c:url value="/shop/editAccount.do/back.do"/>"><img border="0" src="${pageContext.request.contextPath}/images/back.png"
+					style="float: left; width: 30; height: 30; border: 0;" /> </a>&nbsp;
 			</a>
 		</li>
 	</ul>

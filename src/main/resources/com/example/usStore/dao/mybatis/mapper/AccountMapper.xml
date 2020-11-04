@@ -52,4 +52,10 @@
 	SET POINT = POINT + #{param2}
 	WHERE USERID = #{param1}
   </update>
+  
+  <select id="getPointByUserId" resultType="int">
+  	SELECT POINT
+  	FROM ACCOUNT
+  	WHERE USERID = #{userId}
+  </select>
 </mapper>

@@ -54,10 +54,13 @@ public class ViewAccountController {
 	public String showForm(Model model, HttpServletRequest rq) {
 		HttpSession session = rq.getSession(false);
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
-		String victim = userSession.getAccount().getUserId();
-		List<Accuse> accuseList = this.myPageFacade.selectAccuseList(victim);
+		String userId = userSession.getAccount().getUserId();
+		List<Accuse> accuseList = this.myPageFacade.selectAccuseList(userId);
+		int point = usStore.getPointByUserId(userId);
+		System.out.println("point: " +point);
 		
 		model.addAttribute(accuseList);
+		model.addAttribute("point", point);
 		return "account/mypage";
 	}
 	

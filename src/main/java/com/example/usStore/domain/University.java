@@ -10,7 +10,6 @@ public class University implements Serializable{
 	private String univLink;
 	private String univAddr;
 	private String region; 
-	private int isExistUniv; // 디비에 해당 대학이 이미 있는지 여부를 알려줌 
 	private int countPerUniv; // 대학교별 판매 게시글 수 카운트 
 	
 	public University() {}
@@ -51,14 +50,6 @@ public class University implements Serializable{
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	public int getIsExistUniv() {
-		return isExistUniv;
-	}
-
-	public void setIsExistUniv(int isExistUniv) {
-		this.isExistUniv = isExistUniv;
-	}
-
 	public int getCountPerUniv() {
 		return countPerUniv;
 	}
@@ -67,13 +58,4 @@ public class University implements Serializable{
 		this.countPerUniv = countPerUniv;
 	}
 
-	public University(String univName, String univLink, String univAddr, String region, int isExistUniv) {
-		super();
-		this.univName = univName;
-		this.univLink = univLink;
-		this.univAddr = univAddr;
-		this.region = region;
-		this.isExistUniv = isExistUniv;
-	}
-	
 }
