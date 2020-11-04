@@ -15,7 +15,7 @@
  			
  			<h6 class="card-title text-center"> University </h6>
 			<div class="form-label-group">
-				<button class="btn btn-lg btn-light btn-block text-uppercase" onclick="popup();" type="button">대학교 검색하기</button>
+				<button class="btn btn-lg btn-light btn-block text-uppercase" type="button" onclick="popup();" type="button">대학교 검색하기</button>
 				<c:if test="${accountForm.newAccount}">
 				        <form:input path="account.university" id="inputUniversity" readonly="true" value="${accountForm.account.university}" class="form-control" />
 						<B><form:errors path="account.university" cssClass="error" /></B>
