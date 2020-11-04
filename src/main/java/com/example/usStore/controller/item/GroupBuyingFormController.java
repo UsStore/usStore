@@ -25,7 +25,6 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
-import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
 
