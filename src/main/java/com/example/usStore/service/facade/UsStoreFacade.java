@@ -25,6 +25,8 @@ public interface UsStoreFacade {
 	Account getAccountByUsername(String username);
 	
 	void updatePoint(String userId, int point);
+	
+	int getPointByUserId(String userId);
 
 	/////////////////////////////////////////////////////////////////////////
 	/* Category */

@@ -52,4 +52,8 @@ public class MybatisAccountDao implements AccountDao {
 		accountMapper.updatePoint(userId, point);
 		attendanceMapper.insertAttend(userId);
 	}
+	
+	public int getPointByUserId(String userId) {
+		return accountMapper.getPointByUserId(userId);
+	}
 }

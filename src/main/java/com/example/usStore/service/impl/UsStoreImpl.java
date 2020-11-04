@@ -66,6 +66,11 @@ public class UsStoreImpl implements UsStoreFacade {
 	public void updatePoint(String userId, int point) {
 		accountDao.updatePoint(userId, point);
 	}
+	
+	@Override
+	public int getPointByUserId(String userId) {
+		return accountDao.getPointByUserId(userId);
+	}
 
 	@Override
 	public List<Category> getCategoryList() {
