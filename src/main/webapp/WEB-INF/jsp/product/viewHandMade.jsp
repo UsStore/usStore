@@ -153,7 +153,7 @@ function getReview(itemId) {   //매개변수 전달 시도
 										<a href="<c:url value='/addAccuseNoLogin.do'>
 							                 <c:param name="itemId" value="${handMade.itemId}"/>
 							                 <c:param name="productId" value="${handMade.productId}"/></c:url>">
-							              	<img src="${pageContext.request.contextPath}/images/alert.png" width="10" height="10"/>
+							              	<img src="${pageContext.request.contextPath}/images/alert.png" width="25" height="25"/>
 							                         판매자 신고하기
 							            </a>
 						            </span>
