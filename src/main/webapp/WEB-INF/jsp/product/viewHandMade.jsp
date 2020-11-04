@@ -170,14 +170,6 @@ function getReview(itemId) {   //매개변수 전달 시도
 						</c:if>
 					</div> <!-- userId = suppId -->
 					
-                    <div class="product-info">
-	
-						<!-- ItemId -->
-                        <span class="product-id">
-                        	<span class="badge badge-pill badge-dark" id="badge">제품명</span>
-	                        <c:out value="${handMade.itemId}" />
-	                    </span>
-	                </div>
 					<div class="product-info">
 						<!-- Quantity -->
                         <span class="product-avilability">
