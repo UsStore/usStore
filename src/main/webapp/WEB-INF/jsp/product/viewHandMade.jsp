@@ -108,10 +108,10 @@ function getReview(itemId) {   //매개변수 전달 시도
 							<!-- 메인 이미지 -->
 							
                             <div class="thumb-main-image">
-                            	<c:if test="${item.imgUrl eq null}">
+                            	<c:if test="${handMade.imgUrl eq null}">
 									<img src="${pageContext.request.contextPath}/images/picture.png" alt="" class="thumbnail">
 								</c:if>
-								<c:if test="${item.imgUrl ne null}">
+								<c:if test="${handMade.imgUrl ne null}">
 									<img src="getImage.do?itemId=${handMade.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
 								</c:if>
               				</div>
