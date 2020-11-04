@@ -1,14 +1,11 @@
 package com.example.usStore.controller.item;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
@@ -77,7 +73,7 @@ public class SecondHandController {
      PagedListHolder<SecondHand> secondHandList = null;
      if(region != null) {  // 지역별 게시물 필터링 적용했을 때 
     	 HashMap<String, String> param = new HashMap<String, String>();
-    	 param.put("region", region); // drop down에서 선택한거 파라미터로 넘겨줌 
+    	 param.put("region", region); 
     	 param.put("univName", univName);
     	 System.out.println(param.toString()); 
     	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSHListByRegion(param));
@@ -85,21 +81,24 @@ public class SecondHandController {
      }else { // 전체 리스트 보여줌 
     	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList(univName));
      }
-     secondHandList.setPageSize(8);
-     
-     // 디비에서 쿼리로 결과 가져오기 
-     University univ1 = new University("동덕여자대학교", "서울특별시 성북구 화랑로13길 60 (하월곡동, 동덕여자대학교)", 16);
-     University univ2 = new University("서울과학기술대학교", "서울특별시 노원구 공릉로 232 (공릉동, 서울과학기술대학교)", 4);
-     List<University> univMapList = new ArrayList<University>();
-     univMapList.add(univ1);
-     univMapList.add(univ2);
+     secondHandList.setPageSize(4);
      
      model.addAttribute("secondHandList", secondHandList);
      model.addAttribute("productId", productId);
      model.addAttribute("university", univAddr); //로그인 사용자의 대학교 도로명 주소 -> 널값이면 jsp 에서 안보여줌 
-     model.addAttribute("univMapList", univMapList.toString());  // 대학별 이름, 주소, 판매개수를 객체를 리스트로 보내기
      return "product/secondHand";
    }
+   
+	@RequestMapping(value = "/api/secondHand/map.do", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody         
+	public List<University> getSHMapInfo(HttpServletResponse response) throws IOException {
+		List<University> univMapList = this.itemFacade.getSHMapInfo();
+		if (univMapList == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		return univMapList; 
+	}
    
    @RequestMapping("/shop/secondHand/listItem2.do")
    public String secondHandList2(@ModelAttribute("secondHandList") PagedListHolder<Item> secondHandList,
@@ -130,9 +129,8 @@ public class SecondHandController {
          }
       }
       
-      //판매자 대학교 도로명 주소 
+      //판매자 대학교 이름
       String univName = this.usStoreFacade.getAccountByUserId(attacker).getUniversity(); 
-     // String univAddr = myPageFacade.getUnivAddrByName(univName);
       
       List<Tag> tags = itemFacade.getTagByItemId(itemId);
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
