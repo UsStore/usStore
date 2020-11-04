@@ -63,8 +63,6 @@
 								</div>
 							</div>
 							<!--repeat part -->
-
-							</tr>
 						</c:forEach>
 					</div>
 				</div>
