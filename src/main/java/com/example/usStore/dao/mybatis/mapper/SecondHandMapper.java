@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.SecondHand;
+import com.example.usStore.domain.University;
 
 
 public interface SecondHandMapper extends ItemMapper {
@@ -13,12 +14,13 @@ public interface SecondHandMapper extends ItemMapper {
 
 	SecondHand getSecondHandItem(int itemId);
 	
-	public void insertSecondHand(SecondHand secondHand);
+	void insertSecondHand(SecondHand secondHand);
 	
-	public void updateSecondHand(SecondHand secondHand);
+	void updateSecondHand(SecondHand secondHand);
 	
-	public void deleteSecondHand(int itemId);
+	void deleteSecondHand(int itemId);
 	
-	public List<SecondHand> getSHListByRegion(HashMap<String, String> param);
+	List<SecondHand> getSHListByRegion(HashMap<String, String> param);
 	
+	List<University> getSHMapInfo();
 }

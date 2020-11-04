@@ -5,9 +5,9 @@
 <form name="pform" action="">
 	<div class="featured-items">
 	  	<div class="div_map" align="center">
-	  	  <%-- <c:if test="${university != null}"> --%>
+	  	  <c:if test="${university != null}">
 	  		<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
-	  	 <%--  </c:if> --%>
+	  	  </c:if>
 	  	</div>
 		<div class="container">
 			<%@ include file="filterRegion.jsp"%>

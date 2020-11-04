@@ -20,6 +20,7 @@ import com.example.usStore.domain.LineItem;
 import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.domain.University;
 
 @Primary
 @Qualifier("mybatisSecondHandDao")
@@ -88,6 +89,11 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 	
 	@Override
+	public List<University> getSHMapInfo() throws DataAccessException {
+		return secondHandMapper.getSHMapInfo();
+	}
+	
+	@Override
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
 		itemMapper.updateItem(secondHand);
 		secondHandMapper.updateSecondHand(secondHand);
@@ -138,6 +144,8 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	public List<Item> getItemByTitle(String title) {
 		return secondHandMapper.getItemByTitle("%" + title.toLowerCase() + "%");
 	}
+
+
 
 
 

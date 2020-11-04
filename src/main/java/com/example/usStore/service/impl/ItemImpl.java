@@ -27,6 +27,7 @@ import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.Review;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.domain.University;
 import com.example.usStore.service.facade.ItemFacade;
 
 /*
@@ -214,6 +215,11 @@ public class ItemImpl implements ItemFacade {
 	@Override
 	public List<SecondHand> getSHListByRegion(HashMap<String, String> param) {
 		return secondHandDao.getSHListByRegion(param);
+	}
+	
+	@Override
+	public List<University> getSHMapInfo(){
+		return secondHandDao.getSHMapInfo();
 	}
 	
 	@Override
