@@ -24,6 +24,7 @@
 		align-items: center;
 	
 	}
+	
 	#badge {
 		padding: 5px 10px 5px 10px;
 		margin-right: 30px;
@@ -32,6 +33,13 @@
 		background-color: #29403C;
 	}
 	
+	#detailButton {
+		padding: 5px 10px 5px 10px;
+		margin-right: 30px;
+		font-size: 20px;
+		min-width: 200px;
+		font-color: black;
+	}
 	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -170,7 +178,7 @@ function getReview(itemId) {   //매개변수 전달 시도
 
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6" style="padding-bottom: 50px;">
                 	<!-- ViewCount -->
 					<div class="product-info">
 						<span class="strong-text"> 
@@ -254,26 +262,23 @@ function getReview(itemId) {   //매개변수 전달 시도
 				   		
 				   		<c:if test="${gb.state == 0 && gb.userId ne userSession.account.userId}"> 
 				   		<!-- 공동구매 진행중 && 작성자와 본인 아이디가 다르면 공동구매 참여 가능 -->
-				               <span id="blue">
-				                  <a href="javascript:gbJoint(${gb.itemId})">
-				                  	<button class="btn btn-theme" type="button">공동구매 참여하기</button>
-				                  </a>
-				               </span>
-				            </c:if>
-				            <c:if test="${gb.state == 1}">   <!-- 공동구매 마감 -->
-				               <span id="gray">
-				                     <button class="btn btn-theme" type="button"> 공동구매가 마감되었습니다.</button>
-				               </span>
-				            </c:if>
+				           	 <span>
+				                <a href="javascript:gbJoint(${gb.itemId})">
+				               		<button class="btn btn-theme" type="button">공동구매 참여하기</button>
+				                </a>
+				             </span>
+				        </c:if>
+				        <c:if test="${gb.state == 1}">   <!-- 공동구매 마감 -->
+				             <span>
+				             	<button class="btn btn-theme" type="button"> 공동구매가 마감되었습니다.</button>
+				             </span>
+				        </c:if>
+				        <c:if test="${gb.userId eq userSession.account.userId}">
+				        	<span>
+				             	<button class="btn btn-theme" type="button" disabled>공동구매 참여하기</button>
+				             </span> 
+				        </c:if>
 				            
-				         <c:if test="${gb.userId eq userSession.account.userId}"> <!-- ë¡ ê·¸ì ¸ì   ì ¤í   -->
-				            <tr>
-				               <td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-				               <a href="javascript:editGb(${gb.itemId})">[게시물 수정하기]</a>
-				               <a href="javascript:removeGb(${gb.itemId})">[게시물 삭제하기]</a>
-				            </td>
-				          </tr>
-				       </c:if>
 				       <br><br><br>
 				       <div class="alert alert-success" role="alert" align="center">
 						  	<span class="badge badge-pill" id="badge">마감 날짜 : ${gb.deadLine}</span>
@@ -302,19 +307,7 @@ function getReview(itemId) {   //매개변수 전달 시도
 							</c:forEach>
 						</span>
 					</div>
-
-			   		<c:if test="${userSession.account.userId eq gb.userId}">
-						<a href="<c:url value='/shop/handMade/edit.do'>
-									<c:param name="itemId" value="${gb.itemId}" />
-							    </c:url>
-							 	">[게시물 수정하기]</a>
-					    <a href="<c:url value='/shop/handMade/deleteItem.do'>
-							   		<c:param name="productId" value="${handMade.productId}" />
-							   		<c:param name="itemId" value="${gb.itemId}" />
-							   	</c:url>
-							   	"> [게시물 삭제하기]</a>
-					</c:if>
-
+					
                     <ul class="product-info-btn">
 
                         <li><a href=""><i class="fa fa-heart-o"></i> Wishlist</a></li>
@@ -328,6 +321,25 @@ function getReview(itemId) {   //매개변수 전달 시도
                     </ul>
                     
                 </div>
+                
+                <div align="center">
+                	<c:if test="${gb.userId eq userSession.account.userId}">
+			            <tr>
+			               <td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
+			               <a href="javascript:editGb(${gb.itemId})" style="color: black;">
+			               		<button type="button" class="btn btn-lg btn-secondary" id="detailButton">게시물 수정하기</button>
+						   </a>
+			               <a href="javascript:removeGb(${gb.itemId})" style="color: black;">
+			               		<button type="button" class="btn btn-lg btn-secondary" id="detailButton">게시물 삭제하기</button>
+			               </a>
+			            </td>
+			          </tr>
+			      	</c:if>
+					   <!--* 현재 로그인 user가 글 작성자 일때만 수정/삭제 버튼이 보임 
+					   * 작성자 정보는 controller에서 model(db에서 suppId찾아옴)로 넘겨줌
+					   * model로 넘어온 suppId와 세션의 로그인Id를 비교함 
+					   * 세션에 로그인 정보가 없으면, 즉 null이어도 수정/삭제 안보여줌-->
+				</div>
 
             </div>
 

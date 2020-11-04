@@ -24,6 +24,7 @@
 		align-items: center;
 	
 	}
+	
 	#badge {
 		padding: 5px 10px 5px 10px;
 		margin-right: 30px;
@@ -32,6 +33,13 @@
 		background-color: #29403C;
 	}
 	
+	#detailButton {
+		padding: 5px 10px 5px 10px;
+		margin-right: 30px;
+		font-size: 20px;
+		min-width: 200px;
+		font-color: black;
+	}
 	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -124,7 +132,7 @@ function getReview(itemId) {   //매개변수 전달 시도
 
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6" style="padding-bottom: 50px;">
                 	<!-- ViewCount -->
 					<div class="product-info">
 						<span class="strong-text"> 
@@ -238,18 +246,6 @@ function getReview(itemId) {   //매개변수 전달 시도
 						</span>
 					</div>
 
-			   		<c:if test="${userSession.account.userId eq handMade.userId}">
-						<a href="<c:url value='/shop/handMade/edit.do'>
-									<c:param name="itemId" value="${handMade.itemId}" />
-							    </c:url>
-							 	">[게시물 수정하기]</a>
-					    <a href="<c:url value='/shop/handMade/deleteItem.do'>
-							   		<c:param name="productId" value="${handMade.productId}" />
-							   		<c:param name="itemId" value="${handMade.itemId}" />
-							   	</c:url>
-							   	"> [게시물 삭제하기]</a>
-					</c:if>
-
                     <ul class="product-info-btn">
 
                         <li><a href=""><i class="fa fa-heart-o"></i> Wishlist</a></li>
@@ -260,10 +256,22 @@ function getReview(itemId) {   //매개변수 전달 시도
 
                         <li><a href=""><i class="fa fa-print"></i> Print</a></li>
 
-                    </ul>
-                    
+                    </ul>    
                 </div>
-
+                
+                <div align="center">
+				   	<c:if test="${userSession.account.userId eq handMade.userId}">
+						<a href="<c:url value='/shop/handMade/edit.do'>
+									<c:param name="itemId" value="${handMade.itemId}" />
+							    </c:url>" style="color: black;">
+							<button type="button" class="btn btn-lg btn-secondary" id="detailButton">게시물 수정하기</button></a>
+						<a href="<c:url value='/shop/handMade/deleteItem.do'>
+							   		<c:param name="productId" value="${handMade.productId}" />
+							   		<c:param name="itemId" value="${handMade.itemId}" />
+							   	</c:url>" style="color: black;">
+							<button type="button" class="btn btn-lg btn-secondary" id="detailButton">게시물 삭제하기</button></a>
+					</c:if>
+				</div>
             </div>
 
         </div>
