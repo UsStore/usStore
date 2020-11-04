@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.example.usStore.domain.Attendance;
 import com.example.usStore.domain.Events;
 import com.example.usStore.service.facade.UsStoreFacade;
 
@@ -44,13 +43,12 @@ public class AttendanceController {
          UserSession userSession = (UserSession) session.getAttribute("userSession");
          userId = userSession.getAccount().getUserId();
       }
-      System.out.println("userId : " + userId);
       
-      List<Attendance> calList = usStore.getCalendarList(userId);
+      List<String> calList = usStore.getCalendarByDate(userId);
       List<Events> events = new ArrayList<>();
       
       for(int i  = 0; i < calList.size(); i ++) {
-    	  Events event = new Events("출석", calList.get(i).getAttendDate());
+    	  Events event = new Events("출석", calList.get(i));
     	  events.add(event);
       }
       System.out.println("사용자 출석 날짜 정보: " + events);
@@ -76,7 +74,6 @@ public class AttendanceController {
          UserSession userSession = (UserSession) session.getAttribute("userSession");
          userId = userSession.getAccount().getUserId();
       }
-      System.out.println("userId : " + userId);
       
       List<String> dateList = usStore.getCalendarByDate(userId);
       System.out.println("getCalendarByDate: " + dateList);

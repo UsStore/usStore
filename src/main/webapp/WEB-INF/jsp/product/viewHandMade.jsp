@@ -108,10 +108,10 @@ function getReview(itemId) {   //매개변수 전달 시도
 							<!-- 메인 이미지 -->
 							
                             <div class="thumb-main-image">
-                            	<c:if test="${item.imgUrl eq null}">
+                            	<c:if test="${handMade.imgUrl eq null}">
 									<img src="${pageContext.request.contextPath}/images/picture.png" alt="" class="thumbnail">
 								</c:if>
-								<c:if test="${item.imgUrl ne null}">
+								<c:if test="${handMade.imgUrl ne null}">
 									<img src="getImage.do?itemId=${handMade.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
 								</c:if>
               				</div>
@@ -153,7 +153,7 @@ function getReview(itemId) {   //매개변수 전달 시도
 										<a href="<c:url value='/addAccuseNoLogin.do'>
 							                 <c:param name="itemId" value="${handMade.itemId}"/>
 							                 <c:param name="productId" value="${handMade.productId}"/></c:url>">
-							              	<img src="${pageContext.request.contextPath}/images/alert.png" width="10" height="10"/>
+							              	<img src="${pageContext.request.contextPath}/images/alert.png" width="25" height="25"/>
 							                         판매자 신고하기
 							            </a>
 						            </span>
