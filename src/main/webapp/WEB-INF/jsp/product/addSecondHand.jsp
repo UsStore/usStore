@@ -1,38 +1,112 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ include file="itemTop.jsp"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="ItemHeader.jsp"%> 
 <style>
-div#addItemForm {
-	position: absolute;
-	left: 18%;
-	border: none;
-	padding: 20px;
-}
-</style>
-<div id="addItemForm">
-	<h2>ADD ITEM</h2>
-	<hr width="927px" align="left">
-	<br>
-	<br>
 
-	<form:form modelAttribute="secondHandForm"  method="post" enctype="multipart/form-data" action="step3.do?${_csrf.parameterName}=${_csrf.token}">
-		
-	정가: <form:input type="text" path="listPrice" value="${listPrice}" />
-		<form:errors path="listPrice" />
-		<br>
-		<br>
+	* {
+		font-size: 20px;
+	}
+	.product-info {
+		font-size: 15px;
+		padding-bottom: 10px;
+		align-items: center;
 	
-	가격 흥정 여부: 
-		<form:radiobuttons items="${radioKind}" path="discount"/>
-		<br><br>
-	상품 사진 추가 : <input type="file" name="file" /><br><br>
+	}
+	
+	#badge {
+		padding: 10px 15px 10px 15px;
+		margin-right: 30px;
+		font-size: 20px;
+		min-width: 100px;
+		background-color: #29403C;
+	}
+	
+	#submitButton {
+		padding: 10px 15px 10px 15px;
+		margin-right: 30px;
+		font-size: 25px;
+		min-width: 100px;
+		background-color: #308C7B;
+	}
+	
+	hr {
+		background-color: #308C7B;
+		height: 7px;
+	}
+</style>
+    <div class="breadcumbs">
 
-		<a href="<c:url value='/shop/secondHand/gobackItem.do'>
-		         <c:param name="productId" value="${productId}"/>
-		     </c:url>">[이전 단계로]</a> 
-		<input type="submit" value="다음 단계로" />
-	</form:form>
-</div>
+        <div class="container">
 
-</body>
-</html>
+            <div class="row">
+
+                <span>Home > </span>
+
+                <span>Category > </span>
+
+                <span>HandMade > </span>
+
+                <span>Add Item > </span>
+
+				<span>Add SecondHand > </span>
+				
+            </div>
+
+        </div>
+
+    </div>  
+	
+    <div class="short-description">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-10" style="padding: 50px;">
+                
+					<h2>중고거래 상품 추가하기</h2>
+					<hr><br><br>
+					<spring:hasBindErrors name="secondHandForm" />
+					<form:form modelAttribute="secondHandForm" method="post" enctype="multipart/form-data" action="step3.do?${_csrf.parameterName}=${_csrf.token}">
+                    <!-- ListPrice -->
+                    <div class="product-info">
+                    	<span class="badge badge-pill badge-dark" id="badge">정가</span>
+                    	<span>
+                    	 	<form:input type="text" path="listPrice" value="${listPrice}" style="margin-left: 10px; width:380px; height:35px;"/>
+					        <br><form:errors path="listPrice" style="margin-left:150px" /> 
+						</span> <br><br>
+                    </div>
+                    
+                    <!-- discount -->
+                    <div class="product-info">
+                    	<span class="badge badge-pill badge-dark" id="badge">가격 흥정 여부</span>
+                    	<span>
+                    		<form:radiobuttons items="${radioKind}" path="discount" style="margin-left:10px;" />
+						</span> <br><br>
+                    </div>
+
+                    <div class="product-info">
+                    	<!-- Description -->
+                        <span class="badge badge-pill badge-dark" id="badge">상품 사진 추가</span>
+                        <br><br>
+                        <span>
+                        	<input type="file" name="file" style="margin-left: 10px;"/>
+						</span><br><br>
+					</div>
+					
+					<div align="right">
+						<a href="<c:url value='/shop/secondHand/gobackItem.do'>
+						         <c:param name="productId" value="${productId}"/></c:url>" id="submitButton" class="badge">
+						         이전 단계로</a>
+					   <button type="submit" class="badge" id="submitButton">다음 단계로</button>
+					</div>
+					</form:form>
+					 
+                </div>
+                
+            </div>
+
+        </div>
+
+    </div> 
+
+<%@ include file="../IndexBottom.jsp"%>

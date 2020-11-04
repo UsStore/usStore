@@ -180,16 +180,7 @@ function getReview(itemId) {   //매개변수 전달 시도
 	                        <c:out value="${university}" />
 	                    </span>
 	                </div>	
-	                				
-                    <div class="product-info">
-	
-						<!-- ItemId -->
-                        <span class="product-id">
-                        	<span class="badge badge-pill badge-dark" id="badge">제품명</span>
-	                        <c:out value="${sh.itemId}" />
-	                    </span>
-	                </div>
-
+	                			
                     <div class="product-info">
                     	<!-- Description -->
                         <span class="badge badge-pill badge-dark" id="badge">제품 설명</span>

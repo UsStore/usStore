@@ -338,6 +338,9 @@ ol.carousel-indicators li.active {
 }
 .product-description {
     background: #40bea7;
+	display: inline-block;
+ 	vertical-align: middle;
+ 	width:100%;
 }
 .product-description p {
     margin: 0px;

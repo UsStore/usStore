@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" type="text/css">
 
     <!-- Theme Stylesheet -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css?after">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css?after">
     
     <!-- jQuery Library -->

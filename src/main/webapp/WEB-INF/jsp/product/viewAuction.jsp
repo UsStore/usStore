@@ -218,15 +218,6 @@ function getReview(itemId) {   //매개변수 전달 시도
 							</c:choose>
 						</c:if>
 					</div> <!-- userId = suppId -->
-					
-                    <div class="product-info">
-	
-						<!-- ItemId -->
-                        <span class="product-id">
-                        	<span class="badge badge-pill badge-dark" id="badge">제품명</span>
-	                        <c:out value="${auction.itemId}" />
-	                    </span>
-	                </div>
 
                     <div class="product-info">
                     	<!-- Description -->

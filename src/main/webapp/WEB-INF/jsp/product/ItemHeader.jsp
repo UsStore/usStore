@@ -98,44 +98,6 @@
 
                   </ul>
                 </div>
-
-				&nbsp; &nbsp;
-                <!-- Single button -->
-
-                <div class="btn-group">
-
-                  <button type="button" class="btn btn-shop-category dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                    list By Location <span class="caret"></span>
-
-                  </button>
-
-                  <ul class="dropdown-menu">
-
-                    <li>
-                        <a href="<c:url value="/shop/handMade/listItem.do?productId=3"/>">수공예</a>
-                    </li>
-                    
-					<li role="separator" class="divider"></li>
-					
-                    <li>
-                    	<a href="<c:url value="/shop/secondHand/listItem.do?productId=2"/>">중고거래</a>
-                   	</li>
-                   	
-					<li role="separator" class="divider"></li>
-					
-                    <li>
-                    	<a href="<c:url value="/shop/auction/listItem.do?productId=1"/>">경매</a>
-                    </li>
-                    
-                    <li role="separator" class="divider"></li>
-                    
-                    <li>
-                    	<a href="<c:url value="/shop/groupBuying/listItem.do?productId=0"/>">공동구매</a>
-                    </li>     
-
-                  </ul>
-                </div>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
