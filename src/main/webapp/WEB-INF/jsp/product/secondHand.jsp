@@ -1,8 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="ItemHeader.jsp"%>
+
 <!-- db에서 select 결과 보여주는 페이지 -->
 <form name="pform" action="">
 	<div class="featured-items">
+	  	<div class="div_map" align="center">
+	  	  <%-- <c:if test="${university != null}"> --%>
+	  		<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
+	  	 <%--  </c:if> --%>
+	  	</div>
 		<div class="container">
 			<%@ include file="filterRegion.jsp"%>
 			<div class="row" style="padding: 10px">

@@ -1,6 +1,7 @@
 package com.example.usStore.controller.item;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.domain.University;
 import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.MyPageFacade;
 import com.example.usStore.service.facade.UsStoreFacade;
@@ -62,11 +64,13 @@ public class SecondHandController {
      HttpSession session = rq.getSession(false);
    
      String univName = null; //Account에 속한 필드 의미 
+     String univAddr = null;
      if (session.getAttribute("userSession") != null) {
             UserSession userSession = (UserSession)session.getAttribute("userSession") ;
             if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
             	Account account = userSession.getAccount();
             	univName = account.getUniversity();
+            	univAddr = this.myPageFacade.getUnivAddrByName(univName);
             }
      }
      
@@ -83,8 +87,17 @@ public class SecondHandController {
      }
      secondHandList.setPageSize(8);
      
+     // 디비에서 쿼리로 결과 가져오기 
+     University univ1 = new University("동덕여자대학교", "서울특별시 성북구 화랑로13길 60 (하월곡동, 동덕여자대학교)", 16);
+     University univ2 = new University("서울과학기술대학교", "서울특별시 노원구 공릉로 232 (공릉동, 서울과학기술대학교)", 4);
+     List<University> univMapList = new ArrayList<University>();
+     univMapList.add(univ1);
+     univMapList.add(univ2);
+     
      model.addAttribute("secondHandList", secondHandList);
      model.addAttribute("productId", productId);
+     model.addAttribute("university", univAddr); //로그인 사용자의 대학교 도로명 주소 -> 널값이면 jsp 에서 안보여줌 
+     model.addAttribute("univMapList", univMapList.toString());  // 대학별 이름, 주소, 판매개수를 객체를 리스트로 보내기
      return "product/secondHand";
    }
    
@@ -119,7 +132,7 @@ public class SecondHandController {
       
       //판매자 대학교 도로명 주소 
       String univName = this.usStoreFacade.getAccountByUserId(attacker).getUniversity(); 
-      String univAddr = myPageFacade.getUnivAddrByName(univName);
+     // String univAddr = myPageFacade.getUnivAddrByName(univName);
       
       List<Tag> tags = itemFacade.getTagByItemId(itemId);
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
@@ -128,7 +141,7 @@ public class SecondHandController {
       model.addAttribute("sh", sh);
       model.addAttribute("isAccuse", isAccuse);
       model.addAttribute("tags", tags);
-      model.addAttribute("university", univAddr);
+      model.addAttribute("university", univName); // 판매자의 대학교 이름으로 전달 
       return "product/viewSecondHand";
    }
    

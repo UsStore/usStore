@@ -165,7 +165,7 @@ function getReview(itemId) {   //매개변수 전달 시도
    	<tr>
    		<th style="border-right: 1px solid black;">판매자 대학교</th> 
    		<td>
-   			<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
+   			${university}
    		</td>
    	</tr>
    	<c:if test="${sh.qty <= 0}">
