@@ -79,7 +79,6 @@ public class AccountFormController {
 	
 	@RequestMapping("/back.do")
 	public String goBack(@ModelAttribute("accountForm")AccountForm accountForm, SessionStatus sessionStatus) {
-		System.out.println("go back-----");
 		sessionStatus.setComplete();
 		return "index";
 	}

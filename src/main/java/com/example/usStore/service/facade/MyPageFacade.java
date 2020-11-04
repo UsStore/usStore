@@ -24,4 +24,6 @@ public interface MyPageFacade {
 	void insertUniv(University university);
 	
 	String getUnivAddrByName(String univName);
+	
+	int isExistUniv(String univName);
 }

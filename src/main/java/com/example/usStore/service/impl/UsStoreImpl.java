@@ -28,6 +28,7 @@ public class UsStoreImpl implements UsStoreFacade {
 	private UniversityDao univDao;
 	@Autowired
 	private AttendanceDao attendanceDao;
+	
 
 	@Override
 	public Account getAccountByUserId(String userId) {
@@ -51,14 +52,20 @@ public class UsStoreImpl implements UsStoreFacade {
 	@Transactional
 	public void insertAccount(Account account, University university) {
 		accountDao.insertAccount(account);
-		univDao.insertUniv(university);
+		int flag = univDao.isExistUniv(university.getUnivName());
+		if(flag == 0) {
+			univDao.insertUniv(university);
+		}
 	}
 
 	@Override
 	@Transactional
 	public void updateAccount(Account account, University university) {
 		accountDao.updateAccount(account);
-		univDao.insertUniv(university);
+		int flag = univDao.isExistUniv(university.getUnivName());
+		if(flag == 0) {
+			univDao.insertUniv(university);
+		}
 	}
 	
 	@Override

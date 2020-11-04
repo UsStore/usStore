@@ -60,5 +60,10 @@ public class MyPageImpl implements MyPageFacade {
 		return univDao.getUnivAddrByName(univName);
 	}
 
+	@Override
+	public int isExistUniv(String univName) {
+		return univDao.isExistUniv(univName);
+	}
+
 	
 }

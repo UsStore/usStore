@@ -6,10 +6,12 @@ import com.example.usStore.domain.University;
 public interface UniversityMapper {
 	
 
-	University getUnivByName(String univNameU);
+	University getUnivByName(String univName);
 	
 	void insertUniv(University university);
 	
 	String getUnivAddrByName(String univName);
+	
+	int isExistUniv(String univName);
 
 }
