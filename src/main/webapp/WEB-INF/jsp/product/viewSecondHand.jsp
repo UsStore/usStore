@@ -202,10 +202,10 @@ function getReview(itemId) {   //매개변수 전달 시도
                         </span>
                     </div>
                     <br>
-					<del> 정가 : ${sh.listPrice}원 </del>
+					<del> 정가 : ${sh.unitCost}원 </del>
                     <div class="price">
 
-                        <span><c:out value="${sh.unitCost}" /> 원</span>
+                        <span><c:out value="${sh.listPrice}" /> 원</span>
 
                     </div>
 

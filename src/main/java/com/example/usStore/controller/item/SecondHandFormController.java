@@ -212,6 +212,7 @@ public class SecondHandFormController {
 	
 	@RequestMapping(value="/shop/secondHand/getImage.do")
 	   public void getImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("getImage들어옴");
 	      int itemId = Integer.parseInt(request.getParameter("itemId"));
 	      
 	      SecondHand sh = itemFacade.getSecondHandItem(itemId);
