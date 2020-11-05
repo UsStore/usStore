@@ -235,9 +235,9 @@ function getReview(itemId) {   //매개변수 전달 시도
 						<p style="padding: 20px; "><c:out value="${gb.description}" escapeXml="false" /></p>
                     </div>
 
-					<del>${gb.listPrice}원</del>
+					<del>${gb.unitCost}원</del>
                     <div class="price">
-                        <span>${gb.unitCost}원&nbsp;<font color=red>&nbsp;&nbsp;&nbsp;${gb.discount}% 할인</font></span>
+                        <span>${gb.listPrice}원&nbsp;<font color=red>&nbsp;&nbsp;&nbsp;${gb.discount}% 할인</font></span>
                     </div>
 
                     <form action="" class="purchase-form">
