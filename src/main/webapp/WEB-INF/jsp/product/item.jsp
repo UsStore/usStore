@@ -43,8 +43,6 @@
 
                 <span>Category > </span>
 
-                <span>HandMade > </span>
-
                 <span>Add Item</span>
 
             </div>
@@ -94,28 +92,22 @@
 							<br><form:errors path="description" style="margin-left:150px"/>
 						</span><br><br>
 					</div>
-
-                    <div class="product-info">
-						<!-- unitCost  -->
-                        <span>
-                        	<c:set var="pId" value="${productId}"/>
-							<c:if test="${pId == 1}">
-								<span class="badge badge-pill badge-dark" id="badge">판매가</span>
+					
+					<c:set var="pId" value="${productId}"/>
+					<c:if test="${pId == 1}">
+					</c:if>
+					<c:if test="${pId != 1}">
+	                    <div class="product-info">
+							<!-- unitCost  -->
+	                        <span>
+								<span class="badge badge-pill badge-dark" id="badge">원가</span>
 								<span>
-									<form:input type="text" path="unitCost" value="1" readonly="true" hidden="true" style="margin-left:10px"/>
+									<form:input type="text" path="unitCost" value="${unitCost}" style="margin-left:10px" />
 									<br><form:errors path="unitCost" style="margin-left:150px"/>
-								</span><br><br>
-							</c:if>
-							<c:if test="${pId != 1}">
-								<span class="badge badge-pill badge-dark" id="badge">판매가</span>
-							  	<span>
-							  		<form:input type="text" path="unitCost" value="${unitCost}" style="margin-left:10px" />
-									<br><form:errors path="unitCost" style="margin-left:150px"/>
-								</span><br><br>
-							</c:if>
-                        </span>
-
-                    </div>
+								</span><br><br>		
+	                        </span>
+	                    </div>
+                    </c:if>
 
 					<!-- Tags -->
                     <div class="product-info">

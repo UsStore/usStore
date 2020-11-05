@@ -47,7 +47,7 @@
 
                 <span>Category > </span>
 
-                <span>HandMade > </span>
+                <span>GroupBuying > </span>
 
                 <span>Add Item > </span>
 
@@ -74,7 +74,7 @@
                     
                     <!-- ListPrice -->
                     <div class="product-info">
-                    	<span class="badge badge-pill badge-dark" id="badge">원가</span>
+                    	<span class="badge badge-pill badge-dark" id="badge">판매가</span>
                     	<span>
                     	 	<form:input type="text" path="listPrice" value="${listPrice}" style="margin-left: 10px; width:380px; height:35px;"/>
 					        <br><form:errors path="listPrice" style="margin-left:150px" /> 
