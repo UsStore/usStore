@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.usStore.dao.mybatis.mapper.ReplyMapper">
+  <cache />
+  
+  <select id="getReplyByItem" parameterType="int" resultType="Inquiry">
+  	SELECT *
+  	FROM Reply r, Inquiry i
+  	WHERE r.QID = i.QID
+  	 AND ITEMID = #{value}
+  </select>
+  
+   <select id="getReplyByQID" parameterType="int" resultType="Inquiry">
+  	SELECT *
+  	FROM Reply
+  	WHERE QID = #{value}
+   </select>
+   
+   <insert id="insertReply" parameterType="Reply">
+     INSERT INTO Reply (RID, content, userId, QID, ts)
+	 VALUES (reply_seq.nextval, #{content}, #{userId}, #{QID}, TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi:ss'));
+  </insert>
+  
+  <update id="updateReply" parameterType="Reply">
+	    UPDATE Reply SET
+	    	RID = #{RID},
+	  		content = #{content},
+	  		userId = #{userId},
+	  		QID = #{QID},
+	  		ts = TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi:ss')
+	    WHERE QID=#{QID}
+  </update>
+  
+  <delete id="deleteReply" parameterType="int">
+		DELETE FROM Reply
+		WHERE RID=#{value}
+  </delete>
+  
+ </mapper>
