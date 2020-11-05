@@ -67,11 +67,11 @@
 												<hr>
 												<p class="price" align="right">
 													<del>
-														정가 :
-														<fmt:formatNumber value="${gb.listPrice}" pattern="###,###원" />
+														원가 :
+														<fmt:formatNumber value="${gb.unitCost}" pattern="###,###원" />
 													</del>
-													<br> 할인가 :
-													<fmt:formatNumber value="${gb.unitCost}" pattern="###,###원" />
+													<br> 판매가 :
+													<fmt:formatNumber value="${gb.listPrice}" pattern="###,###원" />
 												</p>
 									
 												<p class="price" align="right"><font color="#FF4500">${gb.discount}% 할인</font></p>

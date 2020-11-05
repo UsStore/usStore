@@ -150,8 +150,8 @@ public class GroupBuyingFormController {
          itemForm = (ItemForm) session.getAttribute("itemForm");
       }
       
-      if(itemForm.getUnitCost() >= groupBuyingForm.getListPrice()) {   //판매가는 정가보다 낮은 가격이어야 함
-         result.rejectValue("listPrice", "changeGb");
+      if(itemForm.getUnitCost() <= groupBuyingForm.getListPrice()) {   //판매가는 정가보다 낮은 가격이어야 함
+         result.rejectValue("listPrice", "listComUnit");
       }
       
       if (result.hasErrors()) {   //유효성 검증 에러 발생시
@@ -160,10 +160,10 @@ public class GroupBuyingFormController {
       }
    
       int calDiscount;   //할인율
-      double listPrice = groupBuyingForm.getListPrice(); //정가
-      double unitCost = itemForm.getUnitCost();	//할인가
+      double listPrice = groupBuyingForm.getListPrice(); //판매가
+      double unitCost = itemForm.getUnitCost();	//원가
       
-      calDiscount = (int) ((listPrice - unitCost) / listPrice * 100);   //할인율 계산
+      calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);   //할인율 계산
 
       groupBuyingForm.setDiscount(calDiscount);
        

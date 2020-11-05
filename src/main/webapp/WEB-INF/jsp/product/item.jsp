@@ -9,7 +9,6 @@
 		font-size: 15px;
 		padding-bottom: 10px;
 		align-items: center;
-	
 	}
 	
 	#badge {
