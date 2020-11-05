@@ -115,7 +115,7 @@ public class OrderController {
 				orderForm.setShippingAddressProvided(true);
 				return "order/ShippingForm";
 			} else {
-				if(payFlag.equals("success")) {
+				if(payFlag != null && payFlag.equals("success")) {
 					orderForm.getOrder().setCardType("KakaoPay");
 				}
 				return "order/ConfirmOrder";
@@ -126,7 +126,7 @@ public class OrderController {
 			if (result.hasErrors()) {
 				return "order/ShippingForm";
 			}
-			if(payFlag.equals("success")) {
+			if(payFlag != null && payFlag.equals("success")) {
 				orderForm.getOrder().setCardType("KakaoPay");
 			}
 			return "order/ConfirmOrder";
