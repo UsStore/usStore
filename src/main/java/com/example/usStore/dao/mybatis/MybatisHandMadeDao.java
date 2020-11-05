@@ -87,9 +87,9 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	}
 
 	@Override
-	public List<HandMade> getHandMadeList(Account account) throws DataAccessException {
+	public List<HandMade> getHandMadeList(String univName) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return handMadeMapper.getHandMadeList(account);
+		return handMadeMapper.getHandMadeList(univName);
 	}
 
 	@Override
@@ -145,5 +145,11 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	
 	public List<Item> getItemByTitle(String title) {
 		return handMadeMapper.getItemByTitle("%" + title.toLowerCase() + "%");
+	}
+
+	@Override
+	public List<HandMade> getHMListByRegion(HashMap<String, String> param) {
+		// TODO Auto-generated method stub
+		return handMadeMapper.getHMListByRegion(param);
 	}
 }

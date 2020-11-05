@@ -46,4 +46,16 @@
     VALUES
       (#{userId}, #{password}, #{username}, #{email}, #{addr1}, #{addr2,jdbcType=VARCHAR}, #{city}, #{zip}, #{country}, #{phone}, #{university})
   </insert>
+  
+  <update id="updatePoint">
+  	UPDATE ACCOUNT
+	SET POINT = POINT + #{param2}
+	WHERE USERID = #{param1}
+  </update>
+  
+  <select id="getPointByUserId" resultType="int">
+  	SELECT POINT
+  	FROM ACCOUNT
+  	WHERE USERID = #{userId}
+  </select>
 </mapper>

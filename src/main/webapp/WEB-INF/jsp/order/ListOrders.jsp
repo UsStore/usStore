@@ -1,4 +1,4 @@
-<%@ include file="../account/IncludeAccount.jsp" %>
+<%@ include file="../header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
@@ -29,11 +29,12 @@
 		});
 	};
 </script>
-<div align="center" width="500">
+<div align="center" style="padding: 30px;">
   <p>
     <h2>My Order</h2>
   </p>
- 
+</div>
+ <div align="center" style="padding: 30px;">
   <!-- REST API 내용 부분 -->
   <table>
 	<tr>
@@ -43,8 +44,8 @@
 	</tr>
   </table>
 
-  <table class="table table-hover">
-    <tr bgcolor="#CCCCCC">
+  <table class="table" style="width: 80%;'">
+    <tr bgcolor="#40BEA7">
       <th scope="col">Order ID</th> 
       <th scope="col">Date</th> 
       <th scope="col">Total Price</th>
@@ -65,3 +66,4 @@
   </table>
 </div>
 <br><br>
+<%@ include file="../IndexBottom.jsp" %>

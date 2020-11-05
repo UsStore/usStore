@@ -62,7 +62,7 @@ div#addReviewForm {
 		<br>
 		
 		리뷰 : <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<form:textarea path="description" placeholder="10자 이상 입력하세요." cols="50" rows="10" />
+		<form:textarea path="description" cols="50" rows="10" />
 		<form:errors path="description"/> <br><br>
 				
 		<td id="submit" colspan="2">

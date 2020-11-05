@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="IncludeTop.jsp" %>
-<%@ include file="IncludeMenu.jsp" %>
+<%@ include file="IndexTop.jsp" %>
+<%@ include file="IndexMenu.jsp" %>
 
     <div class="banner">
 
@@ -10,7 +10,7 @@
 
                 <div class="col-md-4 col-sm-4">
 
-                    <div class="single-banner" style="background-image:url(${pageContext.request.contextPath}/images/banner-1.jpg)">
+                    <div class="single-banner" style="background-image:url(${pageContext.request.contextPath}/images/header1.png)">
 
                        <div class="banner-caption">
 
@@ -26,7 +26,7 @@
 
                 <div class="col-md-4 col-sm-4">
 
-                    <div class="single-banner" style="background-image:url(${pageContext.request.contextPath}/images/banner-2.jpg)">
+                    <div class="single-banner" style="background-image:url(${pageContext.request.contextPath}/images/header2.png)">
 
                        <div class="banner-caption">
 
@@ -42,7 +42,7 @@
 
                 <div class="col-md-4 col-sm-4">
 
-                    <div class="single-banner" style="background-image:url(${pageContext.request.contextPath}/images/banner-3.jpg)">
+                    <div class="single-banner" style="background-image:url(${pageContext.request.contextPath}/images/header3.png)">
 
                        <div class="banner-caption">
 
@@ -135,7 +135,7 @@
     </div>
 
 
-	<%@ include file="IncludeBottom.jsp" %>
+	<%@ include file="IndexBottom.jsp" %>
 
 </body>
 

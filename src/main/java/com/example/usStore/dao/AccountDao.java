@@ -1,9 +1,7 @@
 package com.example.usStore.dao;
 
-import java.util.List;
 import org.springframework.dao.DataAccessException;
 import com.example.usStore.domain.Account;
-import com.example.usStore.domain.University;
 
 public interface AccountDao {
 
@@ -21,4 +19,10 @@ public interface AccountDao {
 	
 	// 계정 수정
 	void updateAccount(Account account) throws DataAccessException;
+	
+	//포인트 적립
+	void updatePoint(String userId, int point);
+	
+	//보유 포인트 조회
+	int getPointByUserId(String userId);
 }

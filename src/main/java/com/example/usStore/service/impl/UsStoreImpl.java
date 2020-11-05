@@ -26,6 +26,9 @@ public class UsStoreImpl implements UsStoreFacade {
 	private OrderDao orderDao;
 	@Autowired
 	private UniversityDao univDao;
+	@Autowired
+	private AttendanceDao attendanceDao;
+	
 
 	@Override
 	public Account getAccountByUserId(String userId) {
@@ -49,14 +52,31 @@ public class UsStoreImpl implements UsStoreFacade {
 	@Transactional
 	public void insertAccount(Account account, University university) {
 		accountDao.insertAccount(account);
-		univDao.insertUniv(university);
+		int flag = univDao.isExistUniv(university.getUnivName());
+		if(flag == 0) {
+			univDao.insertUniv(university);
+		}
 	}
 
 	@Override
 	@Transactional
 	public void updateAccount(Account account, University university) {
 		accountDao.updateAccount(account);
-		univDao.insertUniv(university);
+		int flag = univDao.isExistUniv(university.getUnivName());
+		if(flag == 0) {
+			univDao.insertUniv(university);
+		}
+	}
+	
+	@Override
+	@Transactional
+	public void updatePoint(String userId, int point) {
+		accountDao.updatePoint(userId, point);
+	}
+	
+	@Override
+	public int getPointByUserId(String userId) {
+		return accountDao.getPointByUserId(userId);
 	}
 
 	@Override
@@ -88,5 +108,19 @@ public class UsStoreImpl implements UsStoreFacade {
 	public List<Orders> getOrdersByUsername(String username) {
 		return null;
 	}
+	
+	@Override
+	public void insertAttend(String userId) {
+		attendanceDao.insertAttend(userId);
+	}
+
+	@Override
+	public List<Attendance> getCalendarList(String userId) {
+		return attendanceDao.getCalendarList(userId);
+	}
 	 
+	@Override
+	public List<String> getCalendarByDate(String userId) {
+		return attendanceDao.getCalendarByDate(userId);
+	}
 }

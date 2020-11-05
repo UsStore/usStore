@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.SecondHand;
+import com.example.usStore.domain.University;
 
 
 public interface SecondHandDao extends ItemDao {
@@ -24,4 +24,5 @@ public interface SecondHandDao extends ItemDao {
 	
 	public List<SecondHand> getSHListByRegion(HashMap<String, String> param) throws DataAccessException;
 
+	List<University> getSHMapInfo() throws DataAccessException;
 }

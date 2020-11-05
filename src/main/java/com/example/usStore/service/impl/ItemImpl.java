@@ -27,6 +27,7 @@ import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.Review;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.domain.University;
 import com.example.usStore.service.facade.ItemFacade;
 
 /*
@@ -109,6 +110,7 @@ public class ItemImpl implements ItemFacade {
 		return itemDao.getItemByTitle(title);
 	}
 	
+//********************HandMade********************
 	@Override
 	public void insertHandMade(HandMade handmade) {
 		// TODO Auto-generated method stub
@@ -122,11 +124,17 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public List<HandMade> getHandMadeList(Account account) {
+	public List<HandMade> getHandMadeList(String univName) {
 		// TODO Auto-generated method stub
-		return handMadeDao.getHandMadeList(account);
+		return handMadeDao.getHandMadeList(univName);
 	}
 
+	@Override
+	public List<HandMade> getHMListByRegion(HashMap<String, String> param) {
+		// TODO Auto-generated method stub
+		return handMadeDao.getHMListByRegion(param);
+	}
+	
 	@Override
 	public HandMade getHandMadeById(int itemId) {
 		// TODO Auto-generated method stub
@@ -139,6 +147,8 @@ public class ItemImpl implements ItemFacade {
 		return handMadeDao.getHandMadeListByProductId(productId);
 	}
 
+	
+//********************GroupBuying********************
 	@Override
 	public void insertGroupBuying(GroupBuying GroupBuying) {
 		// TODO Auto-generated method stub
@@ -152,11 +162,15 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public List<GroupBuying> getGroupBuyingList(Account account) {
-		// TODO Auto-generated method stub
-		return groupBuyingDao.getGroupBuyingList(account);
+	public List<GroupBuying> getGroupBuyingList(String univName) {
+		return groupBuyingDao.getGroupBuyingList(univName);
 	}
 
+	@Override
+	public List<GroupBuying> getGBListByRegion(HashMap<String, String> param) {
+		// TODO Auto-generated method stub
+		return groupBuyingDao.getGBListByRegion(param);
+	}
 	
 	@Override
 	public GroupBuying getGroupBuyingItem(int itemId) {
@@ -187,6 +201,7 @@ public class ItemImpl implements ItemFacade {
 		groupBuyingDao.soldOutGroupBuying(itemId);
 	}
 	
+//********************SecondHand********************
 	@Override
 	public List<SecondHand> getSecondHandList(String univName) {
 		return secondHandDao.getSecondHandList(univName);
@@ -203,6 +218,11 @@ public class ItemImpl implements ItemFacade {
 	}
 	
 	@Override
+	public List<University> getSHMapInfo(){
+		return secondHandDao.getSHMapInfo();
+	}
+	
+	@Override
 	public void insertSecondHand(SecondHand secondHand) {
 		secondHandDao.insertSecondHand(secondHand);
 	}
@@ -212,12 +232,20 @@ public class ItemImpl implements ItemFacade {
 		secondHandDao.updateSecondHand(secondHand);
 	}
 
+	
+//********************Auction********************
 	@Override
-	public List<Auction> getAuctionList(Account account) {
+	public List<Auction> getAuctionList(String univName) {
 		// TODO Auto-generated method stub
-		return auctionDao.getAuctionList(account);
+		return auctionDao.getAuctionList(univName);
 	}
 
+	@Override
+	public List<Auction> getACListByRegion(HashMap<String, String> param) {
+		// TODO Auto-generated method stub
+		return auctionDao.getACListByRegion(param);
+	}
+	
 	@Override
 	public void insertAuction(Auction auction) {
 		// TODO Auto-generated method stub
@@ -373,6 +401,7 @@ public class ItemImpl implements ItemFacade {
 	public Review findReviewByuserIdAndItemId(int itemId, String buyer) {
 		return reviewDao.findReviewByuserIdAndItemId(itemId, buyer);
 	}
+
 
 	
 	

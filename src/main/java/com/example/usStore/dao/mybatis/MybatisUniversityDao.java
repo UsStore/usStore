@@ -31,4 +31,9 @@ public class MybatisUniversityDao implements UniversityDao{
 		return univMapper.getUnivAddrByName(univName);
 	}
 
+	@Override
+	public int isExistUniv(String univName) throws DataAccessException {
+		return univMapper.isExistUniv(univName);
+	}
+
 }

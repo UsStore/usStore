@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
-import com.example.usStore.dao.AccountDao;
 import com.example.usStore.dao.ItemDao;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.domain.Item;

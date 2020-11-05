@@ -26,15 +26,25 @@
     WHERE H.ITEMID = I.ITEMID AND I.ITEMID = #{itemId}
   </select>
   
-  <select id="getHandMadeList" resultType="HandMade">
+  <select id="getHandMadeList" parameterType="String" resultType="HandMade">
     SELECT I.PRODUCTID, I.ITEMID, I.USERID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, I.IMGURL, LISTPRICE
     FROM HANDMADE H, ITEM I, ACCOUNT A
 	WHERE A.USERID = I.USERID AND H.ITEMID = I.ITEMID
-	<if test="university!= null">
-	    	ORDER BY DECODE ( univName, #{university}, 1)
+	<if test="value != null">
+	    	ORDER BY DECODE (univName, #{value}, 1)
 	</if>
   </select>
   
+  <select id="getHMListByRegion" parameterType="java.util.Map" resultType="HandMade">
+    SELECT I.PRODUCTID, I.ITEMID, I.USERID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, I.IMGURL, LISTPRICE
+    FROM HANDMADE H, ITEM I, ACCOUNT A, UNIVERSITY U
+	WHERE A.USERID = I.USERID AND H.ITEMID = I.ITEMID
+			AND U.REGION = #{region}
+	     <if test="univName != null">
+	    	ORDER BY DECODE (univName, #{univName}, 1)
+	    </if>
+  </select>
+ 
   <!-- 내가 추가한 것 -->
   <delete id="deleteHandMade" parameterType="int">
   	DELETE FROM HAMDMADE

@@ -1,7 +1,6 @@
 package com.example.usStore.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /*
  * Event - Attendance Domain Class
@@ -9,20 +8,15 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class Attendance  implements Serializable {
 	
+	private int attendId;
 	private String userId; 			// (FK) userId
-	private int catId;				// (FK) catId 
-	private Date attendance_date;	// 출석체크한 날짜
-	
-	// Constructor
-	public Attendance() {
+	private String attendDate;	// 출석체크한 날짜
+
+	public int getAttendId() {
+		return attendId;
 	}
-	
-	// getter & setter
-	public Date getAttendance_date() {
-		return attendance_date;
-	}
-	public void setAttendance_date(Date attendance_date) {
-		this.attendance_date = attendance_date;
+	public void setAttendId(int attendId) {
+		this.attendId = attendId;
 	}
 	public String getUserId() {
 		return userId;
@@ -30,13 +24,15 @@ public class Attendance  implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	public int getCatId() {
-		return catId;
+	public String getAttendDate() {
+		return attendDate;
 	}
-
-	public void setCatId(int catId) {
-		this.catId = catId;
+	public void setAttendDate(String attendDate) {
+		this.attendDate = attendDate;
 	}
 	
+	@Override
+	public String toString() {
+		return "Attendance [attendId=" + attendId + ", userId=" + userId + ", attendDate=" + attendDate + "]";
+	}	
 }

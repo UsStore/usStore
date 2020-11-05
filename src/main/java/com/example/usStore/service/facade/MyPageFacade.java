@@ -25,4 +25,5 @@ public interface MyPageFacade {
 	
 	String getUnivAddrByName(String univName);
 	
+	int isExistUniv(String univName);
 }

@@ -21,6 +21,7 @@ public class Account implements Serializable {
     private String zip;
     private String country;
     private String phone;
+    private int point;
     @NotEmpty
     private String university;
 
@@ -90,5 +91,18 @@ public class Account implements Serializable {
 	}
 	public void setUniversity(String university) {
 		this.university = university;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	
+	@Override
+	public String toString() {
+		return "Account [userId=" + userId + ", password=" + password + ", email=" + email + ", username=" + username
+				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", city=" + city + ", zip=" + zip + ", country=" + country
+				+ ", phone=" + phone + ", point=" + point + ", university=" + university + "]";
 	}
 }

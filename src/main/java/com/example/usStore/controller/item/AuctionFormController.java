@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.net.URL; 
@@ -75,28 +76,36 @@ public class AuctionFormController {
    
    //경매 리스트 보여주기
    @RequestMapping("/shop/auction/listItem.do") 
-   public String auctionList(@RequestParam("productId") int productId, ModelMap model,HttpServletRequest rq) {
+   public String auctionList(@RequestParam("productId") int productId, 
+		   @RequestParam(value="region", required=false) String region,
+		   ModelMap model,HttpServletRequest rq) {
       myProductId = productId;
       HttpSession session = rq.getSession(false);
       
-      Account account = null;
+      String univName = null; //Account에 속한 필드 의미 
       if (session.getAttribute("userSession") != null) {
              UserSession userSession = (UserSession)session.getAttribute("userSession") ;
              if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
-                account = userSession.getAccount();
+             	Account account = userSession.getAccount();
+             	univName = account.getUniversity();
              }
       }
       
-      List<Auction> al = new ArrayList<Auction>();
-      al = this.itemFacade.getAuctionList(account);
+      List<Auction> al = this.itemFacade.getAuctionList(univName);
       
-      PagedListHolder<Auction> auctionList = new PagedListHolder<Auction>(al);
-      auctionList.setPageSize(4);
+      PagedListHolder<Auction> auctionList = null;
+      if(region != null) { 
+    	  HashMap<String, String> param = new HashMap<String, String>();
+     	  param.put("region", region); 
+     	  param.put("univName", univName);
+    	  auctionList = new PagedListHolder<Auction>(this.itemFacade.getACListByRegion(param));
+      }else {
+    	  auctionList = new PagedListHolder<Auction>(al);
+      } 
+      auctionList.setPageSize(8);
       
       //낙찰자 리스트 구하기 (jsp 에서는 경매가 종료된(auctionState = 1) 상태여야 bidder 을 보여줄 수 있게 해야한다.
-      List<Bidder> bidderList = new ArrayList<Bidder>();
-      bidderList = itemFacade.getBidderList();
-      
+      List<Bidder> bidderList = itemFacade.getBidderList();
       List<Bidder> bl = new ArrayList<Bidder>();
      
       Bidder noBidder = new Bidder();
@@ -118,7 +127,7 @@ public class AuctionFormController {
       }
       
       PagedListHolder<Bidder> resultBidder = new PagedListHolder<Bidder>(bl);
-      resultBidder.setPageSize(4);    
+      resultBidder.setPageSize(8);    
       
       model.addAttribute("productId", productId);
       model.addAttribute("auctionList", auctionList);

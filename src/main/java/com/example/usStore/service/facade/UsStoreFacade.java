@@ -23,6 +23,10 @@ public interface UsStoreFacade {
 	void updateAccount(Account account, University university);
 	
 	Account getAccountByUsername(String username);
+	
+	void updatePoint(String userId, int point);
+	
+	int getPointByUserId(String userId);
 
 	/////////////////////////////////////////////////////////////////////////
 	/* Category */
@@ -42,4 +46,13 @@ public interface UsStoreFacade {
 	Orders getOrder(int orderId);
 	
 	void insertOrder(Orders order);
+	
+	/////////////////////////////////////////////////////////////////////////
+	/* Attendance */
+	/////////////////////////////////////////////////////////////////////////
+	public void insertAttend(String userId);	//출석 처리
+	
+	List<Attendance> getCalendarList(String userId);	//출석 정보 가져오기
+	
+	List<String> getCalendarByDate(String userId); //출석 날짜만 리스트로 가져옴
 }
