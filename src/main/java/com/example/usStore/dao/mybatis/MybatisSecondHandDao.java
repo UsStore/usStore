@@ -145,8 +145,9 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		return secondHandMapper.getItemByTitle("%" + title.toLowerCase() + "%");
 	}
 
-
-
-
+	@Override
+	public List<SecondHand> getSHListByUniv(String univName) {
+		return secondHandMapper.getSHListByUniv(univName);
+	}
 
 }

@@ -54,6 +54,7 @@ public class SecondHandController {
    @RequestMapping("/shop/secondHand/listItem.do")
    public String secondHandList(@RequestParam("productId") int productId, 
 		   @RequestParam(value="region", required=false) String region,
+		   @RequestParam(value="filterUniv", required=false) String filterUniv,
 		   Model model, HttpServletRequest rq) throws Exception {
       /*현재 로그인한 유저가 있다면 그 유저의 대학 필드를 우선적으로 보여주고 
          만약 로그인이 안된 상태에서는 대학 필터링 없이 보여준다.*/
@@ -75,10 +76,11 @@ public class SecondHandController {
     	 HashMap<String, String> param = new HashMap<String, String>();
     	 param.put("region", region); 
     	 param.put("univName", univName);
-    	 System.out.println(param.toString()); 
+    	 
     	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSHListByRegion(param));
-     
-     }else { // 전체 리스트 보여줌 
+     } else if(filterUniv != null) { // 대학교 별로 게시물 필터링 했을 때 
+    	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSHListByUniv(filterUniv));
+     } else { // 전체 리스트 보여줌 
     	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList(univName));
      }
      secondHandList.setPageSize(4);
@@ -86,6 +88,7 @@ public class SecondHandController {
      model.addAttribute("secondHandList", secondHandList);
      model.addAttribute("productId", productId);
      model.addAttribute("university", univAddr); //로그인 사용자의 대학교 도로명 주소 -> 널값이면 jsp 에서 안보여줌 
+     model.addAttribute("filterUniv", filterUniv);
      return "product/secondHand";
    }
    
