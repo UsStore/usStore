@@ -63,7 +63,6 @@ public class SecondHandController {
      String univName = null; //Account에 속한 필드 의미 
      String univAddr = null;
      if (session.getAttribute("userSession") != null) { // 로그인 했을 때  
-    	    System.out.println("로그인 해ㄸㅆ다고오오오 ");
             UserSession userSession = (UserSession)session.getAttribute("userSession") ;
             if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
             	Account account = userSession.getAccount();

@@ -29,10 +29,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
-import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
-import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.HandMadeFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
@@ -184,8 +182,8 @@ public class HandMadeFormController {
          itemForm = (ItemForm) session.getAttribute("itemForm");
          System.out.println("itemformSession: " + itemForm);   //print itemformSession toString
       }
-      if(handMadeForm.getListPrice() >= itemForm.getUnitCost()) {
-         bindingResult.rejectValue("listPrice", "listComUnit");
+      if(handMadeForm.getListPrice() <= itemForm.getUnitCost()) {
+         bindingResult.rejectValue("listPrice", "UnitComList");
       }
       
       if (bindingResult.hasErrors()) {   //유효성 검증 에러 발생시

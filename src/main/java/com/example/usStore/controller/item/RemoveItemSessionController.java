@@ -3,12 +3,10 @@ package com.example.usStore.controller.item;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
@@ -17,25 +15,28 @@ import com.example.usStore.service.facade.UsStoreFacade;
  */
 @Controller
 public class RemoveItemSessionController { 
-
-   private UsStoreFacade usStore;
-
-   @Autowired
-   public void setusStore(UsStoreFacade usStore) {
-      this.usStore = usStore;
-   }
    
-   @RequestMapping("/shop/item/indexFromLogo.do") //go index(remove sessions)
+   @RequestMapping("/shop/item/goToIndex.do") //go index(remove sessions)
    public String Index(SessionStatus sessionStatus, HttpServletRequest rq)
    {
       HttpSession session = rq.getSession(false);
-         System.out.println("들어옴");
+         System.out.println("item 작성 세션 종료  index");
          session.removeAttribute("itemForm");   //itemForm session close
          session.removeAttribute("status");      //edit flag Session close
          session.removeAttribute("GroupBuying"); 
          session.removeAttribute("Auction"); 
          session.removeAttribute("handMadeForm"); 
-         session.removeAttribute("secondHandForm"); 
+         session.removeAttribute("secondHandForm");
+         
+         return "redirect:/shop/index.do";
+   }
+   
+   @RequestMapping("/shop/account/goToIndex.do") //go index(remove sessions)
+   public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
+   {
+      HttpSession session = rq.getSession(false);
+         System.out.println("account 세션 종료  index");
+         session.removeAttribute("accountForm");
          
          return "redirect:/shop/index.do";
    }

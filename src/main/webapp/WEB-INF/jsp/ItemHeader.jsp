@@ -65,8 +65,9 @@
                 <span class="action pull-left">
 					<ul class="navbar-nav">
 						<li class="nav-item active">
-							<!-- Session 정리 필요합니당 -->
-							<a class="nav-link" href="<c:url value="/shop/index.do"/>">
+							<!-- Session 정리 필요합니당 각item.jsp, item.jsp, addItem.jsp, viewItem.jsp, checkItem.jsp, cart.jsp, checkOut.jsp, 
+							ConfirmOrder.jsp, ListOrders.jsp, NewOrderForm.jsp, ShippingForm.jsp, ViewOrder.jsp, -->
+							<a class="nav-link" href="<c:url value="/shop/item/goToIndex.do"/>">
 								<img border="0" src="${pageContext.request.contextPath}/images/home.png"
 									style="float: left; width: 30; height: 30; border: 0;" />
 							</a>
@@ -153,7 +154,7 @@
 			<div class="row">	
 				<div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
 					<div class="logo">
-						<a href="<c:url value="/shop/index.do"/>">
+						<a href="<c:url value="/shop/item/goToIndex.do"/>">
 		            		<img src="${pageContext.request.contextPath}/images/logo.png" alt="UsStore">
 		        		</a>  
 	        		</div>
