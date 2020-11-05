@@ -25,9 +25,9 @@ public interface InquiryFacade {
 	/* Reply */
 	/////////////////////////////////////////////////////////////////////////
 	 
-	List<Reply> getReplyByItem();
+	List<Reply> getReplyByItem(int itemId);
 	
-	List<Reply> getReplyByQID();
+	List<Reply> getReplyByQID(int QID);
 	
 	void insertReply(Reply reply);
 	

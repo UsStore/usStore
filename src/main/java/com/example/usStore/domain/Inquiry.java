@@ -1,6 +1,9 @@
 package com.example.usStore.domain;
 
 import java.io.Serializable;
+import java.sql.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
 public class Inquiry implements Serializable{
@@ -10,12 +13,13 @@ public class Inquiry implements Serializable{
 	private String userId; // FK - Account
 	private int itemId; // FK - Item 
 	private String isSecret; // "0" :공개, "1": 비공개 
-	private int isAnswer; // "0" : 답변예정 , "1": 답변완료 
-	private String ts; //time stamp
+	private int isAnswer; // "0" : 답변예정 , "1": 답변완료
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date ts; //time stamp
 	
 	public Inquiry() {}
 	public Inquiry(int qID, String title, String content, String userId, int itemId, String isSecret, int isAnswer,
-			String ts) {
+			Date ts) {
 		QID = qID;
 		this.title = title;
 		this.content = content;
@@ -67,10 +71,10 @@ public class Inquiry implements Serializable{
 	public void setIsAnswer(int isAnswer) {
 		this.isAnswer = isAnswer;
 	}
-	public String getTs() {
+	public Date getTs() {
 		return ts;
 	}
-	public void setTs(String ts) {
+	public void setTs(Date ts) {
 		this.ts = ts;
 	}
 	

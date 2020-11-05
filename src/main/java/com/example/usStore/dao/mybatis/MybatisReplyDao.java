@@ -20,13 +20,13 @@ public class MybatisReplyDao implements ReplyDao{
 	private ReplyMapper replyMapper;
 	
 	@Override
-	public List<Reply> getReplyByItem() {
-		return replyMapper.getReplyByItem();
+	public List<Reply> getReplyByItem(int itemId) {
+		return replyMapper.getReplyByItem(itemId);
 	}
 
 	@Override
-	public List<Reply> getReplyByQID() {
-		return replyMapper.getReplyByQID();
+	public List<Reply> getReplyByQID(int QID) {
+		return replyMapper.getReplyByQID(QID);
 	}
 
 	@Override

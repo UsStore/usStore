@@ -6,9 +6,9 @@ import com.example.usStore.domain.Reply;
 
 public interface ReplyMapper {
 	
-	List<Reply> getReplyByItem();
+	List<Reply> getReplyByItem(int itemId);
 	
-	List<Reply> getReplyByQID();
+	List<Reply> getReplyByQID(int QID);
 	
 	void insertReply(Reply reply);
 	

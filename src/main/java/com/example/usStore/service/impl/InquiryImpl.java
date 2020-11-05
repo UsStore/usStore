@@ -62,13 +62,13 @@ public class InquiryImpl implements InquiryFacade{
 
 	
 	@Override
-	public List<Reply> getReplyByItem() {
-		return replyDao.getReplyByItem();
+	public List<Reply> getReplyByItem(int itemId) {
+		return replyDao.getReplyByItem(itemId);
 	}
 
 	@Override
-	public List<Reply> getReplyByQID() {
-		return replyDao.getReplyByQID();
+	public List<Reply> getReplyByQID(int QID) {
+		return replyDao.getReplyByQID(QID);
 	}
 
 	@Override
