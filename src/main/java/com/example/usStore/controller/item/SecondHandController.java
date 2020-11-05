@@ -86,7 +86,6 @@ public class SecondHandController {
     	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSHListByUniv(filterUniv));
      }
     
-
      secondHandList.setPageSize(4);
      
      model.addAttribute("secondHandList", secondHandList);
