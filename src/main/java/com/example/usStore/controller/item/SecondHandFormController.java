@@ -90,8 +90,8 @@ public class SecondHandFormController {
 	    new SecondHandFormValidator().validate(secondHandForm, result);
 	    ItemForm itemForm = (ItemForm)session.getAttribute("itemForm");
 	    
-		if(secondHandForm.getListPrice() <= itemForm.getUnitCost()) {
-			result.rejectValue("listPrice", "mustBig");
+		if(secondHandForm.getListPrice() >= itemForm.getUnitCost()) {
+			result.rejectValue("listPrice", "listComUnit");
 		}
 		
 		if (result.hasErrors()) {	//유효성 검증 에러 발생시

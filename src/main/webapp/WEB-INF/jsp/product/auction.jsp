@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="ItemHeader.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <form name="pform" action="">
 	<div class="featured-items">
@@ -39,7 +40,18 @@
 	                                			</c:url>"> 
 											<div class="product-description" style="padding: 10px">
 
-												<p class="title"><font size="3">제품명 : ${al.title}</font></p>
+												<p class="title">
+													<c:choose>
+														<c:when test="${fn:length(al.title) gt 15}">
+															<font size="4">
+																<c:out value="${fn:substring(al.title, 0, 14)}"/> ...
+															</font>
+														</c:when>
+														<c:otherwise>
+															<font size="4">${al.title}</font>
+														</c:otherwise>
+													</c:choose>
+												</p>
 												<p class="user"><font size="3">판매자 : ${al.userId}</font></p>
 												<p class="user">
 													<font size="3"> 낙찰자 : 

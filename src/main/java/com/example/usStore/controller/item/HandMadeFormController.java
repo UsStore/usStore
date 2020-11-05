@@ -185,7 +185,7 @@ public class HandMadeFormController {
          System.out.println("itemformSession: " + itemForm);   //print itemformSession toString
       }
       if(handMadeForm.getListPrice() >= itemForm.getUnitCost()) {
-         bindingResult.rejectValue("listPrice", "isSmall");
+         bindingResult.rejectValue("listPrice", "listComUnit");
       }
       
       if (bindingResult.hasErrors()) {   //유효성 검증 에러 발생시

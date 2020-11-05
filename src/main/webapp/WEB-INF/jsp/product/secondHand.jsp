@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="ItemHeader.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!-- db에서 select 결과 보여주는 페이지 -->
 <form name="pform" action="">
@@ -51,7 +52,18 @@
 	                                			</c:url>"> 
 											<div class="product-description" style="padding: 10px">
 
-												<p class="title"><font size="4">${item.title}</font></p>
+												<p class="title">
+													<c:choose>
+														<c:when test="${fn:length(item.title) gt 15}">
+															<font size="4">
+																<c:out value="${fn:substring(item.title, 0, 14)}"/> ...
+															</font>
+														</c:when>
+														<c:otherwise>
+															<font size="4">${item.title}</font>
+														</c:otherwise>
+													</c:choose>												
+												</p>
 												<hr>
 												<p class="price" align="right">
 													정가 : 

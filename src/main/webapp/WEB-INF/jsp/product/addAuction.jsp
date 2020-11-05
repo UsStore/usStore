@@ -45,7 +45,7 @@
 
                 <span>Category > </span>
 
-                <span>HandMade > </span>
+                <span>Auction > </span>
 
                 <span>Add Item > </span>
 
