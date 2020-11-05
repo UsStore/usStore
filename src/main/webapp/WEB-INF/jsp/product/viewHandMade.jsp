@@ -191,7 +191,7 @@ function getReview(itemId) {   //매개변수 전달 시도
 
                     <div class="price">
 
-                        <span><c:out value="${handMade.unitCost}" /> 원</span>
+                        <span><c:out value="${handMade.listPrice}" /> 원</span>
 
                     </div>
 
