@@ -96,6 +96,10 @@ function getReview(itemId) {   //매개변수 전달 시도
  	    document.location.href="/usStore/shop/groupBuying/edit.do?itemId=" + itemId;	//확인 클릭
  	 }
  }
+
+function refuseBuyer() {
+	alert('판매자는 본인 상품을 구매할 수 없습니다!');
+}
  
  function getTime() { 
     var time = "${gb.deadLine}";
@@ -260,17 +264,20 @@ function getReview(itemId) {   //매개변수 전달 시도
 				                </a>
 				             </span>
 				        </c:if>
+				        <c:if test="${gb.state == 0 && gb.userId eq userSession.account.userId}">
+				        	<span>
+				        		<a href="javascript:refuseBuyer()">
+				             		<button class="btn btn-theme" type="button">공동구매 참여하기</button>
+				             	</a>
+				             </span> 
+				        </c:if>
+				        
 				        <c:if test="${gb.state == 1}">   <!-- 공동구매 마감 -->
 				             <span>
 				             	<button class="btn btn-theme" type="button"> 공동구매가 마감되었습니다.</button>
 				             </span>
 				        </c:if>
-				        <c:if test="${gb.userId eq userSession.account.userId}">
-				        	<span>
-				             	<button class="btn btn-theme" type="button" disabled>공동구매 참여하기</button>
-				             </span> 
-				        </c:if>
-				            
+				        				            
 				       <br><br><br>
 				       <div class="alert alert-success" role="alert" align="center">
 						  	<span class="badge badge-pill" id="badge">마감 날짜 : ${gb.deadLine}</span>

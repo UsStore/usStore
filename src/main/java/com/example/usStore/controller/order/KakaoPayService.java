@@ -18,7 +18,7 @@ import lombok.extern.java.Log;
  
 @Service
 @Log
-@SessionAttributes({"sessionCart", "orderForm"})
+@SessionAttributes("orderForm")
 public class KakaoPayService {
  
     private static final String HOST = "https://kapi.kakao.com";

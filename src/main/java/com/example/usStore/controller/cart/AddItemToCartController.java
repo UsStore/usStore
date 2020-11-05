@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.usStore.domain.Cart;
 import com.example.usStore.domain.Item;
 import com.example.usStore.service.facade.ItemFacade;
-import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
