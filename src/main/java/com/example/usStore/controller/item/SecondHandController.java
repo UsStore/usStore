@@ -62,27 +62,32 @@ public class SecondHandController {
    
      String univName = null; //Account에 속한 필드 의미 
      String univAddr = null;
-     if (session.getAttribute("userSession") != null) {
+     if (session.getAttribute("userSession") != null) { // 로그인 했을 때  
+    	    System.out.println("로그인 해ㄸㅆ다고오오오 ");
             UserSession userSession = (UserSession)session.getAttribute("userSession") ;
             if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
             	Account account = userSession.getAccount();
             	univName = account.getUniversity();
             	univAddr = this.myPageFacade.getUnivAddrByName(univName);
             }
-     }
+     } 
      
-     PagedListHolder<SecondHand> secondHandList = null;
-     if(region != null) {  // 지역별 게시물 필터링 적용했을 때 
+     // 전체 리스트 보여줌 - 디폴트 
+     PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList(univName));
+     
+     if(region != null && filterUniv == null) {  // 지역별 게시물 필터링 적용했을 때 
+    	 System.out.println("지역별 필터링 적용했을 때 선택한 지역 :  " + region);
     	 HashMap<String, String> param = new HashMap<String, String>();
     	 param.put("region", region); 
-    	 param.put("univName", univName);
-    	 
+    	 param.put("univName", univName); 
     	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSHListByRegion(param));
-     } else if(filterUniv != null) { // 대학교 별로 게시물 필터링 했을 때 
+     } 
+     if(region == null && filterUniv != null) { // 지도에서 대학교 별로 게시물 필터링 했을 때 
+    	 System.out.println("지도에 대학교 별로 게시물 필터링 선택한 대학교이름 :  " + filterUniv);
     	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSHListByUniv(filterUniv));
-     } else { // 전체 리스트 보여줌 
-    	 secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList(univName));
      }
+    
+
      secondHandList.setPageSize(4);
      
      model.addAttribute("secondHandList", secondHandList);

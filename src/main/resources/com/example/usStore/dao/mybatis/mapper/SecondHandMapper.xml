@@ -10,7 +10,7 @@
 	    FROM SECONDHAND S, ITEM I, ACCOUNT A
 	    WHERE A.USERID = I.USERID AND S.ITEMID = I.ITEMID
 	    <if test="value != null">
-	    	ORDER BY DECODE (univName, #{value}, 1)
+	    	ORDER BY DECODE (A.UNIVNAME, #{value}, 1)
 	    </if>
 	</select>
 	
@@ -20,7 +20,7 @@
 		    I.USERID, I.PRODUCTID, I.IMGURL, S.DISCOUNT, S.LISTPRICE  	 
 		FROM SECONDHAND S, ITEM I, ACCOUNT A
 		WHERE A.USERID = I.USERID AND S.ITEMID = I.ITEMID
-			AND A.univName = #{value}
+			AND A.UNIVNAME = #{value}
 	</select>
 	
 	<select id="getSHListByRegion" parameterType="java.util.Map" resultType="SecondHand">
@@ -32,7 +32,7 @@
 	    	AND U.UNIVNAME = A.UNIVNAME
 	    	AND U.REGION = #{region}
 	     <if test="univName != null">
-	    	ORDER BY DECODE (univName, #{univName}, 1)
+	    	ORDER BY DECODE (A.UNIVNAME, #{univName}, 1)
 	    </if>
 	</select>
 	

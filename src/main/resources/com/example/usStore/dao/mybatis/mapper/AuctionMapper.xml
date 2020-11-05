@@ -21,7 +21,7 @@
 		FROM AUCTION A, ITEM I, ACCOUNT AC
 		WHERE AC.USERID = I.USERID AND A.ITEMID = I.ITEMID
 		<if test="value != null">
-	    	ORDER BY DECODE (univName, #{value}, 1)
+	    	ORDER BY DECODE (A.UNIVNAME, #{value}, 1)
 	    </if>
 	</select>
 	
@@ -44,7 +44,7 @@
 		WHERE AC.USERID = I.USERID AND A.ITEMID = I.ITEMID
 			AND U.REGION = #{region}
 	     <if test="univName != null">
-	    	ORDER BY DECODE (univName, #{univName}, 1)
+	    	ORDER BY DECODE (A.UNIVNAME, #{univName}, 1)
 	    </if>
 	</select>
 
