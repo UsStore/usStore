@@ -5,9 +5,7 @@
 <form name="pform" action="">
 	<div class="featured-items">
 	  	<div class="div_map" align="center">
-	  	  <c:if test="${university != null}">
 	  		<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
-	  	  </c:if>
 	  	</div>
 		<div class="container">
 			<%@ include file="filterRegion.jsp"%>
@@ -17,6 +15,14 @@
 						<a href="#trending" data-toggle="tab">
 							<font size="5">SecondHand List</font></a>
 					</li>
+					<c:if test="${filterUniv != null}">
+						<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						<li class="collection-url">
+							<a href="#best-seller">
+								<font color="white" size="5"><c:out value="< ${filterUniv} > 판매 게시물 검색결과"/></font>
+							</a>
+						</li>
+					</c:if>
 					<li class="pull-right collection-url">
 						<a href="<c:url value='/shop/item/addItem.do'>
 		               			<c:param name="productId" value="${productId}"/></c:url>">
