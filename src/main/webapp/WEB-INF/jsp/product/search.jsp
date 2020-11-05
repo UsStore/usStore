@@ -63,7 +63,7 @@
 											<img src="${pageContext.request.contextPath}/images/picture.png" alt="" class="thumbnail">
 										</c:if>
 										<c:if test="${item.imgUrl ne null}">
-											<img src="getImage.do?itemId=${item.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
+											<img src="getImage.do?itemId=${item.itemId}&productId=${item.productId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
 										</c:if>
 
 										<a href="<c:url value='/shop/search/selectItem.do'>
