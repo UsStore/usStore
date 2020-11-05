@@ -3,11 +3,17 @@ package com.example.usStore.dao.mybatis;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.ReplyDao;
 import com.example.usStore.dao.mybatis.mapper.ReplyMapper;
 import com.example.usStore.domain.Reply;
 
+@Transactional
+@Qualifier("mybatisReplyDao")
+@Repository
 public class MybatisReplyDao implements ReplyDao{
 
 	@Autowired
