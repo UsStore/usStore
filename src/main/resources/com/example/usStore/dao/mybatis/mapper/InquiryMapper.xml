@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.usStore.dao.mybatis.mapper.InquiryMapper">
+  <cache />
+  
+  <select id="getInquiryByItem" parameterType="int" resultType="Inquiry">
+  	SELECT *
+  	FROM Inquiry
+  	WHERE ITEMID = #{value}
+  </select>
+  
+  <select id="getInquiryByUserId" parameterType="String" resultType="Inquiry">
+  	SELECT *
+  	FROM Inquiry
+  	WHERE USERID = #{value}
+  </select>
+
+  <insert id="insertInquiry" parameterType="Inquiry">
+     INSERT INTO Inquiry (QID, title, content, userId, itemId, isSecret, isAnswer, ts)
+     VALUES (inquiry_seq.nextval(), #{title}, #{content}, #{userId}, #{itemId}, #{isSecret}, #{isAnswer}, TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi:ss'))
+  </insert>
+  
+  <update id="updateInquiry" parameterType="Inquiry">
+	    UPDATE Inquiry SET
+	  		QID = #{QID},
+	  		title = #{title},
+	  		content = #{content},
+	  		userId = #{userId},
+	  		itemId = #{itemId},
+	  		isSecret = #{isSecret},
+	  		isAnswer = #{isAnswer},
+	  		ts = TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi:ss')
+	    WHERE QID=#{QID}
+  </update>
+  
+  <delete id="deleteInquiry" parameterType="int">
+		DELETE FROM Inquiry
+		WHERE QID=#{value}
+  </delete>
+</mapper>
