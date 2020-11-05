@@ -233,7 +233,7 @@ public class Orders implements Serializable {
 	
 	public String getItemName() {
 		String rslt = "";
-		rslt = lineItems.get(0).getItem().getTitle();
+		rslt = lineItems.get(0).getTitle();
 		if(lineItems.size() >= 2) {
 			rslt += " 외 ";
 			rslt += lineItems.size() - 1 + "개";
