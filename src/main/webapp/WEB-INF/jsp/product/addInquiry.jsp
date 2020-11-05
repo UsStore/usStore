@@ -1,25 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../ItemHeader.jsp"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script>
 	function addReview() {
-		 if (confirm("등록 후 수정이 불가능합니다.\n정말 리뷰를 등록하시겠습니까?") == true){    //확인
+		 if (confirm("등록 후 수정이 불가능합니다.\n정말 게시글을 등록하시겠습니까?") == true){    //확인
 		     document.addReviewfrm.submit();	//폼 제출
 		 }else{   //취소
 		     return false;
 	 }
 	}
 </script>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>리뷰 작성</title>
-</head>
 <style>
-	div#addReviewForm {
+	div#addInquiryForm {
 		margin-left: 100px;
 		border: none;
 		padding: 20px;
@@ -71,10 +63,10 @@
 	}
 </style>
 <body>
-	<div id="addReviewForm">
-		<h2>리뷰 작성</h2>
+	<div id="addInquiryForm">
+		<h2>제품 문의하기</h2>
 		<hr width="927px" align="left"><br>
-	<spring:hasBindErrors name="review" />
+	<spring:hasBindErrors name="rive" />
 	<form:form modelAttribute="review" method="post" name="addReviewfrm" action="addReview.do?itemId=${itemId}">
 
 			<font size="6px">"${title}"</font>&nbsp;&nbsp;&nbsp;상품은 어떠셨나요?<br>

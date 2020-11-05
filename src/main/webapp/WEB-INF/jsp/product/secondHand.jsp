@@ -1,13 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%>
+<%@ include file="../ItemHeader.jsp"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!-- db에서 select 결과 보여주는 페이지 -->
 <form name="pform" action="">
 	<div class="featured-items">
 	  	<div class="div_map" align="center">
-	  	  <c:if test="${university != null}">
 	  		<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
-	  	  </c:if>
 	  	</div>
 		<div class="container">
 			<%@ include file="filterRegion.jsp"%>
@@ -17,6 +16,14 @@
 						<a href="#trending" data-toggle="tab">
 							<font size="5">SecondHand List</font></a>
 					</li>
+					<c:if test="${filterUniv != null}">
+						<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						<li class="collection-url">
+							<a href="#best-seller">
+								<font color="white" size="5"><c:out value="< ${filterUniv} > 판매 게시물 검색결과"/></font>
+							</a>
+						</li>
+					</c:if>
 					<li class="pull-right collection-url">
 						<a href="<c:url value='/shop/item/addItem.do'>
 		               			<c:param name="productId" value="${productId}"/></c:url>">
@@ -45,15 +52,26 @@
 	                                			</c:url>"> 
 											<div class="product-description" style="padding: 10px">
 
-												<p class="title"><font size="4">${item.title}</font></p>
+												<p class="title">
+													<c:choose>
+														<c:when test="${fn:length(item.title) gt 10}">
+															<font size="4">
+																<c:out value="${fn:substring(item.title, 0, 9)}"/> ...
+															</font>
+														</c:when>
+														<c:otherwise>
+															<font size="4">${item.title}</font>
+														</c:otherwise>
+													</c:choose>												
+												</p>
 												<hr>
 												<p class="price" align="right">
-													정가 : 
-													<fmt:formatNumber value="${item.listPrice}" pattern="###,###원" />
+													원가 : 
+													<fmt:formatNumber value="${item.unitCost}" pattern="###,###원" />
 												</p>
 												<p class="price" align="right">
 													판매가 : 
-													<fmt:formatNumber value="${item.unitCost}" pattern="###,###원" />
+													<fmt:formatNumber value="${item.listPrice}" pattern="###,###원" />
 												</p>
 												<p class="discount" align="right">
 													흥정 가능 여부 : 

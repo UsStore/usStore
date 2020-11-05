@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <html>
 <head>
 <title>UsStore</title>
@@ -44,8 +46,6 @@
 
 	<script>
 		function search(word) {
-			alert("검색어 : " + word);
-	
 			searchForm.submit();
 		}
 	</script>

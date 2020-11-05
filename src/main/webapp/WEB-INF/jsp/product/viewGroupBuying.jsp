@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%> 
+<%@ include file="../ItemHeader.jsp"%> 
 <style>
 
 	.review {
@@ -235,9 +235,9 @@ function getReview(itemId) {   //매개변수 전달 시도
 						<p style="padding: 20px; "><c:out value="${gb.description}" escapeXml="false" /></p>
                     </div>
 
-					<del>${gb.listPrice}원</del>
+					<del>${gb.unitCost}원</del>
                     <div class="price">
-                        <span>${gb.unitCost}원&nbsp;<font color=red>&nbsp;&nbsp;&nbsp;${gb.discount}% 할인</font></span>
+                        <span>${gb.listPrice}원&nbsp;<font color=red>&nbsp;&nbsp;&nbsp;${gb.discount}% 할인</font></span>
                     </div>
 
                     <form action="" class="purchase-form">
@@ -347,8 +347,9 @@ function getReview(itemId) {   //매개변수 전달 시도
 
                 <ul class="nav nav-tabs nav-single-product-tabs">
 
-                    <li class="active"><a href="#reviews" data-toggle="tab">Reviews</a></li>
+					<li class="active"><a href="#reviews" data-toggle="tab">제품 후기</a></li>
 
+					<li><a href="#inquirys" data-toggle="tab">제품 문의</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -364,6 +365,17 @@ function getReview(itemId) {   //매개변수 전달 시도
 						</form>
 						
 					</div>
+					
+					<div class="tab-pane" id="inquirys" align="center">
+
+						<!-- Review -->
+						<form name="pform" action="">
+							<div class="inquiry">
+								<p>제품 후기</p>
+							</div>
+						</form>
+						
+					</div>				
 
                 </div>
 

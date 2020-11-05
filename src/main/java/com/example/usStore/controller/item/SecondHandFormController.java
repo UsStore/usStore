@@ -90,8 +90,8 @@ public class SecondHandFormController {
 	    new SecondHandFormValidator().validate(secondHandForm, result);
 	    ItemForm itemForm = (ItemForm)session.getAttribute("itemForm");
 	    
-		if(secondHandForm.getListPrice() <= itemForm.getUnitCost()) {
-			result.rejectValue("listPrice", "mustBig");
+		if(secondHandForm.getListPrice() >= itemForm.getUnitCost()) {
+			result.rejectValue("listPrice", "listComUnit");
 		}
 		
 		if (result.hasErrors()) {	//유효성 검증 에러 발생시
@@ -212,6 +212,7 @@ public class SecondHandFormController {
 	
 	@RequestMapping(value="/shop/secondHand/getImage.do")
 	   public void getImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("getImage들어옴");
 	      int itemId = Integer.parseInt(request.getParameter("itemId"));
 	      
 	      SecondHand sh = itemFacade.getSecondHandItem(itemId);

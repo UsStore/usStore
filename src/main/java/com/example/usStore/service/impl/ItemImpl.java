@@ -232,7 +232,11 @@ public class ItemImpl implements ItemFacade {
 		secondHandDao.updateSecondHand(secondHand);
 	}
 
-	
+	@Override
+	public List<SecondHand> getSHListByUniv(String univName) {
+		return secondHandDao.getSHListByUniv(univName);
+	}
+
 //********************Auction********************
 	@Override
 	public List<Auction> getAuctionList(String univName) {
@@ -401,6 +405,7 @@ public class ItemImpl implements ItemFacade {
 	public Review findReviewByuserIdAndItemId(int itemId, String buyer) {
 		return reviewDao.findReviewByuserIdAndItemId(itemId, buyer);
 	}
+
 
 
 	

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%> 
+<%@ include file="../ItemHeader.jsp"%> 
 <style>
 
-	* {
+	.short-description, span {
 		font-size: 20px;
 	}
 	.product-info {
@@ -43,7 +43,7 @@
 
                 <span>Category > </span>
 
-                <span>HandMade > </span>
+                <span>SecondHand > </span>
 
                 <span>Add Item > </span>
 
@@ -69,7 +69,7 @@
 					<form:form modelAttribute="secondHandForm" method="post" enctype="multipart/form-data" action="step3.do?${_csrf.parameterName}=${_csrf.token}">
                     <!-- ListPrice -->
                     <div class="product-info">
-                    	<span class="badge badge-pill badge-dark" id="badge">정가</span>
+                    	<span class="badge badge-pill badge-dark" id="badge">판매가</span>
                     	<span>
                     	 	<form:input type="text" path="listPrice" value="${listPrice}" style="margin-left: 10px; width:380px; height:35px;"/>
 					        <br><form:errors path="listPrice" style="margin-left:150px" /> 

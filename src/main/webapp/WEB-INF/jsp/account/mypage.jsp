@@ -83,7 +83,7 @@
 								for="inputCountry">Country</label>
 						</div>
 
-						<button class="btn btn-lg btn-light btn-block text-uppercase"
+						<button class="btn btn-lg btn-block btn-block text-uppercase"
 							type="submit">Edit Account</button>
 					</form:form>
 

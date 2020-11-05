@@ -10,19 +10,22 @@
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
+            <hr class="my-4"><br><br>
             <form:form class="form-signin" modelAttribute="accountForm" method="post">
  			<form:errors cssClass="error" /> 
  			
  			<h6 class="card-title text-center"> University </h6>
 			<div class="form-label-group">
-				<button class="btn btn-lg btn-light btn-block text-uppercase" type="button" onclick="popup();" type="button">대학교 검색하기</button>
 				<c:if test="${accountForm.newAccount}">
-				        <form:input path="account.university" id="inputUniversity" readonly="true" value="${accountForm.account.university}" class="form-control" />
-						<B><form:errors path="account.university" cssClass="error" /></B>
+					<form:input path="account.university" id="inputUniversity" readonly="true" value="${accountForm.account.university}" class="form-control"/>
+					<B><form:errors path="account.university" cssClass="error" /></B>
+					<label for="inputUniversity">University</label>
 				</c:if> 
 				<c:if test="${!accountForm.newAccount}">
-				        <form:input path="account.university" id="inputUniversity" readonly="true" value="${accountForm.account.university}" class="form-control" />
+					<form:input path="account.university" id="inputUniversity" readonly="true" value="${accountForm.account.university}" class="form-control" />
+					<label for="inputUniversity">University</label>
 				</c:if>
+				<button class="btn btn-block btn-dark" style="font-size: 15px;" type="button" onclick="popup();" type="button">대학교 검색하기</button>
 				<script>
 			        function popup(){
 			            var url = "/usStore/searchUniv.do";
@@ -31,9 +34,8 @@
 			            window.open(url, name, option);
 			        }
 			    </script>
+			<br>
 			</div>
-			<hr class="my-4">
- 						
               <div class="form-label-group">
                 <c:if test="${accountForm.newAccount}">
 	              <form:input path="account.userId" class="form-control"/>
@@ -42,7 +44,7 @@
 	            <c:if test="${!accountForm.newAccount}">
 	              <form:input path="account.userId" class="form-control" value="${accountForm.account.userId}" disabled="true"/>
 	            </c:if>
-                <label for="inputUserame">USER ID</label>
+                <label for="inputUsername">USER ID</label>
               </div>
               
               <div class="form-label-group">
@@ -56,11 +58,10 @@
                 <B><form:errors path="repeatedPassword" cssClass="error" /></B>
                 <label for="inputConfirmPassword">Confirm password</label>
               </div>
-              
-			  <hr class="my-4">
+              <br><br>
 			  <%@ include file="IncludeAccountFields.jsp"%>
 			  <hr class="my-4">
-              <button class="btn btn-lg btn-light btn-block text-uppercase" type="submit">Register</button>
+              <button class="btn btn-lg btn-dark btn-block text-uppercase" style="font-size: 20px;" type="submit">Register</button>
              </form:form>
              <%--   <h3><b><a href='<c:url value="/shop/listOrders.do"/>'>My Orders</a></b></h3> --%>
           </div>

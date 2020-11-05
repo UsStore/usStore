@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%>
+<%@ include file="../ItemHeader.jsp"%> 
 <style>
 	
 	#badge {
@@ -63,7 +63,7 @@
 											<img src="${pageContext.request.contextPath}/images/picture.png" alt="" class="thumbnail">
 										</c:if>
 										<c:if test="${item.imgUrl ne null}">
-											<img src="getImage.do?itemId=${item.itemId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
+											<img src="getImage.do?itemId=${item.itemId}&productId=${item.productId}" class="thumbnail" onerror="this.src='${pageContext.request.contextPath}/images/picture.png'" />
 										</c:if>
 
 										<a href="<c:url value='/shop/search/selectItem.do'>
@@ -89,7 +89,16 @@
 												</p>
 													
 												<p class="title" align="right">
-									               <font size="4"><c:out value="${item.title}"/></font>
+									               	<c:choose>
+														<c:when test="${fn:length(item.title) gt 13}">
+															<font size="4">
+																<c:out value="${fn:substring(item.title, 0, 12)}"/> ...
+															</font>
+														</c:when>
+														<c:otherwise>
+															<font size="4">${item.title}</font>
+														</c:otherwise>
+													</c:choose>
 												</p>
 											</div>
 										</a>

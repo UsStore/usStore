@@ -25,4 +25,6 @@ public interface SecondHandDao extends ItemDao {
 	public List<SecondHand> getSHListByRegion(HashMap<String, String> param) throws DataAccessException;
 
 	List<University> getSHMapInfo() throws DataAccessException;
+	
+	List<SecondHand> getSHListByUniv(String univName) throws DataAccessException;
 }

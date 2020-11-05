@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%> 
+<%@ include file="../ItemHeader.jsp"%> 
 <style>
 
 	.short-description, span {
@@ -45,7 +45,7 @@
 
                 <span>Category > </span>
 
-                <span>HandMade > </span>
+                <span>Auction > </span>
 
                 <span>Add Item > </span>
 

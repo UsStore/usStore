@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%>
+<%@ include file="../ItemHeader.jsp"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!-- db에서 select 결과 보여주는 페이지 -->
 <style>  
 
@@ -50,15 +52,26 @@
 					                            <c:param name="itemId" value="${gb.itemId}"/>
 		                                	</c:url>">
 										
-												<p class="title"><font size="4">${gb.title}</font></p>
+												<p class="title">
+													<c:choose>
+														<c:when test="${fn:length(gb.title) gt 10}">
+															<font size="4">
+																<c:out value="${fn:substring(gb.title, 0, 9)}"/> ...
+															</font>
+														</c:when>
+														<c:otherwise>
+															<font size="4">${gb.title}</font>
+														</c:otherwise>
+													</c:choose>												
+												</p>
 												<hr>
 												<p class="price" align="right">
 													<del>
-														정가 :
-														<fmt:formatNumber value="${gb.listPrice}" pattern="###,###원" />
+														원가 :
+														<fmt:formatNumber value="${gb.unitCost}" pattern="###,###원" />
 													</del>
-													<br> 할인가 :
-													<fmt:formatNumber value="${gb.unitCost}" pattern="###,###원" />
+													<br> 판매가 :
+													<fmt:formatNumber value="${gb.listPrice}" pattern="###,###원" />
 												</p>
 									
 												<p class="price" align="right"><font color="#FF4500">${gb.discount}% 할인</font></p>

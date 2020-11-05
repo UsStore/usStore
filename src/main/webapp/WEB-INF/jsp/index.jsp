@@ -16,7 +16,7 @@
 
                             <h3>솜솜이 관련 굿즈, <br> 사고싶다면?</h3>
 
-                            <a href="" class="btn btn-theme">Shop Now</a>
+                            <a href="search/viewItem.do?sKind=title&word=솜솜" class="btn btn-theme">Shop Now</a>
 
                         </div>
 
@@ -32,7 +32,7 @@
 
                             <h3>우리 학교 학잠 <br> 사러가기</h3>
 
-                            <a href="" class="btn btn-theme">Shop Now</a>
+                            <a href="search/viewItem.do?sKind=title&word=학잠" class="btn btn-theme">Shop Now</a>
 
                         </div>
 
@@ -48,7 +48,7 @@
 
                             <h3>전공 책<br>중고 판매</h3>
 
-                            <a href="" class="btn btn-theme">Shop Now</a>
+                            <a href="search/viewItem.do?sKind=title&word=전공책" class="btn btn-theme">Shop Now</a>
 
                         </div>
 
