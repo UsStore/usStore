@@ -77,15 +77,18 @@ public class OrderController {
 			@ModelAttribute("sessionCart") Cart cart,
 			@ModelAttribute("orderForm") OrderForm orderForm) throws ModelAndViewDefiningException {
 		
-		// restore orderForm in session
 		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
 		request.setAttribute("orderForm", orderForm);
+		System.out.println("newOrder : " + payFlag);
 		
+		// restore orderForm in session
 		if (cart != null) {
 			// Re-read account from DB at team's request.
 			Account account = usStore.getAccountByUserId(userSession.getAccount().getUserId());
 			
-			orderForm.getOrder().initOrder(account, cart, "OK");
+			if(payFlag == null) {
+				orderForm.getOrder().initOrder(account, cart, "OK");
+			}
 			return "order/NewOrderForm";	
 		} else {
 			ModelAndView modelAndView = new ModelAndView("Error");
@@ -96,8 +99,8 @@ public class OrderController {
 	
 	
 	@RequestMapping("/shop/newOrderSubmitted.do")
-	public String bindAndValidateOrder(HttpServletRequest request,
-			@ModelAttribute("orderForm") OrderForm orderForm, BindingResult result) {
+	public String bindAndValidateOrder(@RequestParam(value="payFlag", required=false) String payFlag, 
+			HttpServletRequest request, @ModelAttribute("orderForm") OrderForm orderForm, BindingResult result) {
 
 		
 		if (orderForm.didShippingAddressProvided() == false) {	
@@ -112,6 +115,9 @@ public class OrderController {
 				orderForm.setShippingAddressProvided(true);
 				return "order/ShippingForm";
 			} else {
+				if(payFlag.equals("success")) {
+					orderForm.getOrder().setCardType("KakaoPay");
+				}
 				return "order/ConfirmOrder";
 			}
 		}
@@ -119,6 +125,9 @@ public class OrderController {
 			orderValidator.validateShippingAddress(orderForm.getOrder(), result);
 			if (result.hasErrors()) {
 				return "order/ShippingForm";
+			}
+			if(payFlag.equals("success")) {
+				orderForm.getOrder().setCardType("KakaoPay");
 			}
 			return "order/ConfirmOrder";
 		}
@@ -157,8 +166,7 @@ public class OrderController {
     
 	// 카카오페이 결제 완료 후 이 컨트롤러로 넘기면 될듯.
 	@RequestMapping("/shop/confirmOrder.do")
-	protected ModelAndView confirmOrder(
-			@ModelAttribute("orderForm") OrderForm orderForm, SessionStatus status) {
+	protected ModelAndView confirmOrder(@ModelAttribute("orderForm") OrderForm orderForm, SessionStatus status) {
 		
 		System.out.println("confirmOrder.do : " + orderForm.getOrder().getLineItems().size());
 		

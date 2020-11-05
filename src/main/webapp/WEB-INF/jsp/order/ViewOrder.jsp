@@ -59,15 +59,19 @@
       <td>결제 종류</td>
       <td><c:out value="${order.cardType}" /></td>
     </tr>
-    <tr>
-      <td>카드 번호</td>
-      <td><c:out value="${order.creditCard}" /> 
-        <font color="red" size="2">* Fake number!</font></td>
-    </tr>
-    <tr>
-      <td>카드 유효기간 (MM/YYYY):</td>
-      <td><c:out value="${order.expiryDate}" /></td>
-    </tr>
+    <c:if test="${order.cardType eq 'KakaoPay'}">
+    </c:if>
+    <c:if test="${order.cardType ne 'KakaoPay'}">
+        <tr>
+	      <td>카드 번호</td>
+	      <td><c:out value="${order.creditCard}" /> 
+	        <font color="red" size="2">* Fake number!</font></td>
+	    </tr>
+	    <tr>
+	      <td>카드 유효기간 (MM/YYYY):</td>
+	      <td><c:out value="${order.expiryDate}" /></td>
+	    </tr>
+    </c:if>
    </table>
    
    <table class="simple_table" align="center">

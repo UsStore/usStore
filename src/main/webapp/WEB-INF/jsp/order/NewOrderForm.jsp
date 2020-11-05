@@ -1,10 +1,6 @@
 <%@ include file="../ItemHeader.jsp"%> 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<c:set var="targetUrl">
-	<c:url value="/shop/newOrderSubmitted.do" />
-</c:set>
-
 <script>
 	$(document).ready(function(){
 	    $("#checkBoxId").change(function(){
@@ -59,6 +55,18 @@
     }
 </style>
 
+<c:set var="targetUrl">
+	<c:if test="${param.payFlag eq 'success'}">
+		<c:url value="/shop/newOrderSubmitted.do">
+			<c:param name="payFlag" value="${param.payFlag}"/>
+		</c:url>
+	</c:if>
+	<c:if test="${param.payFlag ne 'success'}">
+		<c:url value="/shop/newOrderSubmitted.do" />
+	</c:if>
+</c:set>
+
+<% System.out.println(request.getParameter("payFlag")); %>
 <div align="center">
 	<form:form modelAttribute="orderForm" action="${targetUrl}" method="post">
 		<form:errors cssClass="error" />
