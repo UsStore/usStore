@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%> 
+<%@ include file="../ItemHeader.jsp"%> 
 <style>
 
 	.review {
@@ -202,10 +202,10 @@ function getReview(itemId) {   //매개변수 전달 시도
                         </span>
                     </div>
                     <br>
-					<del> 정가 : ${sh.listPrice}원 </del>
+					<del> 원가 : ${sh.unitCost}원 </del>
                     <div class="price">
 
-                        <span><c:out value="${sh.unitCost}" /> 원</span>
+                        <span><c:out value="${sh.listPrice}" /> 원</span>
 
                     </div>
 

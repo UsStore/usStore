@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%>
+<%@ include file="../ItemHeader.jsp"%> 
 <%@ page import="com.example.usStore.controller.item.ItemForm" %>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
