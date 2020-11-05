@@ -19,7 +19,7 @@
 		padding: 10px 15px 10px 15px;
 		margin-right: 30px;
 		font-size: 20px;
-		min-width: 100px;
+		min-width: 150px;
 		background-color: #29403C;
 	}
 	
@@ -73,7 +73,8 @@
 
                 <div class="col-md-10" style="padding: 50px;">
 
-					<h2>상품 확인하기</h2>
+					<h2>수공예 제품 확인하기</h2>
+					<h4>다음 정보로 판매하시겠습니까?</h4>
 					<hr><br><br>
 					<spring:hasBindErrors name="item" />
 					<form:form modelAttribute="handMadeForm" action="detailItem.do"> 	
@@ -125,7 +126,7 @@
                     
                     <div class="product-info">
                     	<!-- Product Image -->
-                        <span class="badge badge-pill badge-dark" id="badge">상품 사진 추가</span>
+                        <span class="badge badge-pill badge-dark" id="badge">상품 사진</span>
                         <span>
                         	${imgName}
 						</span><br><br>
@@ -134,6 +135,7 @@
 					<!-- Tags -->
                     <div class="product-info">
                     	<span class="badge badge-pill" id="badge">태그</span>
+                    	<br><br>
                     	<span>
 							<c:forEach var="tag" items="${tags}"> 
 							    <c:if test="${not empty tag.tagName}">	                    
@@ -160,31 +162,4 @@
 
     </div> 
     
-
-<h1>공동구매 최종 확인</h1>
-다음 정보로 판매하시겠습니까?<br><br>
-
-<form:form modelAttribute="handMadeForm" action="detailItem.do"> 
-<label>제목</label>: ${itemForm.title} <br> 
-<label>내용</label>: ${itemForm.description} <br> 
-<label>정가</label>: ${itemForm.unitCost}원 <br> 
-<label>판매가</label>: ${handMadeForm.listPrice}원 <br> 
-<label>수량</label>: ${itemForm.qty} <br> 
-<label>태그</label>:
-	<c:forEach var="tag" items="${tags}"> 
-	    <c:if test="${not empty tag.tagName}">	                    
-			<font color="blue">#</font>${tag.tagName}                  
-		</c:if>	              
-	</c:forEach>
-<label>상품 사진</label>: ${imgName} <br><br>
-<br> 
-
-<a href="<c:url value='/shop/handMade/addItem2.do'>
-			<c:param name="productId" value="${itemForm.productId}"/>
-		 </c:url>
-		">[이전 단계로]</a> <input type="submit" value="확인" />
-</form:form>
-</body>
-</html>
-
 <%@ include file="../IndexBottom.jsp"%>
