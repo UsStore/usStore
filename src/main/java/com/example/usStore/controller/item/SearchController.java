@@ -175,10 +175,10 @@ public class SearchController {
 			url = "redirect:/shop/groupBuying/getImage.do?itemId=" + itemId;
 			break;
 		case 1:
-			url = "redirect:/shop/handMade/getImage.do?itemId=" + itemId;
+			url = "redirect:/shop/auction/getImage.do?itemId=" + itemId;
 			break;
 		case 2:
-			url = "redirect:/shop/handMade/getImage.do?itemId=" + itemId;
+			url = "redirect:/shop/secondHand/getImage.do?itemId=" + itemId;
 			break;
 		case 3:
 			url = "redirect:/shop/handMade/getImage.do?itemId=" + itemId;
