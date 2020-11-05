@@ -46,8 +46,6 @@
 
 	<script>
 		function search(word) {
-			alert("검색어 : " + word);
-	
 			searchForm.submit();
 		}
 	</script>

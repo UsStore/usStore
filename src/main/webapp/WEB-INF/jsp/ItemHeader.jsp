@@ -46,8 +46,6 @@
 
 	<script>
 		function search(word) {
-			alert("검색어 : " + word);
-	
 			searchForm.submit();
 		}
 	</script>
@@ -67,6 +65,7 @@
                 <span class="action pull-left">
 					<ul class="navbar-nav">
 						<li class="nav-item active">
+							<!-- Session 정리 필요합니당 -->
 							<a class="nav-link" href="<c:url value="/shop/index.do"/>">
 								<img border="0" src="${pageContext.request.contextPath}/images/home.png"
 									style="float: left; width: 30; height: 30; border: 0;" />

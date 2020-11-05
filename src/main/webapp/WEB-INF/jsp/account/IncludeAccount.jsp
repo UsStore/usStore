@@ -45,6 +45,7 @@
 	<ul class="navbar-nav">
 		<li class="nav-item active">
 			<a class="nav-link" href="<c:url value="/shop/index.do"/>">
+				<!-- Session 정리 필요합니당 -->
 				<img border="0" src="${pageContext.request.contextPath}/images/home.png"
 					style="float: left; width: 30; height: 30; border: 0; margin-left:20px;" />
 			</a>
