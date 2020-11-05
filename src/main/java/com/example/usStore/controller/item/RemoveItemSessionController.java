@@ -27,6 +27,7 @@ public class RemoveItemSessionController {
          session.removeAttribute("Auction"); 
          session.removeAttribute("handMadeForm"); 
          session.removeAttribute("secondHandForm");
+         session.removeAttribute("sessionCart");
          
          return "redirect:/shop/index.do";
    }
