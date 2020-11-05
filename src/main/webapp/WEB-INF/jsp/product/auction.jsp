@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%>
+<%@ include file="../ItemHeader.jsp"%> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <form name="pform" action="">
@@ -42,9 +42,9 @@
 
 												<p class="title">
 													<c:choose>
-														<c:when test="${fn:length(al.title) gt 15}">
+														<c:when test="${fn:length(al.title) gt 10}">
 															<font size="4">
-																<c:out value="${fn:substring(al.title, 0, 14)}"/> ...
+																<c:out value="${fn:substring(al.title, 0, 9)}"/> ...
 															</font>
 														</c:when>
 														<c:otherwise>

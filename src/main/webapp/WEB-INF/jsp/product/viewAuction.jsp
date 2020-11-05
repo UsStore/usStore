@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ItemHeader.jsp"%> 
+<%@ include file="../ItemHeader.jsp"%> 
 <style>
 
 	.review {
@@ -355,8 +355,9 @@ function getReview(itemId) {   //매개변수 전달 시도
 
                 <ul class="nav nav-tabs nav-single-product-tabs">
 
-                    <li class="active"><a href="#reviews" data-toggle="tab">Reviews</a></li>
+                    <li class="active"><a href="#reviews" data-toggle="tab">제품 후기</a></li>
 
+					<li><a href="#inquirys" data-toggle="tab">제품 문의</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -368,6 +369,17 @@ function getReview(itemId) {   //매개변수 전달 시도
 							<div class="review">
 								<script>getReview(${auction.itemId});</script>
 								<div id="result"></div>
+							</div>
+						</form>
+						
+					</div>
+					
+					<div class="tab-pane" id="inquirys" align="center">
+
+						<!-- Review -->
+						<form name="pform" action="">
+							<div class="inquiry">
+								<p>제품 후기</p>
 							</div>
 						</form>
 						

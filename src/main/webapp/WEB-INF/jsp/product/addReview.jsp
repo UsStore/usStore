@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="itemTop.jsp" %>
+<%@ include file="../ItemHeader.jsp"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -19,32 +19,56 @@
 <title>리뷰 작성</title>
 </head>
 <style>
-div#addReviewForm {
-	position: absolute;
-	left: 18%;
-	border: none;
-	padding: 20px;
-}
-
-*{margin:0; padding:0;}
-.star{
-  display:inline-block;
-  width: 30px;height: 60px;
-  cursor: pointer;
-}
-.star_left{
-  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat 0 0; 
-  background-size: 60px; 
-  margin-right: -3px;
-}
-.star_right{
-  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat -30px 0; 
-  background-size: 60px; 
-  margin-left: -3px;
-}
-.star.on{
-  background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
-}
+	div#addReviewForm {
+		margin-left: 100px;
+		border: none;
+		padding: 20px;
+	}
+	
+	*{margin:0; padding:0;}
+	
+	.star{
+	  display:inline-block;
+	  width: 30px;height: 60px;
+	  cursor: pointer;
+	}
+	
+	.star_left{
+	  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat 0 0; 
+	  background-size: 60px; 
+	  margin-right: -3px;
+	}
+	
+	.star_right{
+	  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat -30px 0; 
+	  background-size: 60px; 
+	  margin-left: -3px;
+	}
+	
+	.star.on{
+	  background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
+	}
+	
+	#badge {
+		padding: 10px 15px 10px 15px;
+		margin-right: 30px;
+		font-size: 20px;
+		min-width: 100px;
+		background-color: #29403C;
+	}
+	
+	#submitButton {
+		padding: 10px 15px 10px 15px;
+		margin-right: 30px;
+		font-size: 25px;
+		min-width: 100px;
+		background-color: #308C7B;
+	}
+	
+	hr {
+		background-color: #308C7B;
+		height: 7px;
+	}
 </style>
 <body>
 	<div id="addReviewForm">
@@ -52,22 +76,30 @@ div#addReviewForm {
 		<hr width="927px" align="left"><br>
 	<spring:hasBindErrors name="review" />
 	<form:form modelAttribute="review" method="post" name="addReviewfrm" action="addReview.do?itemId=${itemId}">
-	
-		<font size="6px">"${title}"</font>&nbsp;&nbsp;&nbsp;상품은 어떠셨나요?<br><br>
-		
-		<form:label path="rating">평점: </form:label>
-	    	<form:select path="rating">
-	        <form:options items="${ ratingOptions }"/>
-    	</form:select>
-		<br>
-		
-		리뷰 : <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<form:textarea path="description" cols="50" rows="10" />
-		<form:errors path="description"/> <br><br>
-				
-		<td id="submit" colspan="2">
-     		<input id="button" type="button" value="리뷰 등록하기" onclick="addReview()">
- 		</td>
+
+			<font size="6px">"${title}"</font>&nbsp;&nbsp;&nbsp;상품은 어떠셨나요?<br>
+			<br><br>
+			<!-- Rating -->
+			<div class="product-info">
+				<span class="badge badge-pill badge-dark" id="badge">평점</span> <span>
+					<form:select path="rating" style="width: 150px; height: 45px; font-size: 20px;">
+						<form:options items="${ ratingOptions }" />
+					</form:select>
+				</span> <br> <br>
+			</div>
+
+			<!-- Review -->
+			<div class="product-info">
+				<span class="badge badge-pill badge-dark" id="badge">리뷰</span> <br>
+				<br> <span> <form:textarea path="description" cols="100" rows="5" />
+				<form:errors path="description" /> <br>
+				<br>
+				</span> <br> <br>
+			</div>
+
+			<div align="center">
+			<button type="button" class="badge" id="submitButton" onclick="addReview()">리뷰 등록하기</button>
+		</div>
 	</form:form>
 	</div>
 </body>

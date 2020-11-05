@@ -44,9 +44,9 @@
  <nav class="navbar navbar-light" style="background-color: #000000; height: 74px; font-size: 20px;">
 	<ul class="navbar-nav">
 		<li class="nav-item active">
-			<a class="nav-link" href="#">
-				<a href="<c:url value="/shop/editAccount.do/back.do"/>"><img border="0" src="${pageContext.request.contextPath}/images/back.png"
-					style="float: left; width: 30; height: 30; border: 0;" /> </a>&nbsp;
+			<a class="nav-link" href="<c:url value="/shop/index.do"/>">
+				<img border="0" src="${pageContext.request.contextPath}/images/home.png"
+					style="float: left; width: 30; height: 30; border: 0; margin-left:20px;" />
 			</a>
 		</li>
 	</ul>

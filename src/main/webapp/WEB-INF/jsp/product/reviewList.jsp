@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="itemTop.jsp" %>
+<%@ include file="../ItemHeader.jsp"%> 
 <script>
 	 function rmReview(itemId) {
 		if(confirm("정말 리뷰를 삭제하시겠습니까?")){
