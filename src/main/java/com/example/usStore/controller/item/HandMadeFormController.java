@@ -79,7 +79,7 @@ public class HandMadeFormController {
 	   
 		HttpSession session = rq.getSession(false);
 		String univName = null; //Account에 속한 필드 의미 
-	     if (session.getAttribute("userSession") != null) {
+	    if (session.getAttribute("userSession") != null) {
 	            UserSession userSession = (UserSession)session.getAttribute("userSession") ;
 	            if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
 	            	Account account = userSession.getAccount();
@@ -87,14 +87,12 @@ public class HandMadeFormController {
 	            }
 	     }
 
-		PagedListHolder<HandMade> handMadeList = null;
+		PagedListHolder<HandMade> handMadeList = new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList(univName));
 		if(region != null) { 
 			HashMap<String, String> param = new HashMap<String, String>();
 	    	param.put("region", region); 
 	    	param.put("univName", univName);
 	    	handMadeList = new PagedListHolder<HandMade>(this.itemFacade.getHMListByRegion(param));
-		}else {
-			handMadeList =	new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList(univName));
 		}		
 		handMadeList.setPageSize(8);
 

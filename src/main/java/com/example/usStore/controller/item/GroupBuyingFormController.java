@@ -69,24 +69,22 @@ public class GroupBuyingFormController {
 	  HttpSession session = rq.getSession(false);
 	     
 	  String univName = null; //Account에 속한 필드 의미 
-	     if (session.getAttribute("userSession") != null) {
+	  String univAddr = null;
+	  if (session.getAttribute("userSession") != null) {
 	            UserSession userSession = (UserSession)session.getAttribute("userSession") ;
 	            if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
 	            	Account account = userSession.getAccount();
 	            	univName = account.getUniversity();
+	            	univAddr = this.myPageFacade.getUnivAddrByName(univName);
 	     }
 	  }
 	  
-      PagedListHolder<GroupBuying> groupBuyingList = null;
+      PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(univName));
       if(region != null) {
     	  HashMap<String, String> param = new HashMap<String, String>();
      	  param.put("region", region); // drop down에서 선택한거 파라미터로 넘겨줌 
      	  param.put("univName", univName);
-     	  System.out.println(param);
-     	  groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGBListByRegion(param));
-      	 	  
-      }else {
-    	  groupBuyingList  = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(univName));
+     	  groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGBListByRegion(param));  
       }
       groupBuyingList.setPageSize(8);	//페이지 넘김 처리
       

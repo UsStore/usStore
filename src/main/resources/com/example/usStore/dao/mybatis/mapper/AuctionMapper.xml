@@ -42,9 +42,10 @@
 			A.BIDPRICE
 		FROM AUCTION A, ITEM I, ACCOUNT AC, UNIVERSITY U
 		WHERE AC.USERID = I.USERID AND A.ITEMID = I.ITEMID
+			AND U.UNIVNAME = A.UNIVNAME
 			AND U.REGION = #{region}
 	     <if test="univName != null">
-	    	ORDER BY DECODE (A.UNIVNAME, #{univName}, 1)
+	    	ORDER BY DECODE (AC.UNIVNAME, #{univName}, 1)
 	    </if>
 	</select>
 
