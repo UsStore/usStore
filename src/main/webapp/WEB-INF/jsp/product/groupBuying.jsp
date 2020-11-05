@@ -54,9 +54,9 @@
 										
 												<p class="title">
 													<c:choose>
-														<c:when test="${fn:length(gb.title) gt 15}">
+														<c:when test="${fn:length(gb.title) gt 10}">
 															<font size="4">
-																<c:out value="${fn:substring(gb.title, 0, 14)}"/> ...
+																<c:out value="${fn:substring(gb.title, 0, 10)}"/> ...
 															</font>
 														</c:when>
 														<c:otherwise>
