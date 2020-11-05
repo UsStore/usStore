@@ -89,7 +89,16 @@
 												</p>
 													
 												<p class="title" align="right">
-									               <font size="4"><c:out value="${item.title}"/></font>
+									               	<c:choose>
+														<c:when test="${fn:length(item.title) gt 13}">
+															<font size="4">
+																<c:out value="${fn:substring(item.title, 0, 12)}"/> ...
+															</font>
+														</c:when>
+														<c:otherwise>
+															<font size="4">${item.title}</font>
+														</c:otherwise>
+													</c:choose>
 												</p>
 											</div>
 										</a>
