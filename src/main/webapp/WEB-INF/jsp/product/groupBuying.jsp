@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="ItemHeader.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!-- db에서 select 결과 보여주는 페이지 -->
 <style>  
 
@@ -50,7 +52,18 @@
 					                            <c:param name="itemId" value="${gb.itemId}"/>
 		                                	</c:url>">
 										
-												<p class="title"><font size="4">${gb.title}</font></p>
+												<p class="title">
+													<c:choose>
+														<c:when test="${fn:length(gb.title) gt 15}">
+															<font size="4">
+																<c:out value="${fn:substring(gb.title, 0, 14)}"/> ...
+															</font>
+														</c:when>
+														<c:otherwise>
+															<font size="4">${gb.title}</font>
+														</c:otherwise>
+													</c:choose>												
+												</p>
 												<hr>
 												<p class="price" align="right">
 													<del>
