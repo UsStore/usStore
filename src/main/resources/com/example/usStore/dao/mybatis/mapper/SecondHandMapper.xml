@@ -14,6 +14,15 @@
 	    </if>
 	</select>
 	
+	<select id="getSHListByUniv" parameterType="String"  resultType="SecondHand">
+		SELECT 
+			I.ITEMID, I.UNITCOST, I.TITLE, I.DESCRIPTION, I.VIEWCOUNT,I.QTY,
+		    I.USERID, I.PRODUCTID, I.IMGURL, S.DISCOUNT, S.LISTPRICE  	 
+		FROM SECONDHAND S, ITEM I, ACCOUNT A
+		WHERE A.USERID = I.USERID AND S.ITEMID = I.ITEMID
+			AND A.univName = #{value}
+	</select>
+	
 	<select id="getSHListByRegion" parameterType="java.util.Map" resultType="SecondHand">
 	    SELECT 
 	     	I.ITEMID, I.UNITCOST, I.TITLE, I.DESCRIPTION, I.VIEWCOUNT,I.QTY,

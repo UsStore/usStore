@@ -23,4 +23,6 @@ public interface SecondHandMapper extends ItemMapper {
 	List<SecondHand> getSHListByRegion(HashMap<String, String> param);
 	
 	List<University> getSHMapInfo();
+	
+	List<SecondHand> getSHListByUniv(String univName);
 }
