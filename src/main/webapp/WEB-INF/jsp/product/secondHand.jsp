@@ -56,7 +56,7 @@
 													<c:choose>
 														<c:when test="${fn:length(item.title) gt 10}">
 															<font size="4">
-																<c:out value="${fn:substring(item.title, 0, 10)}"/> ...
+																<c:out value="${fn:substring(item.title, 0, 9)}"/> ...
 															</font>
 														</c:when>
 														<c:otherwise>
