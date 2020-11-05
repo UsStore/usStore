@@ -164,7 +164,6 @@
 							</c:forEach>
 						</span>
 					</div>
-					</form:form>
 					
 					<br><br><br>
 					<div align="right">
@@ -173,7 +172,7 @@
 						         이전 단계로</a>
 					   <button type="submit" class="badge" id="submitButton">확인</button>
 					</div>
-										 
+					</form:form>										 
                 </div>
                 
             </div>
