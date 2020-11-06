@@ -298,9 +298,7 @@ function getReview(itemId) {   //매개변수 전달 시도
                 </ul>
 
                 <div class="tab-content">
-
                     <div class="tab-pane active" id="reviews" align="center">
-
 						<!-- Review -->
 						<form name="pform" action="">
 							<div class="review">
@@ -308,19 +306,17 @@ function getReview(itemId) {   //매개변수 전달 시도
 								<div id="result"></div>
 							</div>
 						</form>
-						
 					</div>
 
 					<div class="tab-pane" id="inquirys" align="center">
-
-						<!-- Review -->
+						<!-- Inquiry  -->
 						<form name="pform" action="">
 							<div class="inquiry">
-								<p>제품 후기</p>
+								<%@ include file="/WEB-INF/jsp/product/viewInquiry.jsp" %>
+								<div id="inquiryList"></div>
 							</div>
 						</form>
-						
-					</div>
+					</div> 
                 </div>
 
             </div>

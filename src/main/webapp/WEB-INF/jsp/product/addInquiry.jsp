@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../ItemHeader.jsp"%> 
-<script>
-	function addReview() {
-		 if (confirm("등록 후 수정이 불가능합니다.\n정말 게시글을 등록하시겠습니까?") == true){    //확인
-		     document.addReviewfrm.submit();	//폼 제출
-		 }else{   //취소
-		     return false;
-	 }
-	}
-</script>
 <style>
 	div#addInquiryForm {
 		margin-left: 100px;
@@ -64,33 +55,40 @@
 </style>
 <body>
 	<div id="addInquiryForm">
-		<h2>제품 문의하기</h2>
+		<h2>제품 문의</h2>
 		<hr width="927px" align="left"><br>
 	<spring:hasBindErrors name="rive" />
-	<form:form modelAttribute="review" method="post" name="addReviewfrm" action="addReview.do?itemId=${itemId}">
+	<form:form modelAttribute="InquiryForm" method="post" action="addInquiry.do?itemId=${itemId}">
 
 			<font size="6px">"${title}"</font>&nbsp;&nbsp;&nbsp;상품은 어떠셨나요?<br>
 			<br><br>
-			<!-- Rating -->
+			<!-- 비밀글 여부 -->
+		<%-- 	<div class="product-info">
+				<span class="badge badge-pill badge-dark" id="badge">비밀글 여부</span> 
+			    <span>
+			    	<form:radiobutton path="isSecret" style="margin-left:10px;" />
+				</span> <br> <br>
+			</div> --%>
+			
+			<!-- 문의 제묵 -->
 			<div class="product-info">
-				<span class="badge badge-pill badge-dark" id="badge">평점</span> <span>
-					<form:select path="rating" style="width: 150px; height: 45px; font-size: 20px;">
-						<form:options items="${ ratingOptions }" />
-					</form:select>
+				<span class="badge badge-pill badge-dark" id="badge">제목</span><br><br>
+				<span> <form:textarea path="title" cols="100" rows="5" />
+				<form:errors path="title" />
 				</span> <br> <br>
 			</div>
 
-			<!-- Review -->
+			<!-- 문의 내용 -->
 			<div class="product-info">
-				<span class="badge badge-pill badge-dark" id="badge">리뷰</span> <br>
-				<br> <span> <form:textarea path="description" cols="100" rows="5" />
-				<form:errors path="description" /> <br>
+				<span class="badge badge-pill badge-dark" id="badge">문의 사항</span> <br>
+				<br> <span> <form:textarea path="content" cols="100" rows="5" />
+				<form:errors path="content" /> <br>
 				<br>
 				</span> <br> <br>
 			</div>
 
 			<div align="center">
-			<button type="button" class="badge" id="submitButton" onclick="addReview()">리뷰 등록하기</button>
+			<button class="badge" type="submit" id="submitButton"> 등록하기</button>
 		</div>
 	</form:form>
 	</div>

@@ -2,11 +2,8 @@ package com.example.usStore.controller.order;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Item;
-import com.example.usStore.domain.LineItem;
 import com.example.usStore.domain.Orders;
-import com.example.usStore.service.OrderService;
 import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.UsStoreFacade;
 

@@ -233,7 +233,7 @@ public class Orders implements Serializable {
 	
 	public String getItemName() {
 		String rslt = "";
-		rslt = lineItems.get(0).getItem().getTitle();
+		rslt = lineItems.get(0).getTitle();
 		if(lineItems.size() >= 2) {
 			rslt += " 외 ";
 			rslt += lineItems.size() - 1 + "개";
@@ -263,7 +263,7 @@ public class Orders implements Serializable {
 	    totalPrice = cart.getSubTotal();
 	
 	    creditCard = "999 9999 9999 9999";
-	    expiryDate = "12/03";
+	    expiryDate = "02/23";
 	    cardType = "결제 수단을 선택해주세요.";
 	    courier = "UPS";
 	    locale = "CA";

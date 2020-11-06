@@ -16,8 +16,11 @@
   </select>
 
   <insert id="insertInquiry" parameterType="Inquiry">
+  	<selectKey keyProperty="QID" resultType="int" order="BEFORE">
+			SELECT inquiry_seq.nextval AS QID FROM DUAL
+	</selectKey> 
      INSERT INTO Inquiry (QID, title, content, userId, itemId, isSecret, isAnswer, ts)
-     VALUES (inquiry_seq.nextval(), #{title}, #{content}, #{userId}, #{itemId}, #{isSecret}, #{isAnswer}, TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi:ss'))
+     VALUES (#{QID}, #{title}, #{content}, #{userId}, #{itemId}, #{isSecret}, 0, TO_DATE(SYSDATE, 'yyyy/mm/dd'))
   </insert>
   
   <update id="updateInquiry" parameterType="Inquiry">
@@ -29,7 +32,7 @@
 	  		itemId = #{itemId},
 	  		isSecret = #{isSecret},
 	  		isAnswer = #{isAnswer},
-	  		ts = TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi:ss')
+	  		ts = TO_DATE(SYSDATE, 'yyyy/mm/dd')
 	    WHERE QID=#{QID}
   </update>
   

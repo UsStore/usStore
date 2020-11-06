@@ -29,10 +29,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
-import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
-import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.HandMadeFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
@@ -79,7 +77,7 @@ public class HandMadeFormController {
 	   
 		HttpSession session = rq.getSession(false);
 		String univName = null; //Account에 속한 필드 의미 
-	     if (session.getAttribute("userSession") != null) {
+	    if (session.getAttribute("userSession") != null) {
 	            UserSession userSession = (UserSession)session.getAttribute("userSession") ;
 	            if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
 	            	Account account = userSession.getAccount();
@@ -87,14 +85,12 @@ public class HandMadeFormController {
 	            }
 	     }
 
-		PagedListHolder<HandMade> handMadeList = null;
+		PagedListHolder<HandMade> handMadeList = new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList(univName));
 		if(region != null) { 
 			HashMap<String, String> param = new HashMap<String, String>();
 	    	param.put("region", region); 
 	    	param.put("univName", univName);
 	    	handMadeList = new PagedListHolder<HandMade>(this.itemFacade.getHMListByRegion(param));
-		}else {
-			handMadeList =	new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList(univName));
 		}		
 		handMadeList.setPageSize(8);
 
@@ -184,8 +180,8 @@ public class HandMadeFormController {
          itemForm = (ItemForm) session.getAttribute("itemForm");
          System.out.println("itemformSession: " + itemForm);   //print itemformSession toString
       }
-      if(handMadeForm.getListPrice() >= itemForm.getUnitCost()) {
-         bindingResult.rejectValue("listPrice", "listComUnit");
+      if(handMadeForm.getListPrice() <= itemForm.getUnitCost()) {
+         bindingResult.rejectValue("listPrice", "UnitComList");
       }
       
       if (bindingResult.hasErrors()) {   //유효성 검증 에러 발생시

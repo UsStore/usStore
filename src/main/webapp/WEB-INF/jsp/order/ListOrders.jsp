@@ -17,7 +17,7 @@
 					responseJson.shipAddr2 + ", " + responseJson.shipCity + "</li>");
 				var content = "";
 				$(responseJson.lineItems).each(function(i, lineItem){	        	
-			       	content += "LineItem " + lineItem.lineNum + ": " + lineItem.quantity +
+			       	content += "LineItem : " + lineItem.title + ": " + lineItem.quantity +
 							" piece(s) of item " + lineItem.itemId + "<br>";
 				});
 				$("#detail > ul").append ("<li>" + content + "</li>");
@@ -35,14 +35,6 @@
   </p>
 </div>
  <div align="center" style="padding: 30px;">
-  <!-- REST API 내용 부분 -->
-  <table>
-	<tr>
-		<td>
-			<div id="detail"></div>
-		</td>
-	</tr>
-  </table>
 
   <table class="table" style="width: 80%;'">
     <tr bgcolor="#40BEA7">
@@ -51,18 +43,25 @@
       <th scope="col">Total Price</th>
     </tr>
     <c:forEach var="order" items="${orderList}">
+      <a href="#reviews" data-toggle="tab">
       <tr bgcolor="#FFFFFF">
+      	
         <td scope="row">
           <b><a href='<c:url value="/shop/viewOrder.do">
               <c:param name="orderId" value="${order.orderId}"/></c:url>'>
               <font color="black"><c:out value="${order.orderId}" /></font>
             </a></b></td>
+          <!-- REST API 내용 부분 -->
         <td scope="row"><fmt:formatDate value="${order.orderDate}"
             pattern="yyyy/MM/dd hh:mm:ss" /></td>
         <td scope="row" onClick="getOrder(${order.orderId});"><fmt:formatNumber value="${order.totalPrice}"
             pattern="###,###,###원" /></td>
       </tr>
+      </a>
     </c:forEach>
+     	<tr class="tab-pane" id="reviews">
+      	<td colspan="3"><div id="detail"></div></td>
+      </tr>
   </table>
 </div>
 <br><br>
