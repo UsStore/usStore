@@ -1,5 +1,3 @@
-# usStore
-UsStore : 대학생들을 위한 마켓 플랫폼 웹서비스 
 ![0001](https://user-images.githubusercontent.com/48404998/99153758-12896c00-26ee-11eb-9aa8-0a3cc188eb99.jpg)
 ![0002](https://user-images.githubusercontent.com/48404998/99153761-161cf300-26ee-11eb-8faa-b2b05554e88d.jpg)
 ![0003](https://user-images.githubusercontent.com/48404998/99153763-174e2000-26ee-11eb-92f9-497e25a088e0.jpg)
